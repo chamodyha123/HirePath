@@ -1,0 +1,15 @@
+﻿namespace HirePathAI.API.Models.Enums
+{
+    public enum ApplicationStatus
+    {
+        Applied = 1,
+        UnderReview = 2,
+        Shortlisted = 3,
+        InterviewScheduled = 4,
+        Interviewed = 5,
+        Offered = 6,
+        Hired = 7,
+        Rejected = 8,
+        Withdrawn = 9
+    }
+}
