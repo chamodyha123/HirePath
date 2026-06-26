@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\.gitignore.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\.gitignore.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\implementations\\jobapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\implementations\\jobapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -137,10 +141,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\.gitignore.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\.gitignore.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\dtos\\auth\\authresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -318,24 +318,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "JobApplicationRepository.cs",
-              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\JobApplicationRepository.cs",
-              "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\JobApplicationRepository.cs",
-              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\JobApplicationRepository.cs",
-              "RelativeToolTip": "HirePath\\Repositories\\Implementations\\JobApplicationRepository.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T04:37:33.875Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "JobApplicationService.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\JobApplicationService.cs",
               "RelativeDocumentMoniker": "HirePath\\Services\\Implementations\\JobApplicationService.cs",
@@ -348,7 +335,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "IJobApplicationService.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IJobApplicationService.cs",
               "RelativeDocumentMoniker": "HirePath\\Services\\Interfaces\\IJobApplicationService.cs",
@@ -356,12 +343,11 @@
               "RelativeToolTip": "HirePath\\Services\\Interfaces\\IJobApplicationService.cs",
               "ViewState": "AgIAAAEAAAAAAAAAAAAuwBMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T04:31:04.875Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-26T04:31:04.875Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "IJobApplicationRepository.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IJobApplicationRepository.cs",
               "RelativeDocumentMoniker": "HirePath\\Repositories\\Interfaces\\IJobApplicationRepository.cs",
@@ -369,12 +355,36 @@
               "RelativeToolTip": "HirePath\\Repositories\\Interfaces\\IJobApplicationRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T04:37:05.73Z",
+              "WhenOpened": "2026-06-26T04:37:05.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": ".gitignore.txt",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\.gitignore.txt",
+              "RelativeDocumentMoniker": "HirePath\\.gitignore.txt",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\.gitignore.txt",
+              "RelativeToolTip": "HirePath\\.gitignore.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-06-25T17:21:28.976Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 3,
+              "Title": "JobApplicationRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\JobApplicationRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\JobApplicationRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\JobApplicationRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Implementations\\JobApplicationRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T04:37:33.875Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "JobApplication.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\JobApplication.cs",
               "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\JobApplication.cs",
@@ -382,12 +392,11 @@
               "RelativeToolTip": "HirePath\\Models\\Entities\\JobApplication.cs",
               "ViewState": "AgIAABYAAAAAAAAAAADwvx0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T09:33:07.56Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T09:33:07.56Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 6,
               "Title": "ApplicationDbContext.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Data\\ApplicationDbContext.cs",
               "RelativeDocumentMoniker": "HirePath\\Data\\ApplicationDbContext.cs",
@@ -395,12 +404,11 @@
               "RelativeToolTip": "HirePath\\Data\\ApplicationDbContext.cs",
               "ViewState": "AgIAABIAAAAAAAAAAAAzwBoAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T10:24:23.597Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:24:23.597Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 7,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Program.cs",
               "RelativeDocumentMoniker": "HirePath\\Program.cs",
@@ -408,12 +416,11 @@
               "RelativeToolTip": "HirePath\\Program.cs",
               "ViewState": "AgIAAEUAAAAAAAAAAAAAAFIAAABMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T10:18:14.951Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:18:14.951Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 8,
               "Title": "JobApplicationsController.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\JobApplicationsController.cs",
               "RelativeDocumentMoniker": "HirePath\\Controllers\\JobApplicationsController.cs",
@@ -421,12 +428,11 @@
               "RelativeToolTip": "HirePath\\Controllers\\JobApplicationsController.cs",
               "ViewState": "AgIAAEAAAAAAAAAAAAAuwFIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T04:32:38.264Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-26T04:32:38.264Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 10,
               "Title": "UpdateApplicationStatusDto.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\JobApplication\\UpdateApplicationStatusDto.cs",
               "RelativeDocumentMoniker": "HirePath\\DTOs\\JobApplication\\UpdateApplicationStatusDto.cs",
@@ -434,12 +440,11 @@
               "RelativeToolTip": "HirePath\\DTOs\\JobApplication\\UpdateApplicationStatusDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T04:28:57.303Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-26T04:28:57.303Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 11,
               "Title": "CreateApplicationDto.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\JobApplication\\CreateApplicationDto.cs",
               "RelativeDocumentMoniker": "HirePath\\DTOs\\JobApplication\\CreateApplicationDto.cs",
@@ -447,12 +452,11 @@
               "RelativeToolTip": "HirePath\\DTOs\\JobApplication\\CreateApplicationDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T04:28:32.968Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-26T04:28:32.968Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
+              "DocumentIndex": 19,
               "Title": "ICandidateRepository.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\ICandidateRepository.cs",
               "RelativeDocumentMoniker": "HirePath\\Repositories\\Interfaces\\ICandidateRepository.cs",
@@ -460,12 +464,11 @@
               "RelativeToolTip": "HirePath\\Repositories\\Interfaces\\ICandidateRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T09:36:32.291Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T09:36:32.291Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 17,
+              "DocumentIndex": 18,
               "Title": "ICandidateService.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\ICandidateService.cs",
               "RelativeDocumentMoniker": "HirePath\\Services\\Interfaces\\ICandidateService.cs",
@@ -473,12 +476,11 @@
               "RelativeToolTip": "HirePath\\Services\\Interfaces\\ICandidateService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T10:11:03.216Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:11:03.216Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 9,
               "Title": "IJobService.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IJobService.cs",
               "RelativeDocumentMoniker": "HirePath\\Services\\Interfaces\\IJobService.cs",
@@ -486,12 +488,11 @@
               "RelativeToolTip": "HirePath\\Services\\Interfaces\\IJobService.cs",
               "ViewState": "AgIAAAcAAAAAAAAAAAAAwAsAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T10:11:17.783Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:11:17.783Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
+              "DocumentIndex": 13,
               "Title": "SeedData.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Data\\SeedData.cs",
               "RelativeDocumentMoniker": "HirePath\\Data\\SeedData.cs",
@@ -499,12 +500,11 @@
               "RelativeToolTip": "HirePath\\Data\\SeedData.cs",
               "ViewState": "AgIAABcAAAAAAAAAAADwvzQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-25T08:35:23.309Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-25T08:35:23.309Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
+              "DocumentIndex": 12,
               "Title": "ApplicationStatus.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\ApplicationStatus.cs",
               "RelativeDocumentMoniker": "HirePath\\Models\\Enums\\ApplicationStatus.cs",
@@ -512,12 +512,11 @@
               "RelativeToolTip": "HirePath\\Models\\Enums\\ApplicationStatus.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T09:24:09.281Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T09:24:09.281Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
+              "DocumentIndex": 16,
               "Title": "CandidateController.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\CandidateController.cs",
               "RelativeDocumentMoniker": "HirePath\\Controllers\\CandidateController.cs",
@@ -525,12 +524,11 @@
               "RelativeToolTip": "HirePath\\Controllers\\CandidateController.cs",
               "ViewState": "AgIAADgAAAAAAAAAAAA9wEIAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T04:02:57.301Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-26T04:02:57.301Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
+              "DocumentIndex": 14,
               "Title": "JobsController.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\JobsController.cs",
               "RelativeDocumentMoniker": "HirePath\\Controllers\\JobsController.cs",
@@ -538,12 +536,11 @@
               "RelativeToolTip": "HirePath\\Controllers\\JobsController.cs",
               "ViewState": "AgIAAEYAAAAAAAAAAAAqwFcAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-26T04:14:06.276Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-26T04:14:06.276Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
+              "DocumentIndex": 15,
               "Title": "JobService.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\JobService.cs",
               "RelativeDocumentMoniker": "HirePath\\Services\\Implementations\\JobService.cs",
@@ -551,12 +548,11 @@
               "RelativeToolTip": "HirePath\\Services\\Implementations\\JobService.cs",
               "ViewState": "AgIAADMAAAAAAAAAAAAuwEUAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T10:13:39.253Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:13:39.253Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 19,
+              "DocumentIndex": 20,
               "Title": "AuthController.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\AuthController.cs",
               "RelativeDocumentMoniker": "HirePath\\Controllers\\AuthController.cs",
@@ -564,12 +560,11 @@
               "RelativeToolTip": "HirePath\\Controllers\\AuthController.cs",
               "ViewState": "AgIAAA0AAAAAAAAAAAAqwC0AAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-25T15:26:42.852Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-25T15:26:42.852Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 20,
+              "DocumentIndex": 21,
               "Title": "AuthService.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\AuthService.cs",
               "RelativeDocumentMoniker": "HirePath\\Services\\Implementations\\AuthService.cs",
@@ -577,12 +572,11 @@
               "RelativeToolTip": "HirePath\\Services\\Implementations\\AuthService.cs",
               "ViewState": "AgIAAHgAAAAAAAAAAAAuwJMAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T10:13:10.813Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:13:10.813Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
+              "DocumentIndex": 17,
               "Title": "CandidateService.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\CandidateService.cs",
               "RelativeDocumentMoniker": "HirePath\\Services\\Implementations\\CandidateService.cs",
@@ -590,12 +584,11 @@
               "RelativeToolTip": "HirePath\\Services\\Implementations\\CandidateService.cs",
               "ViewState": "AgIAACkAAAAAAAAAAAAuwDsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T10:13:25.022Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:13:25.022Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 21,
+              "DocumentIndex": 22,
               "Title": "IAuthService.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IAuthService.cs",
               "RelativeDocumentMoniker": "HirePath\\Services\\Interfaces\\IAuthService.cs",
@@ -603,12 +596,11 @@
               "RelativeToolTip": "HirePath\\Services\\Interfaces\\IAuthService.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T10:10:47.782Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:10:47.782Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 22,
+              "DocumentIndex": 23,
               "Title": "ApplicationRepository.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\ApplicationRepository.cs",
               "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\ApplicationRepository.cs",
@@ -616,12 +608,11 @@
               "RelativeToolTip": "HirePath\\Repositories\\Implementations\\ApplicationRepository.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAuwCAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T10:09:46.059Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:09:46.059Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 23,
+              "DocumentIndex": 24,
               "Title": "IApplicationRepository.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IApplicationRepository.cs",
               "RelativeDocumentMoniker": "HirePath\\Repositories\\Interfaces\\IApplicationRepository.cs",
@@ -629,12 +620,11 @@
               "RelativeToolTip": "HirePath\\Repositories\\Interfaces\\IApplicationRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T09:36:49.685Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T09:36:49.685Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 24,
+              "DocumentIndex": 25,
               "Title": "CandidateRepository.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\CandidateRepository.cs",
               "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\CandidateRepository.cs",
@@ -642,12 +632,11 @@
               "RelativeToolTip": "HirePath\\Repositories\\Implementations\\CandidateRepository.cs",
               "ViewState": "AgIAAAgAAAAAAAAAAAAuwBoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T10:09:31.275Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:09:31.275Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 25,
+              "DocumentIndex": 26,
               "Title": "JobRepository.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\JobRepository.cs",
               "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\JobRepository.cs",
@@ -655,12 +644,11 @@
               "RelativeToolTip": "HirePath\\Repositories\\Implementations\\JobRepository.cs",
               "ViewState": "AgIAAA8AAAAAAAAAAAA+wCEAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T10:08:17.786Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:08:17.786Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 26,
+              "DocumentIndex": 27,
               "Title": "IJobRepository.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IJobRepository.cs",
               "RelativeDocumentMoniker": "HirePath\\Repositories\\Interfaces\\IJobRepository.cs",
@@ -668,12 +656,11 @@
               "RelativeToolTip": "HirePath\\Repositories\\Interfaces\\IJobRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T09:36:13.392Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T09:36:13.392Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 27,
+              "DocumentIndex": 28,
               "Title": "UserRepository.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\UserRepository.cs",
               "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\UserRepository.cs",
@@ -681,12 +668,11 @@
               "RelativeToolTip": "HirePath\\Repositories\\Implementations\\UserRepository.cs",
               "ViewState": "AgIAAAkAAAAAAAAAAAAuwBQAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T09:37:51.653Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T09:37:51.653Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 28,
+              "DocumentIndex": 29,
               "Title": "IUserRepository.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IUserRepository.cs",
               "RelativeDocumentMoniker": "HirePath\\Repositories\\Interfaces\\IUserRepository.cs",
@@ -694,12 +680,11 @@
               "RelativeToolTip": "HirePath\\Repositories\\Interfaces\\IUserRepository.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T09:35:55.226Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T09:35:55.226Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 29,
+              "DocumentIndex": 30,
               "Title": "GenericRepository.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\GenericRepository.cs",
               "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\GenericRepository.cs",
@@ -707,12 +692,11 @@
               "RelativeToolTip": "HirePath\\Repositories\\Implementations\\GenericRepository.cs",
               "ViewState": "AgIAACQAAAAAAAAAAAAuwDYAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T09:37:37.168Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T09:37:37.168Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 30,
+              "DocumentIndex": 31,
               "Title": "IGenericRepository.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IGenericRepository.cs",
               "RelativeDocumentMoniker": "HirePath\\Repositories\\Interfaces\\IGenericRepository.cs",
@@ -720,12 +704,11 @@
               "RelativeToolTip": "HirePath\\Repositories\\Interfaces\\IGenericRepository.cs",
               "ViewState": "AgIAAAIAAAAAAAAAAAAuwBQAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T09:35:40.53Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T09:35:40.53Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 31,
+              "DocumentIndex": 32,
               "Title": "appsettings.json",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\appsettings.json",
               "RelativeDocumentMoniker": "HirePath\\appsettings.json",
@@ -733,12 +716,11 @@
               "RelativeToolTip": "HirePath\\appsettings.json",
               "ViewState": "AgIAAAkAAAAAAAAAAAAAAAYAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2026-06-24T10:25:14.337Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T10:25:14.337Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 32,
+              "DocumentIndex": 33,
               "Title": "RegisterDto.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\Auth\\RegisterDto.cs",
               "RelativeDocumentMoniker": "HirePath\\DTOs\\Auth\\RegisterDto.cs",
@@ -746,12 +728,11 @@
               "RelativeToolTip": "HirePath\\DTOs\\Auth\\RegisterDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAASAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-25T15:10:28.133Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-25T15:10:28.133Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 33,
+              "DocumentIndex": 34,
               "Title": "User.cs",
               "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\User.cs",
               "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\User.cs",
@@ -759,21 +740,7 @@
               "RelativeToolTip": "HirePath\\Models\\Entities\\User.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-24T09:27:55.625Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 34,
-              "Title": ".gitignore.txt",
-              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\.gitignore.txt",
-              "RelativeDocumentMoniker": "HirePath\\.gitignore.txt",
-              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\.gitignore.txt",
-              "RelativeToolTip": "HirePath\\.gitignore.txt",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAMAAAAGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2026-06-25T17:21:28.976Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-24T09:27:55.625Z"
             },
             {
               "$type": "Document",
