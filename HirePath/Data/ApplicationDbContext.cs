@@ -24,6 +24,8 @@ namespace HirePathAI.API.Data
         public DbSet<JobApplication> JobApplications => Set<JobApplication>();
         public DbSet<Interview> Interviews => Set<Interview>();
 
+        
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

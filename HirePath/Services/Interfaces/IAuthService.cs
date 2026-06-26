@@ -1,6 +1,11 @@
-﻿namespace HirePath.Services.Interfaces
+﻿using HirePathAI.API.DTOs.Auth;
+
+namespace HirePathAI.API.Services.Interfaces
 {
-    public class IAuthService
+    public interface IAuthService
     {
+        Task<AuthResponseDto> RegisterAsync(RegisterDto dto);
+
+        Task<AuthResponseDto> LoginAsync(LoginDto dto);
     }
 }

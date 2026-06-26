@@ -1,4 +1,13 @@
-﻿bin/
-obj/
+﻿# Visual Studio
 .vs/
-wwwroot/lib/
+
+# Build folders
+bin/
+obj/
+
+# User files
+*.user
+*.suo
+
+# Logs
+*.log

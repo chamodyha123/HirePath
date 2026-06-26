@@ -1,12 +1,17 @@
-using System.Text;
 using HirePathAI.API.Data;
 using HirePathAI.API.Models.Entities;
+using HirePathAI.API.Repositories.Implementations;
+using HirePathAI.API.Repositories.Interfaces;
 using HirePathAI.API.Services.Auth;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using System.Text;
+using HirePathAI.API.Services.Interfaces;
+using HirePathAI.API.Services.Implementations;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -61,11 +66,21 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IJobRepository, JobRepository>();
+builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
+builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 
 // ----------------------------------------------------
 // Authorization
 // ----------------------------------------------------
 builder.Services.AddAuthorization();
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IJobService, JobService>();
+builder.Services.AddScoped<ICandidateService, CandidateService>();
+builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
+builder.Services.AddScoped<IJobApplicationService, JobApplicationService>();
 
 // ----------------------------------------------------
 // Controllers + Swagger

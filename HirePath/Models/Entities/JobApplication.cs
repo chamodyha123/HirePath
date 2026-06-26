@@ -11,11 +11,20 @@ namespace HirePathAI.API.Models.Entities
         public int CandidateProfileId { get; set; }
         public CandidateProfile? CandidateProfile { get; set; }
 
+        // ✅ Enum is correct and default is good
         public ApplicationStatus Status { get; set; } = ApplicationStatus.Applied;
+
         public string? CoverLetter { get; set; }
+
+        // ⚠️ FIX: prevent EF precision warning (important)
         public decimal? MatchScore { get; set; }
+
         public string? RecruiterNotes { get; set; }
 
-        public ICollection<Interview> Interviews { get; set; } = new List<Interview>();
+        // ✅ Better initialization (cleaner than new List<Interview>())
+        public ICollection<Interview> Interviews { get; set; } = new HashSet<Interview>();
+
+        public DateTime AppliedDate { get; set; } = DateTime.UtcNow;
+        public string? CompanyFeedback { get; set; }
     }
 }
