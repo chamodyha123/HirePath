@@ -1,0 +1,1328 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\controllers\\aicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\controllers\\aicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\implementations\\aiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\implementations\\aiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\interfaces\\iaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\interfaces\\iaiservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\dtos\\ai\\jobmatchresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\dtos\\ai\\jobmatchresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\dtos\\ai\\resumeanalysisresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\dtos\\ai\\resumeanalysisresultdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\dtos\\ai\\resumeparserequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\dtos\\ai\\resumeparserequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\.gitignore.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\.gitignore.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\implementations\\jobapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\implementations\\jobapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\repositories\\interfaces\\ijobapplicationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\repositories\\interfaces\\ijobapplicationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\repositories\\implementations\\jobapplicationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\repositories\\implementations\\jobapplicationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\interfaces\\ijobapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\interfaces\\ijobapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\jobapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\jobapplication.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\controllers\\jobapplicationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\controllers\\jobapplicationscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\interfaces\\ijobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\interfaces\\ijobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\dtos\\jobapplication\\updateapplicationstatusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\dtos\\jobapplication\\updateapplicationstatusdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\dtos\\jobapplication\\createapplicationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\dtos\\jobapplication\\createapplicationdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\enums\\applicationstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\enums\\applicationstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\data\\seeddata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\controllers\\jobscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\controllers\\jobscontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\implementations\\jobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\implementations\\jobservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\controllers\\candidatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\controllers\\candidatecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\implementations\\candidateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\implementations\\candidateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\interfaces\\icandidateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\interfaces\\icandidateservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\repositories\\interfaces\\icandidaterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\repositories\\interfaces\\icandidaterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\controllers\\authcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\implementations\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\implementations\\authservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\interfaces\\iauthservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\repositories\\implementations\\applicationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\repositories\\implementations\\applicationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\repositories\\interfaces\\iapplicationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\repositories\\interfaces\\iapplicationrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\repositories\\implementations\\candidaterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\repositories\\implementations\\candidaterepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\repositories\\implementations\\jobrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\repositories\\implementations\\jobrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\repositories\\interfaces\\ijobrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\repositories\\interfaces\\ijobrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\repositories\\implementations\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\repositories\\implementations\\userrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\repositories\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\repositories\\interfaces\\iuserrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\repositories\\implementations\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\repositories\\implementations\\genericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\repositories\\interfaces\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\repositories\\interfaces\\igenericrepository.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\dtos\\auth\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\dtos\\auth\\registerdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\dtos\\auth\\authresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\dtos\\auth\\authresponsedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\dtos\\auth\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\dtos\\auth\\logindto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\auth\\jwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\auth\\jwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\auth\\ijwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\auth\\ijwttokenservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\data\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\data\\applicationuser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\candidateexperience.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\candidateexperience.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\candidateeducation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\candidateeducation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\enums\\interviewstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\enums\\interviewstatus.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\interview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\interview.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\resume.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\resume.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\jobskill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\jobskill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\job.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\job.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\department.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\company.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\candidateskill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\candidateskill.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\entities\\candidateprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\entities\\candidateprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\enums\\skilllevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\enums\\skilllevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\enums\\interviewtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\enums\\interviewtype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\enums\\employmenttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\enums\\employmenttype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\enums\\experiencelevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\enums\\experiencelevel.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\enums\\workmode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\enums\\workmode.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\enums\\userroletype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\enums\\userroletype.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\controllers\\testcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\models\\common\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\models\\common\\baseentity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\mappings\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\mappings\\automapperprofile.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\hirepath.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\hirepath.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\middleware\\exceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\middleware\\exceptionmiddleware.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\helpers\\resumeparserhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\helpers\\resumeparserhelper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\helpers\\matchscorecalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\helpers\\matchscorecalculator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\helpers\\jwttokengenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\helpers\\jwttokengenerator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\implementations\\analyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\implementations\\analyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\implementations\\interviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\implementations\\interviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\implementations\\applicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\implementations\\applicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\interfaces\\ianalyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\interfaces\\ianalyticsservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\interfaces\\iinterviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\interfaces\\iinterviewservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\services\\interfaces\\iapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\services\\interfaces\\iapplicationservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\migrations\\20260625154343_addauthphase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\migrations\\20260625154343_addauthphase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\migrations\\20260625090808_fixmatchscoreprecision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\migrations\\20260625090808_fixmatchscoreprecision.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|c:\\users\\navodya thathsarani\\source\\repos\\hirepath\\hirepath\\migrations\\20260625090430_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C11B2AC5-E292-4DFB-93A0-92939EDF4B34}|HirePath\\HirePath.csproj|solutionrelative:hirepath\\migrations\\20260625090430_initialcreate.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 1,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "AIController.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\AIController.cs",
+              "RelativeDocumentMoniker": "HirePath\\Controllers\\AIController.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\AIController.cs",
+              "RelativeToolTip": "HirePath\\Controllers\\AIController.cs",
+              "ViewState": "AgIAABoAAAAAAAAAAAAuwCwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T08:38:47.759Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "JobMatchResultDto.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\AI\\JobMatchResultDto.cs",
+              "RelativeDocumentMoniker": "HirePath\\DTOs\\AI\\JobMatchResultDto.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\AI\\JobMatchResultDto.cs",
+              "RelativeToolTip": "HirePath\\DTOs\\AI\\JobMatchResultDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T08:36:39.356Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "ResumeAnalysisResultDto.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\AI\\ResumeAnalysisResultDto.cs",
+              "RelativeDocumentMoniker": "HirePath\\DTOs\\AI\\ResumeAnalysisResultDto.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\AI\\ResumeAnalysisResultDto.cs",
+              "RelativeToolTip": "HirePath\\DTOs\\AI\\ResumeAnalysisResultDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T08:36:06.178Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "IAIService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IAIService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Interfaces\\IAIService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IAIService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Interfaces\\IAIService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:12:31.173Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AIService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\AIService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Implementations\\AIService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\AIService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Implementations\\AIService.cs",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAuwFwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:14:33.785Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Program.cs",
+              "RelativeDocumentMoniker": "HirePath\\Program.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Program.cs",
+              "RelativeToolTip": "HirePath\\Program.cs",
+              "ViewState": "AgIAAEUAAAAAAAAAAAAAAFMAAAA0AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:18:14.951Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "ResumeParseRequestDto.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\AI\\ResumeParseRequestDto.cs",
+              "RelativeDocumentMoniker": "HirePath\\DTOs\\AI\\ResumeParseRequestDto.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\AI\\ResumeParseRequestDto.cs",
+              "RelativeToolTip": "HirePath\\DTOs\\AI\\ResumeParseRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T08:35:18.858Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "IJobApplicationService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IJobApplicationService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Interfaces\\IJobApplicationService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IJobApplicationService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Interfaces\\IJobApplicationService.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAuwBMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T04:31:04.875Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "IJobApplicationRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IJobApplicationRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Interfaces\\IJobApplicationRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IJobApplicationRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Interfaces\\IJobApplicationRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T04:37:05.73Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": ".gitignore.txt",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\.gitignore.txt",
+              "RelativeDocumentMoniker": "HirePath\\.gitignore.txt",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\.gitignore.txt",
+              "RelativeToolTip": "HirePath\\.gitignore.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2026-06-25T17:21:28.976Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "JobApplicationRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\JobApplicationRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\JobApplicationRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\JobApplicationRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Implementations\\JobApplicationRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T04:37:33.875Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\appsettings.json",
+              "RelativeDocumentMoniker": "HirePath\\appsettings.json",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\appsettings.json",
+              "RelativeToolTip": "HirePath\\appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-24T10:25:14.337Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "JobApplicationService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\JobApplicationService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Implementations\\JobApplicationService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\JobApplicationService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Implementations\\JobApplicationService.cs",
+              "ViewState": "AgIAADIAAAAAAAAAAAAswDUAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T04:31:41.239Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "JobApplication.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\JobApplication.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\JobApplication.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\JobApplication.cs",
+              "RelativeToolTip": "HirePath\\Models\\Entities\\JobApplication.cs",
+              "ViewState": "AgIAABYAAAAAAAAAAADwvx0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:33:07.56Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "HirePath\\Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "HirePath\\Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAzwBoAAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:24:23.597Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 15,
+              "Title": "JobApplicationsController.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\JobApplicationsController.cs",
+              "RelativeDocumentMoniker": "HirePath\\Controllers\\JobApplicationsController.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\JobApplicationsController.cs",
+              "RelativeToolTip": "HirePath\\Controllers\\JobApplicationsController.cs",
+              "ViewState": "AgIAAEAAAAAAAAAAAAAuwFIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T04:32:38.264Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 17,
+              "Title": "UpdateApplicationStatusDto.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\JobApplication\\UpdateApplicationStatusDto.cs",
+              "RelativeDocumentMoniker": "HirePath\\DTOs\\JobApplication\\UpdateApplicationStatusDto.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\JobApplication\\UpdateApplicationStatusDto.cs",
+              "RelativeToolTip": "HirePath\\DTOs\\JobApplication\\UpdateApplicationStatusDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T04:28:57.303Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 18,
+              "Title": "CreateApplicationDto.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\JobApplication\\CreateApplicationDto.cs",
+              "RelativeDocumentMoniker": "HirePath\\DTOs\\JobApplication\\CreateApplicationDto.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\JobApplication\\CreateApplicationDto.cs",
+              "RelativeToolTip": "HirePath\\DTOs\\JobApplication\\CreateApplicationDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T04:28:32.968Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 26,
+              "Title": "ICandidateRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\ICandidateRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Interfaces\\ICandidateRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\ICandidateRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Interfaces\\ICandidateRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:36:32.291Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 25,
+              "Title": "ICandidateService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\ICandidateService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Interfaces\\ICandidateService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\ICandidateService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Interfaces\\ICandidateService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:11:03.216Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 16,
+              "Title": "IJobService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IJobService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Interfaces\\IJobService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IJobService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Interfaces\\IJobService.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAwAsAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:11:17.783Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 20,
+              "Title": "SeedData.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Data\\SeedData.cs",
+              "RelativeDocumentMoniker": "HirePath\\Data\\SeedData.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Data\\SeedData.cs",
+              "RelativeToolTip": "HirePath\\Data\\SeedData.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAADwvzQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T08:35:23.309Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 19,
+              "Title": "ApplicationStatus.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\ApplicationStatus.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Enums\\ApplicationStatus.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\ApplicationStatus.cs",
+              "RelativeToolTip": "HirePath\\Models\\Enums\\ApplicationStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:24:09.281Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 23,
+              "Title": "CandidateController.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\CandidateController.cs",
+              "RelativeDocumentMoniker": "HirePath\\Controllers\\CandidateController.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\CandidateController.cs",
+              "RelativeToolTip": "HirePath\\Controllers\\CandidateController.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAA9wEIAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T04:02:57.301Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 21,
+              "Title": "JobsController.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\JobsController.cs",
+              "RelativeDocumentMoniker": "HirePath\\Controllers\\JobsController.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\JobsController.cs",
+              "RelativeToolTip": "HirePath\\Controllers\\JobsController.cs",
+              "ViewState": "AgIAAEYAAAAAAAAAAAAqwFcAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-26T04:14:06.276Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 22,
+              "Title": "JobService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\JobService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Implementations\\JobService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\JobService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Implementations\\JobService.cs",
+              "ViewState": "AgIAADMAAAAAAAAAAAAuwEUAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:13:39.253Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 27,
+              "Title": "AuthController.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\AuthController.cs",
+              "RelativeDocumentMoniker": "HirePath\\Controllers\\AuthController.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\AuthController.cs",
+              "RelativeToolTip": "HirePath\\Controllers\\AuthController.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAqwC0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T15:26:42.852Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 28,
+              "Title": "AuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\AuthService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Implementations\\AuthService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\AuthService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Implementations\\AuthService.cs",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAuwJMAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:13:10.813Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 24,
+              "Title": "CandidateService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\CandidateService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Implementations\\CandidateService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\CandidateService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Implementations\\CandidateService.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAuwDsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:13:25.022Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 29,
+              "Title": "IAuthService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IAuthService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Interfaces\\IAuthService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IAuthService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Interfaces\\IAuthService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:10:47.782Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 30,
+              "Title": "ApplicationRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\ApplicationRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\ApplicationRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\ApplicationRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Implementations\\ApplicationRepository.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAuwCAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:09:46.059Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 31,
+              "Title": "IApplicationRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IApplicationRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Interfaces\\IApplicationRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IApplicationRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Interfaces\\IApplicationRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:36:49.685Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 32,
+              "Title": "CandidateRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\CandidateRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\CandidateRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\CandidateRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Implementations\\CandidateRepository.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAuwBoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:09:31.275Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 33,
+              "Title": "JobRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\JobRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\JobRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\JobRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Implementations\\JobRepository.cs",
+              "ViewState": "AgIAAA8AAAAAAAAAAAA+wCEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:08:17.786Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 34,
+              "Title": "IJobRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IJobRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Interfaces\\IJobRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IJobRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Interfaces\\IJobRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:36:13.392Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 35,
+              "Title": "UserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\UserRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\UserRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\UserRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Implementations\\UserRepository.cs",
+              "ViewState": "AgIAAAkAAAAAAAAAAAAuwBQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:37:51.653Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 36,
+              "Title": "IUserRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IUserRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Interfaces\\IUserRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IUserRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Interfaces\\IUserRepository.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:35:55.226Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 37,
+              "Title": "GenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\GenericRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Implementations\\GenericRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Implementations\\GenericRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Implementations\\GenericRepository.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAuwDYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:37:37.168Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 38,
+              "Title": "IGenericRepository.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IGenericRepository.cs",
+              "RelativeDocumentMoniker": "HirePath\\Repositories\\Interfaces\\IGenericRepository.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Repositories\\Interfaces\\IGenericRepository.cs",
+              "RelativeToolTip": "HirePath\\Repositories\\Interfaces\\IGenericRepository.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAuwBQAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:35:40.53Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 39,
+              "Title": "RegisterDto.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\Auth\\RegisterDto.cs",
+              "RelativeDocumentMoniker": "HirePath\\DTOs\\Auth\\RegisterDto.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\Auth\\RegisterDto.cs",
+              "RelativeToolTip": "HirePath\\DTOs\\Auth\\RegisterDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T15:10:28.133Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 40,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\User.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\User.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\User.cs",
+              "RelativeToolTip": "HirePath\\Models\\Entities\\User.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:27:55.625Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 41,
+              "Title": "AuthResponseDto.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\Auth\\AuthResponseDto.cs",
+              "RelativeDocumentMoniker": "HirePath\\DTOs\\Auth\\AuthResponseDto.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\Auth\\AuthResponseDto.cs",
+              "RelativeToolTip": "HirePath\\DTOs\\Auth\\AuthResponseDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T15:12:28.982Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 42,
+              "Title": "LoginDto.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\Auth\\LoginDto.cs",
+              "RelativeDocumentMoniker": "HirePath\\DTOs\\Auth\\LoginDto.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\DTOs\\Auth\\LoginDto.cs",
+              "RelativeToolTip": "HirePath\\DTOs\\Auth\\LoginDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T15:11:16.349Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 78,
+              "Title": "20260625154343_AddAuthPhase.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Migrations\\20260625154343_AddAuthPhase.cs",
+              "RelativeDocumentMoniker": "HirePath\\Migrations\\20260625154343_AddAuthPhase.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Migrations\\20260625154343_AddAuthPhase.cs",
+              "RelativeToolTip": "HirePath\\Migrations\\20260625154343_AddAuthPhase.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T15:43:43.769Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 43,
+              "Title": "JwtTokenService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Auth\\JwtTokenService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Auth\\JwtTokenService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Auth\\JwtTokenService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Auth\\JwtTokenService.cs",
+              "ViewState": "AgIAADEAAAAAAAAAAADwv0IAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T15:24:22.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 44,
+              "Title": "IJwtTokenService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Auth\\IJwtTokenService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Auth\\IJwtTokenService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Auth\\IJwtTokenService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Auth\\IJwtTokenService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T15:37:23.605Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 45,
+              "Title": "ApplicationUser.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Data\\ApplicationUser.cs",
+              "RelativeDocumentMoniker": "HirePath\\Data\\ApplicationUser.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Data\\ApplicationUser.cs",
+              "RelativeToolTip": "HirePath\\Data\\ApplicationUser.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T15:31:58.745Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 47,
+              "Title": "CandidateEducation.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\CandidateEducation.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\CandidateEducation.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\CandidateEducation.cs",
+              "RelativeToolTip": "HirePath\\Models\\Entities\\CandidateEducation.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:30:38.969Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 46,
+              "Title": "CandidateExperience.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\CandidateExperience.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\CandidateExperience.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\CandidateExperience.cs",
+              "RelativeToolTip": "HirePath\\Models\\Entities\\CandidateExperience.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAA+wAsAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:31:08.678Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 48,
+              "Title": "InterviewStatus.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\InterviewStatus.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Enums\\InterviewStatus.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\InterviewStatus.cs",
+              "RelativeToolTip": "HirePath\\Models\\Enums\\InterviewStatus.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:24:49.18Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 79,
+              "Title": "20260625090808_FixMatchScorePrecision.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Migrations\\20260625090808_FixMatchScorePrecision.cs",
+              "RelativeDocumentMoniker": "HirePath\\Migrations\\20260625090808_FixMatchScorePrecision.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Migrations\\20260625090808_FixMatchScorePrecision.cs",
+              "RelativeToolTip": "HirePath\\Migrations\\20260625090808_FixMatchScorePrecision.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T09:08:08.113Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 49,
+              "Title": "Interview.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\Interview.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\Interview.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\Interview.cs",
+              "RelativeToolTip": "HirePath\\Models\\Entities\\Interview.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:33:38.204Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 80,
+              "Title": "20260625090430_InitialCreate.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Migrations\\20260625090430_InitialCreate.cs",
+              "RelativeDocumentMoniker": "HirePath\\Migrations\\20260625090430_InitialCreate.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Migrations\\20260625090430_InitialCreate.cs",
+              "RelativeToolTip": "HirePath\\Migrations\\20260625090430_InitialCreate.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T09:04:31.058Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 50,
+              "Title": "Resume.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\Resume.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\Resume.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\Resume.cs",
+              "RelativeToolTip": "HirePath\\Models\\Entities\\Resume.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAAA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:31:38.396Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 51,
+              "Title": "JobSkill.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\JobSkill.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\JobSkill.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\JobSkill.cs",
+              "RelativeToolTip": "HirePath\\Models\\Entities\\JobSkill.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAAwAwAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:32:37.841Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 52,
+              "Title": "Job.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\Job.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\Job.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\Job.cs",
+              "RelativeToolTip": "HirePath\\Models\\Entities\\Job.cs",
+              "ViewState": "AgIAABMAAAAAAAAAAAAAAB0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:32:08.891Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 53,
+              "Title": "Department.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\Department.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\Department.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\Department.cs",
+              "RelativeToolTip": "HirePath\\Models\\Entities\\Department.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAAwA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:29:01.356Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 54,
+              "Title": "Company.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\Company.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\Company.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\Company.cs",
+              "RelativeToolTip": "HirePath\\Models\\Entities\\Company.cs",
+              "ViewState": "AgIAAAQAAAAAAAAAAAAuwA4AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:28:35.753Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 55,
+              "Title": "CandidateSkill.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\CandidateSkill.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\CandidateSkill.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\CandidateSkill.cs",
+              "RelativeToolTip": "HirePath\\Models\\Entities\\CandidateSkill.cs",
+              "ViewState": "AgIAAAIAAAAAAAAAAAAIwA0AAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:30:07.08Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 56,
+              "Title": "CandidateProfile.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\CandidateProfile.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Entities\\CandidateProfile.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Entities\\CandidateProfile.cs",
+              "RelativeToolTip": "HirePath\\Models\\Entities\\CandidateProfile.cs",
+              "ViewState": "AgIAAAwAAAAAAAAAAAA/wBYAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:29:30.136Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 57,
+              "Title": "SkillLevel.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\SkillLevel.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Enums\\SkillLevel.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\SkillLevel.cs",
+              "RelativeToolTip": "HirePath\\Models\\Enums\\SkillLevel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T08:51:25.71Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 58,
+              "Title": "InterviewType.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\InterviewType.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Enums\\InterviewType.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\InterviewType.cs",
+              "RelativeToolTip": "HirePath\\Models\\Enums\\InterviewType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T08:50:37.08Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 59,
+              "Title": "EmploymentType.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\EmploymentType.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Enums\\EmploymentType.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\EmploymentType.cs",
+              "RelativeToolTip": "HirePath\\Models\\Enums\\EmploymentType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:25:20.207Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 60,
+              "Title": "ExperienceLevel.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\ExperienceLevel.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Enums\\ExperienceLevel.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\ExperienceLevel.cs",
+              "RelativeToolTip": "HirePath\\Models\\Enums\\ExperienceLevel.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T08:49:42.02Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 62,
+              "Title": "UserRoleType.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\UserRoleType.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Enums\\UserRoleType.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\UserRoleType.cs",
+              "RelativeToolTip": "HirePath\\Models\\Enums\\UserRoleType.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:23:24.439Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 63,
+              "Title": "launchSettings.json",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Properties\\launchSettings.json",
+              "RelativeDocumentMoniker": "HirePath\\Properties\\launchSettings.json",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Properties\\launchSettings.json",
+              "RelativeToolTip": "HirePath\\Properties\\launchSettings.json",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAowBgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-06-25T08:17:56.049Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 61,
+              "Title": "WorkMode.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\WorkMode.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Enums\\WorkMode.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Enums\\WorkMode.cs",
+              "RelativeToolTip": "HirePath\\Models\\Enums\\WorkMode.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:25:51.642Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 64,
+              "Title": "TestController.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\TestController.cs",
+              "RelativeDocumentMoniker": "HirePath\\Controllers\\TestController.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Controllers\\TestController.cs",
+              "RelativeToolTip": "HirePath\\Controllers\\TestController.cs",
+              "ViewState": "AgIAAAEAAAAAAAAAAAAowBEAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-25T08:46:38.202Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 65,
+              "Title": "BaseEntity.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Common\\BaseEntity.cs",
+              "RelativeDocumentMoniker": "HirePath\\Models\\Common\\BaseEntity.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Models\\Common\\BaseEntity.cs",
+              "RelativeToolTip": "HirePath\\Models\\Common\\BaseEntity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T09:26:44.837Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 66,
+              "Title": "AutoMapperProfile.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Mappings\\AutoMapperProfile.cs",
+              "RelativeDocumentMoniker": "HirePath\\Mappings\\AutoMapperProfile.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Mappings\\AutoMapperProfile.cs",
+              "RelativeToolTip": "HirePath\\Mappings\\AutoMapperProfile.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:17:59.835Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 68,
+              "Title": "ExceptionMiddleware.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Middleware\\ExceptionMiddleware.cs",
+              "RelativeDocumentMoniker": "HirePath\\Middleware\\ExceptionMiddleware.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Middleware\\ExceptionMiddleware.cs",
+              "RelativeToolTip": "HirePath\\Middleware\\ExceptionMiddleware.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:17:20.111Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 69,
+              "Title": "ResumeParserHelper.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Helpers\\ResumeParserHelper.cs",
+              "RelativeDocumentMoniker": "HirePath\\Helpers\\ResumeParserHelper.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Helpers\\ResumeParserHelper.cs",
+              "RelativeToolTip": "HirePath\\Helpers\\ResumeParserHelper.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:16:01.716Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 70,
+              "Title": "MatchScoreCalculator.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Helpers\\MatchScoreCalculator.cs",
+              "RelativeDocumentMoniker": "HirePath\\Helpers\\MatchScoreCalculator.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Helpers\\MatchScoreCalculator.cs",
+              "RelativeToolTip": "HirePath\\Helpers\\MatchScoreCalculator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:15:46.961Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 71,
+              "Title": "JwtTokenGenerator.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Helpers\\JwtTokenGenerator.cs",
+              "RelativeDocumentMoniker": "HirePath\\Helpers\\JwtTokenGenerator.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Helpers\\JwtTokenGenerator.cs",
+              "RelativeToolTip": "HirePath\\Helpers\\JwtTokenGenerator.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:15:32.096Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 67,
+              "Title": "HirePath.csproj",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\HirePath.csproj",
+              "RelativeDocumentMoniker": "HirePath\\HirePath.csproj",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\HirePath.csproj",
+              "RelativeToolTip": "HirePath\\HirePath.csproj",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-06-24T09:34:58.132Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 72,
+              "Title": "AnalyticsService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\AnalyticsService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Implementations\\AnalyticsService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\AnalyticsService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Implementations\\AnalyticsService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:14:18.071Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 73,
+              "Title": "InterviewService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\InterviewService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Implementations\\InterviewService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\InterviewService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Implementations\\InterviewService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:14:05.052Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 74,
+              "Title": "ApplicationService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\ApplicationService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Implementations\\ApplicationService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Implementations\\ApplicationService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Implementations\\ApplicationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:13:52.365Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 75,
+              "Title": "IAnalyticsService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IAnalyticsService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Interfaces\\IAnalyticsService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IAnalyticsService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Interfaces\\IAnalyticsService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:12:12.046Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 76,
+              "Title": "IInterviewService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IInterviewService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Interfaces\\IInterviewService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IInterviewService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Interfaces\\IInterviewService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:11:57.441Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 77,
+              "Title": "IApplicationService.cs",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IApplicationService.cs",
+              "RelativeDocumentMoniker": "HirePath\\Services\\Interfaces\\IApplicationService.cs",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePath\\Services\\Interfaces\\IApplicationService.cs",
+              "RelativeToolTip": "HirePath\\Services\\Interfaces\\IApplicationService.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-06-24T10:11:34.265Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

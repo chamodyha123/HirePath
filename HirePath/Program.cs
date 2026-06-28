@@ -81,7 +81,7 @@ builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<ICandidateService, CandidateService>();
 builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
 builder.Services.AddScoped<IJobApplicationService, JobApplicationService>();
-
+builder.Services.AddScoped<IAIService, AIService>();
 // ----------------------------------------------------
 // Controllers + Swagger
 // ----------------------------------------------------
