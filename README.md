@@ -272,7 +272,7 @@ Develop:
 Clone the repository
 
 ```bash
-git clone https://github.com/USERNAME/HirePathAI.git
+(https://github.com/chamodyha123/HirePath.git)
 ```
 
 Open Visual Studio
