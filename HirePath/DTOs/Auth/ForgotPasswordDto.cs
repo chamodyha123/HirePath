@@ -2,7 +2,7 @@
 
 namespace HirePathAI.API.DTOs.Auth
 {
-    public class ResendOtpDto
+    public class ForgotPasswordDto
     {
         [Required]
         [EmailAddress]

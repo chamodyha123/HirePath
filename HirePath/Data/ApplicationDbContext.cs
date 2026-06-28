@@ -25,6 +25,9 @@ namespace HirePathAI.API.Data
         public DbSet<Interview> Interviews => Set<Interview>();
 
         public DbSet<EmailOtp> EmailOtps => Set<EmailOtp>();
+        public DbSet<PendingRegistration>
+PendingRegistrations
+=> Set<PendingRegistration>();
 
 
 
@@ -54,6 +57,8 @@ namespace HirePathAI.API.Data
                     e.Email,
                     e.Purpose
                 });
+
+
 
             // =========================
             // COMPANY -> DEPARTMENTS

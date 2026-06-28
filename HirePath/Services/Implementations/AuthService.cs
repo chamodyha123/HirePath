@@ -1,5 +1,7 @@
-﻿using HirePathAI.API.DTOs.Auth;
+﻿using HirePathAI.API.Data;
+using HirePathAI.API.DTOs.Auth;
 using HirePathAI.API.Models.Entities;
+using HirePathAI.API.Models.Enums;
 using HirePathAI.API.Services.Auth;
 using HirePathAI.API.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
@@ -9,81 +11,215 @@ namespace HirePathAI.API.Services.Implementations
 {
     public class AuthService : IAuthService
     {
+        private readonly ApplicationDbContext _context;
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
         private readonly IJwtTokenService _jwtTokenService;
+        private readonly IOtpService _otpService;
 
         public AuthService(
+            ApplicationDbContext context,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
-            IJwtTokenService jwtTokenService)
+            IJwtTokenService jwtTokenService,
+            IOtpService otpService)
         {
+            _context = context;
             _userManager = userManager;
             _signInManager = signInManager;
             _jwtTokenService = jwtTokenService;
+            _otpService = otpService;
         }
 
-        public async Task<AuthResponseDto> RegisterAsync(RegisterDto dto)
+        public async Task<AuthResponseDto> StartRegistrationAsync(RegisterRequestDto dto)
         {
             var allowedRoles = new[] { "Candidate", "Recruiter", "HiringManager" };
 
             if (!allowedRoles.Contains(dto.Role))
-            {
-                return new AuthResponseDto
-                {
-                    IsSuccess = false,
-                    Message = "Invalid role."
-                };
-            }
+                return Fail("Invalid role.");
 
             if (await _userManager.Users.AnyAsync(x => x.Email == dto.Email))
-            {
-                return new AuthResponseDto
-                {
-                    IsSuccess = false,
-                    Message = "Email already exists."
-                };
-            }
+                return Fail("Email already exists.");
 
             if (await _userManager.Users.AnyAsync(x => x.UserName == dto.UserName))
+                return Fail("Username already exists.");
+
+            var existingPending = await _context.PendingRegistrations
+                .Where(x => x.Email == dto.Email || x.UserName == dto.UserName)
+                .ToListAsync();
+
+            if (existingPending.Any())
             {
-                return new AuthResponseDto
-                {
-                    IsSuccess = false,
-                    Message = "Username already exists."
-                };
+                _context.PendingRegistrations.RemoveRange(existingPending);
+                await _context.SaveChangesAsync();
             }
 
-            var user = new User
+            var pending = new PendingRegistration
             {
                 FullName = dto.FullName,
-                Email = dto.Email,
                 UserName = dto.UserName,
-                EmailConfirmed = true
+                Email = dto.Email,
+                Password = dto.Password,
+                Role = dto.Role,
+                ExpireAt = DateTime.UtcNow.AddMinutes(5)
             };
 
-            var result = await _userManager.CreateAsync(user, dto.Password);
+            _context.PendingRegistrations.Add(pending);
+            await _context.SaveChangesAsync();
 
-            if (!result.Succeeded)
-            {
-                return new AuthResponseDto
-                {
-                    IsSuccess = false,
-                    Message = string.Join(" | ", result.Errors.Select(x => x.Description))
-                };
-            }
-
-            await _userManager.AddToRoleAsync(user, dto.Role);
-
-            var roles = await _userManager.GetRolesAsync(user);
-
-            var (token, expiration) =
-                await _jwtTokenService.CreateTokenAsync(user);
+            await _otpService.GenerateOtpAsync(dto.Email, OtpPurpose.EmailVerification);
 
             return new AuthResponseDto
             {
                 IsSuccess = true,
-                Message = "Registration Successful",
+                Message = "Registration started. Verification OTP sent to your email."
+            };
+        }
+
+        public async Task<AuthResponseDto> VerifyEmailOtpAsync(VerifyEmailOtpDto dto)
+        {
+            var otpValid = await _otpService.VerifyOtpAsync(
+                dto.Email,
+                dto.Otp,
+                OtpPurpose.EmailVerification);
+
+            if (!otpValid)
+                return Fail("Invalid or expired OTP.");
+
+            var pending = await _context.PendingRegistrations
+                .FirstOrDefaultAsync(x => x.Email == dto.Email);
+
+            if (pending == null)
+                return Fail("Registration request not found.");
+
+            if (pending.ExpireAt < DateTime.UtcNow)
+            {
+                _context.PendingRegistrations.Remove(pending);
+                await _context.SaveChangesAsync();
+
+                return Fail("Registration request expired. Please register again.");
+            }
+
+            var user = new User
+            {
+                FullName = pending.FullName,
+                UserName = pending.UserName,
+                Email = pending.Email,
+                EmailConfirmed = true
+            };
+
+            var createResult = await _userManager.CreateAsync(user, pending.Password);
+
+            if (!createResult.Succeeded)
+                return Fail(string.Join(" | ", createResult.Errors.Select(e => e.Description)));
+
+            await _userManager.AddToRoleAsync(user, pending.Role);
+
+            _context.PendingRegistrations.Remove(pending);
+            await _context.SaveChangesAsync();
+
+            return await BuildAuthResponseAsync(user, "Email verified successfully. Account created.");
+        }
+
+        public async Task<AuthResponseDto> RegisterAsync(RegisterDto dto)
+        {
+            var request = new RegisterRequestDto
+            {
+                FullName = dto.FullName,
+                UserName = dto.UserName,
+                Email = dto.Email,
+                Password = dto.Password,
+                ConfirmPassword = dto.Password,
+                Role = dto.Role
+            };
+
+            return await StartRegistrationAsync(request);
+        }
+
+        public async Task<AuthResponseDto> LoginAsync(LoginDto dto)
+        {
+            User? user = await _userManager.FindByEmailAsync(dto.EmailOrUsername);
+
+            if (user == null)
+            {
+                user = await _userManager.Users
+                    .FirstOrDefaultAsync(x => x.UserName == dto.EmailOrUsername);
+            }
+
+            if (user == null)
+                return Fail("Invalid credentials.");
+
+            if (!user.EmailConfirmed)
+                return Fail("Please verify your email before logging in.");
+
+            var signIn = await _signInManager.CheckPasswordSignInAsync(
+                user,
+                dto.Password,
+                false);
+
+            if (!signIn.Succeeded)
+                return Fail("Invalid credentials.");
+
+            return await BuildAuthResponseAsync(user, "Login successful.");
+        }
+
+        public async Task<AuthResponseDto> ForgotPasswordAsync(ForgotPasswordDto dto)
+        {
+            var user = await _userManager.FindByEmailAsync(dto.Email);
+
+            if (user == null)
+                return Fail("Account not found.");
+
+            await _otpService.GenerateOtpAsync(dto.Email, OtpPurpose.PasswordReset);
+
+            return new AuthResponseDto
+            {
+                IsSuccess = true,
+                Message = "Password reset OTP sent to your email."
+            };
+        }
+
+        public async Task<AuthResponseDto> ResetPasswordAsync(ResetPasswordDto dto)
+        {
+            var otpValid = await _otpService.VerifyOtpAsync(
+                dto.Email,
+                dto.Otp,
+                OtpPurpose.PasswordReset);
+
+            if (!otpValid)
+                return Fail("Invalid or expired OTP.");
+
+            var user = await _userManager.FindByEmailAsync(dto.Email);
+
+            if (user == null)
+                return Fail("Account not found.");
+
+            var resetToken = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var result = await _userManager.ResetPasswordAsync(
+                user,
+                resetToken,
+                dto.NewPassword);
+
+            if (!result.Succeeded)
+                return Fail(string.Join(" | ", result.Errors.Select(e => e.Description)));
+
+            return new AuthResponseDto
+            {
+                IsSuccess = true,
+                Message = "Password reset successfully."
+            };
+        }
+
+        private async Task<AuthResponseDto> BuildAuthResponseAsync(User user, string message)
+        {
+            var roles = await _userManager.GetRolesAsync(user);
+            var (token, expiration) = await _jwtTokenService.CreateTokenAsync(user);
+
+            return new AuthResponseDto
+            {
+                IsSuccess = true,
+                Message = message,
                 Token = token,
                 Expiration = expiration,
                 FullName = user.FullName,
@@ -93,55 +229,12 @@ namespace HirePathAI.API.Services.Implementations
             };
         }
 
-        public async Task<AuthResponseDto> LoginAsync(LoginDto dto)
+        private static AuthResponseDto Fail(string message)
         {
-            User? user =
-                await _userManager.FindByEmailAsync(dto.EmailOrUsername);
-
-            if (user == null)
-            {
-                user = await _userManager.Users.FirstOrDefaultAsync(x =>
-                    x.UserName == dto.EmailOrUsername);
-            }
-
-            if (user == null)
-            {
-                return new AuthResponseDto
-                {
-                    IsSuccess = false,
-                    Message = "Invalid credentials."
-                };
-            }
-
-            var signIn =
-                await _signInManager.CheckPasswordSignInAsync(user,
-                    dto.Password,
-                    false);
-
-            if (!signIn.Succeeded)
-            {
-                return new AuthResponseDto
-                {
-                    IsSuccess = false,
-                    Message = "Invalid credentials."
-                };
-            }
-
-            var roles = await _userManager.GetRolesAsync(user);
-
-            var (token, expiration) =
-                await _jwtTokenService.CreateTokenAsync(user);
-
             return new AuthResponseDto
             {
-                IsSuccess = true,
-                Message = "Login Successful",
-                Token = token,
-                Expiration = expiration,
-                FullName = user.FullName,
-                Email = user.Email,
-                UserName = user.UserName,
-                Roles = roles
+                IsSuccess = false,
+                Message = message
             };
         }
     }
