@@ -24,7 +24,9 @@ namespace HirePathAI.API.Data
         public DbSet<JobApplication> JobApplications => Set<JobApplication>();
         public DbSet<Interview> Interviews => Set<Interview>();
 
-        
+        public DbSet<EmailOtp> EmailOtps => Set<EmailOtp>();
+
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -36,6 +38,22 @@ namespace HirePathAI.API.Data
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.NormalizedEmail)
                 .HasDatabaseName("IX_User_NormalizedEmail");
+
+
+            modelBuilder.Entity<EmailOtp>()
+    .Property(e => e.Email)
+    .HasMaxLength(150);
+
+            modelBuilder.Entity<EmailOtp>()
+                .Property(e => e.OtpHash)
+                .HasMaxLength(256);
+
+            modelBuilder.Entity<EmailOtp>()
+                .HasIndex(e => new
+                {
+                    e.Email,
+                    e.Purpose
+                });
 
             // =========================
             // COMPANY -> DEPARTMENTS

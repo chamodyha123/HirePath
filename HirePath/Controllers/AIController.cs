@@ -1,5 +1,4 @@
 ﻿using HirePathAI.API.DTOs.AI;
-using HirePathAI.API.Models.Entities;
 using HirePathAI.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -20,25 +19,20 @@ namespace HirePathAI.API.Controllers
         public IActionResult ParseResume(ResumeParseRequestDto dto)
         {
             var result = _aiService.ParseResume(dto.ResumeText);
-
             return Ok(result);
         }
 
         [HttpPost("match")]
-        public IActionResult Match(Job job, CandidateProfile candidate)
+        public IActionResult Match([FromBody] MatchRequestDto dto)
         {
-            var result = _aiService.MatchCandidate(job, candidate);
-
+            var result = _aiService.MatchCandidate(dto.Job, dto.Candidate);
             return Ok(result);
         }
 
         [HttpPost("rank")]
-        public IActionResult Rank(Job job,
-            List<CandidateProfile> candidates)
+        public IActionResult Rank([FromBody] RankRequestDto dto)
         {
-            var result =
-                _aiService.RankCandidates(job, candidates);
-
+            var result = _aiService.RankCandidates(dto.Job, dto.Candidates);
             return Ok(result);
         }
     }

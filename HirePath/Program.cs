@@ -11,6 +11,8 @@ using Microsoft.OpenApi.Models;
 using System.Text;
 using HirePathAI.API.Services.Interfaces;
 using HirePathAI.API.Services.Implementations;
+using HirePathAI.API.Configuration;
+
 
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +36,12 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
 })
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
+
+builder.Services.Configure<EmailSettings>(
+    builder.Configuration.GetSection("EmailSettings"));
+
+builder.Services.AddScoped<IEmailService, EmailService>();
+
 
 // ----------------------------------------------------
 // JWT Service
