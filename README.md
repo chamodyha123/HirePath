@@ -142,7 +142,7 @@ Responsible for the overall backend architecture, security, integration, and pro
 
 ---
 
-## Member 02
+## Member 02 - sudeesha ravisara
 
 ### Candidate Module
 
