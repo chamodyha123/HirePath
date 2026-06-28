@@ -142,7 +142,7 @@ Responsible for the overall backend architecture, security, integration, and pro
 
 ---
 
-## Member 02
+## Member 02 - sudeesha ravisara
 
 ### Candidate Module
 
@@ -272,7 +272,7 @@ Develop:
 Clone the repository
 
 ```bash
-git clone https://github.com/USERNAME/HirePathAI.git
+(https://github.com/chamodyha123/HirePath.git)
 ```
 
 Open Visual Studio
@@ -354,7 +354,7 @@ Admin@123
 ## First Time
 
 ```bash
-git clone https://github.com/USERNAME/HirePathAI.git
+git clone https://github.com/chamodyha123/HirePathAI.git
 ```
 
 ---
@@ -372,25 +372,25 @@ git pull origin main
 Member 2
 
 ```bash
-git checkout -b candidate-module
+git checkout -b dev-yourname
 ```
 
 Member 3
 
 ```bash
-git checkout -b recruiter-module
+git checkout -b dev-yourname
 ```
 
 Member 4
 
 ```bash
-git checkout -b application-module
+git checkout -b dev-yourname
 ```
 
 Member 5
 
 ```bash
-git checkout -b admin-module
+git checkout -b dev-yourname
 ```
 
 ---
