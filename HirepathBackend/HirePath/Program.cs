@@ -13,8 +13,6 @@ using HirePathAI.API.Services.Interfaces;
 using HirePathAI.API.Services.Implementations;
 using HirePathAI.API.Configuration;
 
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // ----------------------------------------------------
@@ -37,12 +35,14 @@ builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
 .AddEntityFrameworkStores<ApplicationDbContext>()
 .AddDefaultTokenProviders();
 
+// ----------------------------------------------------
+// Email + OTP
+// ----------------------------------------------------
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
 
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IOtpService, OtpService>();
-
 
 // ----------------------------------------------------
 // JWT Service
@@ -75,22 +75,44 @@ builder.Services.AddAuthentication(options =>
         ClockSkew = TimeSpan.Zero
     };
 });
+
+// ----------------------------------------------------
+// Repositories
+// ----------------------------------------------------
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
+builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
 
 // ----------------------------------------------------
-// Authorization
+// Services
 // ----------------------------------------------------
 builder.Services.AddAuthorization();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<ICandidateService, CandidateService>();
-builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
 builder.Services.AddScoped<IJobApplicationService, JobApplicationService>();
 builder.Services.AddScoped<IAIService, AIService>();
+
+// ----------------------------------------------------
+// CORS for React frontend
+// ----------------------------------------------------
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        policy
+            .WithOrigins(
+                "http://localhost:5173",
+                "https://localhost:5173"
+            )
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 // ----------------------------------------------------
 // Controllers + Swagger
 // ----------------------------------------------------
@@ -105,7 +127,6 @@ builder.Services.AddSwaggerGen(options =>
         Version = "v1"
     });
 
-    // Swagger JWT setup
     options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
         Name = "Authorization",
@@ -154,9 +175,104 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+app.UseCors("AllowFrontend");
+
 app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
+
+// ----------------------------------------------------
+// Start Page: Choose Swagger or Frontend
+// ----------------------------------------------------
+app.MapGet("/", async context =>
+{
+    context.Response.ContentType = "text/html";
+
+    await context.Response.WriteAsync("""
+    <!DOCTYPE html>
+    <html>
+    <head>
+        <title>HirePath AI</title>
+        <style>
+            body {
+                margin: 0;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: Arial, sans-serif;
+                background: linear-gradient(135deg, #07111f, #0f2742);
+                color: white;
+            }
+
+            .card {
+                width: 460px;
+                background: rgba(255, 255, 255, 0.1);
+                padding: 40px;
+                border-radius: 20px;
+                text-align: center;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+                backdrop-filter: blur(12px);
+            }
+
+            h1 {
+                margin-bottom: 10px;
+                color: #66b2ff;
+            }
+
+            p {
+                color: #d7e7ff;
+                margin-bottom: 30px;
+            }
+
+            .btn {
+                display: block;
+                margin: 14px 0;
+                padding: 15px;
+                border-radius: 12px;
+                text-decoration: none;
+                font-weight: bold;
+                color: white;
+                background: #0d6efd;
+                transition: 0.2s;
+            }
+
+            .btn:hover {
+                background: #0b5ed7;
+                transform: translateY(-2px);
+            }
+
+            .secondary {
+                background: #198754;
+            }
+
+            .secondary:hover {
+                background: #157347;
+            }
+
+            .note {
+                margin-top: 25px;
+                font-size: 13px;
+                color: #aac7e8;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="card">
+            <h1>HirePath AI</h1>
+            <p>Choose how you want to continue</p>
+
+            <a class="btn" href="/swagger">Open Swagger API</a>
+            <a class="btn secondary" href="http://localhost:5173">Open Frontend UI</a>
+
+            <div class="note">
+                Backend API must be running here. Frontend must be running on http://localhost:5173
+            </div>
+        </div>
+    </body>
+    </html>
+    """);
+});
 
 app.Run();
