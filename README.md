@@ -108,90 +108,164 @@ The project foundation is now complete. Team members can begin implementing thei
 
 # Team Responsibilities
 
-## Member 01 (Project Lead - chamodyha peshan)
-Responsible for the core system architecture.
+## Member 01 ( Chamodyha Peshan)
 
-Completed:
+Responsible for the overall backend architecture, security, integration, and project management.
 
-- Database Design
-- Entity Framework Core
-- ApplicationDbContext
-- ASP.NET Identity
-- JWT Authentication
-- Repository Pattern
-- Service Layer
-- Dependency Injection
-- GitHub Management
-- Project Architecture
-- Code Review
-- Module Integration
+### Completed
 
-Will Continue:
+* Project Architecture
+* Database Design
+* Entity Framework Core
+* ApplicationDbContext
+* ASP.NET Identity
+* JWT Authentication
+* Repository Pattern
+* Service Layer
+* Dependency Injection
+* GitHub Repository Management
+* Code Review
+* Module Integration
+* Phase 01 – Database Foundation
+* Phase 02 – Authentication & Authorization
+* Phase 03 – Core Backend Foundation
 
-- AI Integration
-- Final Integration
-- Testing
-- Bug Fixing
-- Deployment
+### Will Continue
+
+* AI Service Integration
+* Final System Integration
+* Performance Optimization
+* Bug Fixing
+* Deployment
+* Final Testing
+* Code Review & Merge Requests
+
+---
 
 ## Member 02
 
-Candidate Module
+### Candidate Module
 
-Develop
+Responsible for all candidate-related features.
 
-- Candidate Profile
-- Skills
-- Education
-- Experience
-- Resume Upload
-- Candidate APIs
+Develop:
+
+* Candidate Profile Management
+* Skills Management
+* Education Management
+* Experience Management
+* Resume Upload & Management
+* Candidate Dashboard
+* Candidate APIs
+* Candidate Module Testing
 
 ---
 
 ## Member 03
 
-Recruiter Module
+### Recruiter Module
 
-Develop
+Responsible for recruiter operations and job management.
 
-- Company Management
-- Department Management
-- Job CRUD
-- Job Skills
-- Job Search
-- Recruiter APIs
+Develop:
+
+* Company Management
+* Department Management
+* Job CRUD Operations
+* Job Skills Management
+* Job Search & Filtering
+* Recruiter Dashboard
+* Recruiter APIs
+* Recruiter Module Testing
 
 ---
 
 ## Member 04
 
-Application Module
+### Recruitment Workflow Module
 
-Develop
+Responsible for the complete hiring workflow.
 
-- Job Application
-- Application Tracking
-- Interview Scheduling
-- Candidate Evaluation
-- Hiring Workflow
+Develop:
+
+* Job Applications
+* Application Tracking
+* Application Status Management
+* Interview Scheduling
+* Interview Feedback
+* Candidate Evaluation
+* Hiring Workflow
+* Recruitment Workflow APIs
+* Workflow Testing
 
 ---
 
 ## Member 05
 
-Admin & AI Module
+### AI & Analytics Module
 
-Develop
+Responsible for AI-powered features and reporting.
 
-- Dashboard
-- User Management
-- Analytics
-- AI Recommendation
-- Candidate Ranking
-- Reports
+Develop:
+
+* Resume Parsing
+* Skill Extraction
+* AI Job Recommendation
+* Candidate Ranking
+* Candidate–Job Matching
+* Recruitment Analytics
+* Hiring Reports
+* AI APIs
+* AI Module Testing
 
 ---
+
+## Member 06
+
+### External Integrations & Communication Module
+
+Responsible for integrations with external services and notifications.
+
+Develop:
+
+* Resume File Storage
+* Email Notifications
+* Interview Reminder Emails
+* Google Calendar Integration
+* Microsoft Outlook Calendar Integration
+* Cloud Storage Integration (Azure Blob / Cloudinary)
+* Notification Services
+* Integration Testing
+* User Acceptance Testing (UAT)
+
+---
+
+# Branch Strategy
+
+| Member    | Branch                     |
+| --------- | -------------------------- |
+| Member 01 | feature/project-foundation |
+| Member 02 | feature/candidate-module   |
+| Member 03 | feature/recruiter-module   |
+| Member 04 | feature/application-module |
+| Member 05 | feature/ai-analytics       |
+| Member 06 | feature/integrations       |
+
+---
+
+# Development Workflow
+
+1. Clone the repository.
+2. Create or switch to your assigned branch.
+3. Implement only your assigned module.
+4. Commit changes with meaningful commit messages.
+5. Push your branch to GitHub.
+6. Create a Pull Request to the `main` branch.
+7. The Project Lead will review and merge approved changes.
+8. Resolve merge conflicts before submitting new Pull Requests.
+
+**Important:** Team members should not modify another member's module without prior discussion to minimize merge conflicts and maintain clear individual contributions.
+
 
 # Clone Project
 
