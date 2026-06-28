@@ -354,7 +354,7 @@ Admin@123
 ## First Time
 
 ```bash
-git clone https://github.com/USERNAME/HirePathAI.git
+git clone https://github.com/chamodyha123/HirePathAI.git
 ```
 
 ---
@@ -372,25 +372,25 @@ git pull origin main
 Member 2
 
 ```bash
-git checkout -b candidate-module
+git checkout -b dev-yourname
 ```
 
 Member 3
 
 ```bash
-git checkout -b recruiter-module
+git checkout -b dev-yourname
 ```
 
 Member 4
 
 ```bash
-git checkout -b application-module
+git checkout -b dev-yourname
 ```
 
 Member 5
 
 ```bash
-git checkout -b admin-module
+git checkout -b dev-yourname
 ```
 
 ---
