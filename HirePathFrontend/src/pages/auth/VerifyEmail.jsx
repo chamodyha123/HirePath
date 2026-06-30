@@ -55,6 +55,7 @@ function VerifyEmail() {
     return (
         <div className="auth-page">
             <div className="auth-card">
+                <div className="auth-badge">AI Recruitment Platform</div>
                 <h1>Verify Email</h1>
                 <p>Enter the OTP sent to your email</p>
 

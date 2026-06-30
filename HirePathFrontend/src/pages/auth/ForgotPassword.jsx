@@ -33,6 +33,7 @@ function ForgotPassword() {
     return (
         <div className="auth-page">
             <div className="auth-card">
+                <div className="auth-badge">AI Recruitment Platform</div>
                 <h1>Forgot Password</h1>
                 <p>Enter your email to receive reset OTP</p>
 

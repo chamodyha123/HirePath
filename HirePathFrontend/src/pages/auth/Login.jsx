@@ -50,6 +50,7 @@ function Login() {
     return (
         <div className="auth-page">
             <div className="auth-card">
+                <div className="auth-badge">AI Recruitment Platform</div>
                 <h1>HirePath AI</h1>
                 <p>Login to your account</p>
 

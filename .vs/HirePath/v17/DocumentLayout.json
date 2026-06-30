@@ -1,12 +1,156 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\Login.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HirePathFrontend\\src\\pages\\auth\\Login.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\ForgotPassword.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HirePathFrontend\\src\\pages\\auth\\ForgotPassword.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\VerifyEmail.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HirePathFrontend\\src\\pages\\auth\\VerifyEmail.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\ResetPassword.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HirePathFrontend\\src\\pages\\auth\\ResetPassword.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\Register.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HirePathFrontend\\src\\pages\\auth\\Register.jsx||{14D17961-FE51-464D-9111-C4AF11D7D99A}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\Auth.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HirePathFrontend\\src\\pages\\auth\\Auth.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HirePathFrontend\\src\\index.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\App.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:HirePathFrontend\\src\\App.css||{A5401142-F49D-43DB-90B1-F57BA349E55C}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
       "VerticalTabListWidth": 256,
-      "DocumentGroups": []
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 3,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "VerifyEmail.jsx",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\VerifyEmail.jsx",
+              "RelativeDocumentMoniker": "HirePathFrontend\\src\\pages\\auth\\VerifyEmail.jsx",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\VerifyEmail.jsx",
+              "RelativeToolTip": "HirePathFrontend\\src\\pages\\auth\\VerifyEmail.jsx",
+              "ViewState": "AgIAAC0AAAAAAAAAAAAAADkAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-06-30T03:27:16.761Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ResetPassword.jsx",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\ResetPassword.jsx",
+              "RelativeDocumentMoniker": "HirePathFrontend\\src\\pages\\auth\\ResetPassword.jsx",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\ResetPassword.jsx",
+              "RelativeToolTip": "HirePathFrontend\\src\\pages\\auth\\ResetPassword.jsx",
+              "ViewState": "AgIAADYAAAAAAAAAAAAAAC0AAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-06-30T03:26:49.88Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Register.jsx",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\Register.jsx",
+              "RelativeDocumentMoniker": "HirePathFrontend\\src\\pages\\auth\\Register.jsx",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\Register.jsx",
+              "RelativeToolTip": "HirePathFrontend\\src\\pages\\auth\\Register.jsx",
+              "ViewState": "AgIAAFQAAAAAAAAAAAAAADAAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-06-30T03:26:10.559Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Login.jsx",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\Login.jsx",
+              "RelativeDocumentMoniker": "HirePathFrontend\\src\\pages\\auth\\Login.jsx",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\Login.jsx",
+              "RelativeToolTip": "HirePathFrontend\\src\\pages\\auth\\Login.jsx",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAADQAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-06-30T03:25:59.191Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "index.css",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\index.css",
+              "RelativeDocumentMoniker": "HirePathFrontend\\src\\index.css",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\index.css",
+              "RelativeToolTip": "HirePathFrontend\\src\\index.css",
+              "ViewState": "AgIAABEAAAAAAAAAAAAgwCQAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-06-30T03:23:31.759Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Auth.css",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\Auth.css",
+              "RelativeDocumentMoniker": "HirePathFrontend\\src\\pages\\auth\\Auth.css",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\Auth.css",
+              "RelativeToolTip": "HirePathFrontend\\src\\pages\\auth\\Auth.css",
+              "ViewState": "AgIAAFoAAAAAAAAAAAAAAAIBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-06-30T03:16:56.491Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "ForgotPassword.jsx",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\ForgotPassword.jsx",
+              "RelativeDocumentMoniker": "HirePathFrontend\\src\\pages\\auth\\ForgotPassword.jsx",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\pages\\auth\\ForgotPassword.jsx",
+              "RelativeToolTip": "HirePathFrontend\\src\\pages\\auth\\ForgotPassword.jsx",
+              "ViewState": "AgIAABUAAAAAAAAAAAAAACMAAABJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003663|",
+              "WhenOpened": "2026-06-30T03:16:53.49Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "App.css",
+              "DocumentMoniker": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\App.css",
+              "RelativeDocumentMoniker": "HirePathFrontend\\src\\App.css",
+              "ToolTip": "C:\\Users\\Navodya Thathsarani\\source\\repos\\HirePath\\HirePathFrontend\\src\\App.css",
+              "RelativeToolTip": "HirePathFrontend\\src\\App.css",
+              "ViewState": "AgIAAKUAAAAAAAAAAAAgwLgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003000|",
+              "WhenOpened": "2026-06-30T03:17:11.324Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
     }
   ]
 }
