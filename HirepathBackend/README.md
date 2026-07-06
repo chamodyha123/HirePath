@@ -180,7 +180,7 @@ Develop:
 
 ---
 
-## Member 04
+## Member 04 - Hansi
 
 ### Recruitment Workflow Module
 
@@ -200,7 +200,7 @@ Develop:
 
 ---
 
-## Member 05
+## Member 05 - Sashin Peiris
 
 ### AI & Analytics Module
 
