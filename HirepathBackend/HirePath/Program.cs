@@ -84,6 +84,7 @@ builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
+builder.Services.AddScoped<IInterviewRepository, InterviewRepository>(); // ✅ Added
 
 // ----------------------------------------------------
 // Services
@@ -94,6 +95,8 @@ builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<ICandidateService, CandidateService>();
 builder.Services.AddScoped<IJobApplicationService, JobApplicationService>();
+builder.Services.AddScoped<IInterviewService, InterviewService>(); // ✅ Added
+builder.Services.AddScoped<IApplicationService, ApplicationService>(); // ✅ Added
 builder.Services.AddScoped<IAIService, AIService>();
 
 // ----------------------------------------------------
