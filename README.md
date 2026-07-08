@@ -6,20 +6,20 @@
 HirePath/
 │
 ├── HirepathBackend/
-│   └── HirePath/
-│       ├── Controllers/
-│       ├── Data/
-│       ├── DTOs/
-│       ├── Migrations/
-│       ├── Models/
-│       ├── Repositories/
-│       ├── Services/
-│       ├── wwwroot/
-│       ├── appsettings.json
-│       ├── Program.cs
-│       └── HirePath.csproj
-│
-└── HirePathFrontend/
+   └── HirePath/
+       ├── Controllers/
+       ├── Data/
+       ├── DTOs/
+       ├── Migrations/
+       ├── Models/
+       ├── Repositories/
+       ├── Services/
+       ├── wwwroot/
+       ├── appsettings.json
+       ├── Program.cs
+       └── HirePath.csproj
+
+ HirePathFrontend/
     ├── public/
     ├── src/
     │   ├── api/
