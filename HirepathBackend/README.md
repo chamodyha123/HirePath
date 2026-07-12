@@ -200,7 +200,7 @@ Develop:
 
 ---
 
-## Member 05 - Sashin Peiris
+## Member 05 - Shashin Peiris
 
 ### AI & Analytics Module
 
