@@ -12,6 +12,7 @@ namespace HirePathAI.API.Models.Entities
         [ForeignKey(nameof(UserId))]
         public User? User { get; set; }
 
+        // ============ BASIC INFORMATION ============
         [MaxLength(100)]
         public string? FirstName { get; set; }
 
@@ -26,12 +27,6 @@ namespace HirePathAI.API.Models.Entities
         [MaxLength(200)]
         public string? Location { get; set; }
 
-        [MaxLength(200)]
-        public string? LinkedInUrl { get; set; }
-
-        [MaxLength(200)]
-        public string? PortfolioUrl { get; set; }
-
         [MaxLength(50)]
         public string? PhoneNumber { get; set; }
 
@@ -41,7 +36,43 @@ namespace HirePathAI.API.Models.Entities
 
         public DateTime? ProfileUpdatedAt { get; set; }
 
-        // Navigation Properties
+        // ============ PROFILE PICTURE ============
+        public int? ProfilePictureId { get; set; }
+
+        [ForeignKey(nameof(ProfilePictureId))]
+        public ProfilePicture? ProfilePicture { get; set; }
+
+        // ============ PERSONAL INFORMATION ============
+        public DateTime? DateOfBirth { get; set; }
+
+        [MaxLength(20)]
+        public string? Gender { get; set; }
+
+        [MaxLength(50)]
+        public string? Nationality { get; set; }
+
+        [MaxLength(20)]
+        public string? MaritalStatus { get; set; }
+
+        // ============ PREFERENCES ============
+        [MaxLength(50)]
+        public string? PreferredWorkMode { get; set; }
+
+        // ============ SOCIAL LINKS ============
+        [MaxLength(200)]
+        public string? GitHubUrl { get; set; }
+
+        [MaxLength(200)]
+        public string? LinkedInUrl { get; set; }
+
+        [MaxLength(200)]
+        public string? PortfolioUrl { get; set; }
+
+        // ============ ADDITIONAL ============
+        [MaxLength(200)]
+        public string? Languages { get; set; }
+
+        // ============ NAVIGATION PROPERTIES ============
         public ICollection<CandidateSkill> Skills { get; set; } = new List<CandidateSkill>();
         public ICollection<CandidateEducation> Educations { get; set; } = new List<CandidateEducation>();
         public ICollection<CandidateExperience> Experiences { get; set; } = new List<CandidateExperience>();

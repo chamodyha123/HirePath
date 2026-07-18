@@ -16,6 +16,7 @@ namespace HirePathAI.API.Services.Implementations
         private readonly IGenericRepository<CandidateEducation> _educationRepository;
         private readonly IGenericRepository<CandidateExperience> _experienceRepository;
         private readonly IGenericRepository<Resume> _resumeRepository;
+        private readonly IGenericRepository<ProfilePicture> _profilePictureRepository;
         private readonly IMapper _mapper;
         private readonly IWebHostEnvironment _webHostEnvironment;
 
@@ -25,6 +26,7 @@ namespace HirePathAI.API.Services.Implementations
             IGenericRepository<CandidateEducation> educationRepository,
             IGenericRepository<CandidateExperience> experienceRepository,
             IGenericRepository<Resume> resumeRepository,
+            IGenericRepository<ProfilePicture> profilePictureRepository,
             IMapper mapper,
             IWebHostEnvironment webHostEnvironment)
         {
@@ -33,6 +35,7 @@ namespace HirePathAI.API.Services.Implementations
             _educationRepository = educationRepository;
             _experienceRepository = experienceRepository;
             _resumeRepository = resumeRepository;
+            _profilePictureRepository = profilePictureRepository;
             _mapper = mapper;
             _webHostEnvironment = webHostEnvironment;
         }
@@ -289,16 +292,26 @@ namespace HirePathAI.API.Services.Implementations
             if (candidate == null)
                 throw new Exception("Candidate profile not found");
 
-            // Create uploads folder if not exists
-            var uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "resumes");
+            // Validate file type
+            var allowedExtensions = new[] { ".pdf", ".doc", ".docx", ".txt" };
+            var fileExtension = Path.GetExtension(dto.File.FileName).ToLower();
+            if (!allowedExtensions.Contains(fileExtension))
+                throw new Exception("Invalid file type. Allowed types: PDF, DOC, DOCX, TXT");
+
+            // Validate file size (max 5MB)
+            if (dto.File.Length > 5 * 1024 * 1024)
+                throw new Exception("File size exceeds 5MB limit");
+
+            // Create uploads folder
+            var webRootPath = _webHostEnvironment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            var uploadsFolder = Path.Combine(webRootPath, "resumes");
             if (!Directory.Exists(uploadsFolder))
                 Directory.CreateDirectory(uploadsFolder);
 
-            // Generate unique filename
+            // Generate unique filename and save
             var uniqueFileName = $"{Guid.NewGuid()}_{dto.File.FileName}";
             var filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
-            // Save file
             using (var fileStream = new FileStream(filePath, FileMode.Create))
             {
                 await dto.File.CopyToAsync(fileStream);
@@ -321,7 +334,7 @@ namespace HirePathAI.API.Services.Implementations
                 CandidateProfileId = candidate.Id,
                 FileName = dto.File.FileName,
                 FilePath = $"/resumes/{uniqueFileName}",
-                FileType = Path.GetExtension(dto.File.FileName),
+                FileType = fileExtension,
                 FileSize = dto.File.Length,
                 UploadDate = DateTime.UtcNow,
                 IsPrimary = dto.IsPrimary,
@@ -340,8 +353,8 @@ namespace HirePathAI.API.Services.Implementations
             if (resume == null)
                 return false;
 
-            // Delete physical file
-            var filePath = Path.Combine(_webHostEnvironment.WebRootPath, resume.FilePath.TrimStart('/'));
+            var webRootPath = _webHostEnvironment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            var filePath = Path.Combine(webRootPath, resume.FilePath.TrimStart('/'));
             if (File.Exists(filePath))
                 File.Delete(filePath);
 
@@ -356,7 +369,6 @@ namespace HirePathAI.API.Services.Implementations
             if (resume == null)
                 throw new Exception("Resume not found");
 
-            // Unset all primary resumes for this candidate
             var candidateResumes = await _resumeRepository
                 .FindAsync(r => r.CandidateProfileId == resume.CandidateProfileId);
             foreach (var r in candidateResumes)
@@ -385,6 +397,127 @@ namespace HirePathAI.API.Services.Implementations
             return _mapper.Map<IEnumerable<ResumeDto>>(resumes);
         }
 
+        // ============ PROFILE PICTURE MANAGEMENT ============
+
+        public async Task<ProfilePictureDto> UploadProfilePictureAsync(int userId, UploadProfilePictureDto dto)
+        {
+            // 1. Get candidate profile
+            var candidate = await _candidateRepository.GetCandidateByUserIdAsync(userId);
+            if (candidate == null)
+                throw new Exception("Candidate profile not found");
+
+            // 2. Validate file
+            if (dto.File == null || dto.File.Length == 0)
+                throw new Exception("No file uploaded");
+
+            // 3. Validate file type (only images)
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
+            var fileExtension = Path.GetExtension(dto.File.FileName).ToLower();
+            if (!allowedExtensions.Contains(fileExtension))
+                throw new Exception("Invalid file type. Allowed types: JPG, PNG, GIF, WEBP");
+
+            // 4. Validate file size (max 2MB)
+            if (dto.File.Length > 2 * 1024 * 1024)
+                throw new Exception("File size exceeds 2MB limit");
+
+            // 5. Create uploads folder
+            var webRootPath = _webHostEnvironment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            var uploadsFolder = Path.Combine(webRootPath, "profile-pictures");
+            if (!Directory.Exists(uploadsFolder))
+                Directory.CreateDirectory(uploadsFolder);
+
+            // 6. Delete old profile picture if exists
+            if (candidate.ProfilePictureId.HasValue)
+            {
+                var oldPicture = await _profilePictureRepository.GetByIdAsync(candidate.ProfilePictureId.Value);
+                if (oldPicture != null)
+                {
+                    var oldFilePath = Path.Combine(webRootPath, oldPicture.FilePath.TrimStart('/'));
+                    if (File.Exists(oldFilePath))
+                        File.Delete(oldFilePath);
+
+                    await _profilePictureRepository.DeleteAsync(oldPicture);
+                }
+            }
+
+            // 7. Generate unique filename and save
+            var uniqueFileName = $"{Guid.NewGuid()}{fileExtension}";
+            var filePath = Path.Combine(uploadsFolder, uniqueFileName);
+
+            using (var fileStream = new FileStream(filePath, FileMode.Create))
+            {
+                await dto.File.CopyToAsync(fileStream);
+            }
+
+            // 8. Save to database
+            var profilePicture = new ProfilePicture
+            {
+                CandidateProfileId = candidate.Id,
+                FileName = dto.File.FileName,
+                FilePath = $"/profile-pictures/{uniqueFileName}",
+                FileType = fileExtension,
+                FileSize = dto.File.Length,
+                UploadDate = DateTime.UtcNow,
+                IsPrimary = true,
+                CreatedAt = DateTime.UtcNow
+            };
+
+            await _profilePictureRepository.AddAsync(profilePicture);
+            await _profilePictureRepository.SaveChangesAsync();
+
+            // 9. Update candidate profile with ProfilePictureId
+            candidate.ProfilePictureId = profilePicture.Id;
+            candidate.ProfileUpdatedAt = DateTime.UtcNow;
+            await _candidateRepository.UpdateAsync(candidate);
+            await _candidateRepository.SaveChangesAsync();
+
+            return _mapper.Map<ProfilePictureDto>(profilePicture);
+        }
+
+        public async Task<bool> DeleteProfilePictureAsync(int userId)
+        {
+            var candidate = await _candidateRepository.GetCandidateByUserIdAsync(userId);
+            if (candidate == null)
+                return false;
+
+            if (!candidate.ProfilePictureId.HasValue)
+                return false;
+
+            var picture = await _profilePictureRepository.GetByIdAsync(candidate.ProfilePictureId.Value);
+            if (picture == null)
+                return false;
+
+            var webRootPath = _webHostEnvironment.WebRootPath ?? Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            var filePath = Path.Combine(webRootPath, picture.FilePath.TrimStart('/'));
+            if (File.Exists(filePath))
+                File.Delete(filePath);
+
+            await _profilePictureRepository.DeleteAsync(picture);
+            await _profilePictureRepository.SaveChangesAsync();
+
+            candidate.ProfilePictureId = null;
+            await _candidateRepository.UpdateAsync(candidate);
+            await _candidateRepository.SaveChangesAsync();
+
+            return true;
+        }
+
+        public async Task<ProfilePictureDto> GetProfilePictureAsync(int userId)
+        {
+            var candidate = await _candidateRepository.GetCandidateByUserIdAsync(userId);
+            if (candidate == null)
+                throw new Exception("Candidate profile not found");
+
+            if (!candidate.ProfilePictureId.HasValue)
+                throw new Exception("Profile picture not found");
+
+            var picture = await _profilePictureRepository.GetByIdAsync(candidate.ProfilePictureId.Value);
+            if (picture == null)
+                throw new Exception("Profile picture not found");
+
+            return _mapper.Map<ProfilePictureDto>(picture);
+        }
+
         // ============ SEARCH ============
 
         public async Task<IEnumerable<CandidateProfileDto>> SearchCandidatesAsync(string searchTerm)
@@ -403,13 +536,19 @@ namespace HirePathAI.API.Services.Implementations
 
         private bool IsProfileComplete(CandidateProfile profile)
         {
-            return !string.IsNullOrEmpty(profile.FirstName) &&
-                   !string.IsNullOrEmpty(profile.LastName) &&
-                   !string.IsNullOrEmpty(profile.Headline) &&
-                   !string.IsNullOrEmpty(profile.Summary) &&
-                   profile.Skills != null && profile.Skills.Any() &&
-                   profile.Educations != null && profile.Educations.Any() &&
-                   profile.Resumes != null && profile.Resumes.Any();
+            var hasBasicInfo = !string.IsNullOrEmpty(profile.FirstName) &&
+                               !string.IsNullOrEmpty(profile.LastName) &&
+                               !string.IsNullOrEmpty(profile.Headline) &&
+                               !string.IsNullOrEmpty(profile.Summary) &&
+                               !string.IsNullOrEmpty(profile.Location) &&
+                               !string.IsNullOrEmpty(profile.PhoneNumber);
+
+            var hasSkills = (profile.Skills?.Any() ?? false);
+            var hasEducation = (profile.Educations?.Any() ?? false);
+            var hasExperience = (profile.Experiences?.Any() ?? false);
+            var hasResume = (profile.Resumes?.Any() ?? false);
+
+            return hasBasicInfo && hasSkills && hasEducation && hasResume;
         }
     }
 }

@@ -12,8 +12,6 @@ namespace HirePathAI.API.Services.Interfaces
         Task<bool> UpdateAsync(CandidateProfile profile);
         Task<bool> DeleteAsync(int id);
 
-        // ============ NEW METHODS FOR DTOs ============
-
         // Profile Management with DTOs
         Task<CandidateProfileDto> GetProfileDtoAsync(int userId);
         Task<CandidateProfileDto> GetProfileByIdAsync(int candidateId);
@@ -41,6 +39,11 @@ namespace HirePathAI.API.Services.Interfaces
         Task<bool> DeleteResumeAsync(int resumeId);
         Task<ResumeDto> SetPrimaryResumeAsync(int resumeId);
         Task<IEnumerable<ResumeDto>> GetResumesAsync(int userId);
+
+        // ============ PROFILE PICTURE MANAGEMENT ============
+        Task<ProfilePictureDto> UploadProfilePictureAsync(int userId, UploadProfilePictureDto dto);
+        Task<bool> DeleteProfilePictureAsync(int userId);
+        Task<ProfilePictureDto> GetProfilePictureAsync(int userId);
 
         // Search
         Task<IEnumerable<CandidateProfileDto>> SearchCandidatesAsync(string searchTerm);

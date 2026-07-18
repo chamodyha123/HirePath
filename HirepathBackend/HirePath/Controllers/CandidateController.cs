@@ -1,5 +1,4 @@
 ﻿using HirePathAI.API.DTOs.Candidate;
-using HirePathAI.API.Models.Entities;
 using HirePathAI.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
@@ -79,7 +78,7 @@ namespace HirePathAI.API.Controllers
             }
         }
 
-        // PUT: api/Candidate - Full Update (Preserves skills, education, experience, resumes)
+        // PUT: api/Candidate - Full Update
         [HttpPut]
         public async Task<IActionResult> UpdateProfile([FromBody] UpdateCandidateProfileDto dto)
         {
@@ -101,10 +100,17 @@ namespace HirePathAI.API.Controllers
                     PhoneNumber = currentProfileDto.PhoneNumber,
                     LinkedInUrl = currentProfileDto.LinkedInUrl,
                     PortfolioUrl = currentProfileDto.PortfolioUrl,
-                    YearsOfExperience = currentProfileDto.YearsOfExperience
+                    YearsOfExperience = currentProfileDto.YearsOfExperience,
+                    DateOfBirth = currentProfileDto.DateOfBirth,
+                    Gender = currentProfileDto.Gender,
+                    Nationality = currentProfileDto.Nationality,
+                    MaritalStatus = currentProfileDto.MaritalStatus,
+                    PreferredWorkMode = currentProfileDto.PreferredWorkMode,
+                    GitHubUrl = currentProfileDto.GitHubUrl,
+                    Languages = currentProfileDto.Languages
                 };
 
-                // Only update fields that are provided (not null/empty)
+                // Only update fields that are provided
                 if (!string.IsNullOrEmpty(dto.FirstName))
                     updateDto.FirstName = dto.FirstName;
 
@@ -129,12 +135,29 @@ namespace HirePathAI.API.Controllers
                 if (!string.IsNullOrEmpty(dto.PortfolioUrl))
                     updateDto.PortfolioUrl = dto.PortfolioUrl;
 
-                // YearsOfExperience is int (not nullable), so check if it's different from default
                 if (dto.YearsOfExperience > 0)
                     updateDto.YearsOfExperience = dto.YearsOfExperience;
 
-                // IMPORTANT: Preserve existing skills, education, experience, resumes
-                // DO NOT clear them - they are managed by separate endpoints
+                if (dto.DateOfBirth.HasValue)
+                    updateDto.DateOfBirth = dto.DateOfBirth;
+
+                if (!string.IsNullOrEmpty(dto.Gender))
+                    updateDto.Gender = dto.Gender;
+
+                if (!string.IsNullOrEmpty(dto.Nationality))
+                    updateDto.Nationality = dto.Nationality;
+
+                if (!string.IsNullOrEmpty(dto.MaritalStatus))
+                    updateDto.MaritalStatus = dto.MaritalStatus;
+
+                if (!string.IsNullOrEmpty(dto.PreferredWorkMode))
+                    updateDto.PreferredWorkMode = dto.PreferredWorkMode;
+
+                if (!string.IsNullOrEmpty(dto.GitHubUrl))
+                    updateDto.GitHubUrl = dto.GitHubUrl;
+
+                if (!string.IsNullOrEmpty(dto.Languages))
+                    updateDto.Languages = dto.Languages;
 
                 var updatedProfile = await _candidateService.UpdateProfileAsync(userId, updateDto);
                 return Ok(updatedProfile);
@@ -145,7 +168,7 @@ namespace HirePathAI.API.Controllers
             }
         }
 
-        // PATCH: api/Candidate - Partial Update (Recommended for specific field updates)
+        // PATCH: api/Candidate - Partial Update
         [HttpPatch]
         public async Task<IActionResult> PatchProfile([FromBody] JsonPatchDocument<UpdateCandidateProfileDto> patchDoc)
         {
@@ -153,10 +176,8 @@ namespace HirePathAI.API.Controllers
             {
                 var userId = GetUserId();
 
-                // Get current profile
                 var currentProfileDto = await _candidateService.GetProfileDtoAsync(userId);
 
-                // Map to Update DTO
                 var profileDto = new UpdateCandidateProfileDto
                 {
                     FirstName = currentProfileDto.FirstName,
@@ -167,17 +188,21 @@ namespace HirePathAI.API.Controllers
                     PhoneNumber = currentProfileDto.PhoneNumber,
                     LinkedInUrl = currentProfileDto.LinkedInUrl,
                     PortfolioUrl = currentProfileDto.PortfolioUrl,
-                    YearsOfExperience = currentProfileDto.YearsOfExperience
+                    YearsOfExperience = currentProfileDto.YearsOfExperience,
+                    DateOfBirth = currentProfileDto.DateOfBirth,
+                    Gender = currentProfileDto.Gender,
+                    Nationality = currentProfileDto.Nationality,
+                    MaritalStatus = currentProfileDto.MaritalStatus,
+                    PreferredWorkMode = currentProfileDto.PreferredWorkMode,
+                    GitHubUrl = currentProfileDto.GitHubUrl,
+                    Languages = currentProfileDto.Languages
                 };
 
-                // Apply patch operations
                 patchDoc.ApplyTo(profileDto);
 
-                // Validate the updated DTO
                 if (!TryValidateModel(profileDto))
                     return BadRequest(ModelState);
 
-                // Update only the patched fields
                 var updatedProfile = await _candidateService.UpdateProfileAsync(userId, profileDto);
                 return Ok(updatedProfile);
             }
@@ -205,6 +230,62 @@ namespace HirePathAI.API.Controllers
             }
         }
 
+        // ============ PROFILE PICTURE ENDPOINTS ============
+
+        // GET: api/Candidate/profile-picture
+        [HttpGet("profile-picture")]
+        public async Task<IActionResult> GetProfilePicture()
+        {
+            try
+            {
+                var userId = GetUserId();
+                var picture = await _candidateService.GetProfilePictureAsync(userId);
+                return Ok(picture);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(new { message = ex.Message });
+            }
+        }
+
+        // POST: api/Candidate/profile-picture
+        [HttpPost("profile-picture")]
+        public async Task<IActionResult> UploadProfilePicture([FromForm] UploadProfilePictureDto dto)
+        {
+            try
+            {
+                var userId = GetUserId();
+                var picture = await _candidateService.UploadProfilePictureAsync(userId, dto);
+                return Ok(new
+                {
+                    message = "Profile picture uploaded successfully",
+                    data = picture
+                });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
+        // DELETE: api/Candidate/profile-picture
+        [HttpDelete("profile-picture")]
+        public async Task<IActionResult> DeleteProfilePicture()
+        {
+            try
+            {
+                var userId = GetUserId();
+                var result = await _candidateService.DeleteProfilePictureAsync(userId);
+                if (result)
+                    return Ok(new { message = "Profile picture deleted successfully" });
+                return NotFound(new { message = "Profile picture not found" });
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { message = ex.Message });
+            }
+        }
+
         // ============ SEARCH ENDPOINTS ============
 
         // GET: api/Candidate/search?searchTerm=...
@@ -225,8 +306,6 @@ namespace HirePathAI.API.Controllers
 
         // GET: api/Candidate/skill/{skillName}
         [HttpGet("skill/{skillName}")]
-        // REMOVED: [Authorize(Roles = "Admin,Recruiter")]
-        // Now any authenticated user can access this endpoint
         public async Task<IActionResult> GetCandidatesBySkill(string skillName)
         {
             try

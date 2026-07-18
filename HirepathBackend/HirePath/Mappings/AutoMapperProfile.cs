@@ -97,6 +97,9 @@ namespace HirePath.Mappings
 
             CreateMap<CandidateExperience, CandidateExperienceDto>();
 
+            // ============ PROFILE PICTURE MAPPINGS ============
+            CreateMap<ProfilePicture, ProfilePictureDto>();
+
             // ============ RESUME MAPPINGS ============
             CreateMap<Resume, ResumeDto>();
         }
