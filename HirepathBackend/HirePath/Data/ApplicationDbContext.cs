@@ -19,17 +19,13 @@ namespace HirePathAI.API.Data
         public DbSet<CandidateEducation> CandidateEducations => Set<CandidateEducation>();
         public DbSet<CandidateExperience> CandidateExperiences => Set<CandidateExperience>();
         public DbSet<Resume> Resumes => Set<Resume>();
+        public DbSet<ProfilePicture> ProfilePictures => Set<ProfilePicture>();
         public DbSet<Job> Jobs => Set<Job>();
         public DbSet<JobSkill> JobSkills => Set<JobSkill>();
         public DbSet<JobApplication> JobApplications => Set<JobApplication>();
         public DbSet<Interview> Interviews => Set<Interview>();
-
         public DbSet<EmailOtp> EmailOtps => Set<EmailOtp>();
-        public DbSet<PendingRegistration>
-PendingRegistrations
-=> Set<PendingRegistration>();
-
-
+        public DbSet<PendingRegistration> PendingRegistrations => Set<PendingRegistration>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -42,23 +38,19 @@ PendingRegistrations
                 .HasIndex(u => u.NormalizedEmail)
                 .HasDatabaseName("IX_User_NormalizedEmail");
 
-
+            // =========================
+            // EMAIL OTP
+            // =========================
             modelBuilder.Entity<EmailOtp>()
-    .Property(e => e.Email)
-    .HasMaxLength(150);
+                .Property(e => e.Email)
+                .HasMaxLength(150);
 
             modelBuilder.Entity<EmailOtp>()
                 .Property(e => e.OtpHash)
                 .HasMaxLength(256);
 
             modelBuilder.Entity<EmailOtp>()
-                .HasIndex(e => new
-                {
-                    e.Email,
-                    e.Purpose
-                });
-
-
+                .HasIndex(e => new { e.Email, e.Purpose });
 
             // =========================
             // COMPANY -> DEPARTMENTS
@@ -79,6 +71,15 @@ PendingRegistrations
                 .OnDelete(DeleteBehavior.Cascade);
 
             // =========================
+            // CANDIDATE PROFILE -> PROFILE PICTURE (1:1)
+            // =========================
+            modelBuilder.Entity<CandidateProfile>()
+                .HasOne(cp => cp.ProfilePicture)
+                .WithOne(pp => pp.CandidateProfile)
+                .HasForeignKey<CandidateProfile>(cp => cp.ProfilePictureId)
+                .OnDelete(DeleteBehavior.SetNull);
+
+            // =========================
             // CANDIDATE PROFILE -> SKILLS
             // =========================
             modelBuilder.Entity<CandidateSkill>()
@@ -91,11 +92,6 @@ PendingRegistrations
                 .HasIndex(cs => new { cs.CandidateProfileId, cs.SkillName })
                 .IsUnique();
 
-
-            modelBuilder.Entity<JobApplication>()
-                .Property(j => j.MatchScore)
-                .HasPrecision(5, 2);
-
             // =========================
             // CANDIDATE PROFILE -> EDUCATIONS
             // =========================
@@ -104,6 +100,17 @@ PendingRegistrations
                 .WithMany(cp => cp.Educations)
                 .HasForeignKey(e => e.CandidateProfileId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            // =========================
+            // CANDIDATE EDUCATION - DECIMAL PRECISION
+            // =========================
+            modelBuilder.Entity<CandidateEducation>()
+                .Property(e => e.GPA)
+                .HasPrecision(3, 2);
+
+            modelBuilder.Entity<CandidateEducation>()
+                .Property(e => e.Percentage)
+                .HasPrecision(5, 2);
 
             // =========================
             // CANDIDATE PROFILE -> EXPERIENCES
@@ -168,6 +175,10 @@ PendingRegistrations
                 .WithMany(cp => cp.Applications)
                 .HasForeignKey(ja => ja.CandidateProfileId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<JobApplication>()
+                .Property(j => j.MatchScore)
+                .HasPrecision(5, 2);
 
             // =========================
             // INTERVIEWS

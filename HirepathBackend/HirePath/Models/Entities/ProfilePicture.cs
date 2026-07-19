@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HirePathAI.API.Models.Entities
 {
-    public class Resume : BaseEntity
+    public class ProfilePicture : BaseEntity
     {
         [Required]
         public int CandidateProfileId { get; set; }
@@ -27,8 +27,6 @@ namespace HirePathAI.API.Models.Entities
 
         public DateTime UploadDate { get; set; }
 
-        public bool IsPrimary { get; set; }
-
-        public string? ParsedContent { get; set; }
+        public bool IsPrimary { get; set; } = true;
     }
 }

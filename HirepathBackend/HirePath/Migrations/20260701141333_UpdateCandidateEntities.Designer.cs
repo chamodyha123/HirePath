@@ -4,6 +4,7 @@ using HirePathAI.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HirePath.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260701141333_UpdateCandidateEntities")]
+    partial class UpdateCandidateEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -33,18 +36,6 @@ namespace HirePath.Migrations
                     b.Property<int>("CandidateProfileId")
                         .HasColumnType("int");
 
-                    b.Property<string>("CertificateUrl")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<string>("City")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Country")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -52,20 +43,12 @@ namespace HirePath.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("EducationLevel")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<DateTime?>("EndDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("FieldOfStudy")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<decimal?>("GPA")
-                        .HasPrecision(3, 2)
-                        .HasColumnType("decimal(3,2)");
 
                     b.Property<string>("Grade")
                         .HasMaxLength(10)
@@ -79,13 +62,6 @@ namespace HirePath.Migrations
                     b.Property<bool>("IsCurrent")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsVerified")
-                        .HasColumnType("bit");
-
-                    b.Property<decimal?>("Percentage")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
-
                     b.Property<string>("Qualification")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -96,10 +72,6 @@ namespace HirePath.Migrations
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("VerifiedBy")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("Id");
 
@@ -173,20 +145,9 @@ namespace HirePath.Migrations
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateOfBirth")
-                        .HasColumnType("datetime2");
-
                     b.Property<string>("FirstName")
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Gender")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("GitHubUrl")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Headline")
                         .HasMaxLength(200)
@@ -194,10 +155,6 @@ namespace HirePath.Migrations
 
                     b.Property<bool>("IsProfileComplete")
                         .HasColumnType("bit");
-
-                    b.Property<string>("Languages")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("LastName")
                         .HasMaxLength(100)
@@ -211,14 +168,6 @@ namespace HirePath.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("MaritalStatus")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
-
-                    b.Property<string>("Nationality")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
@@ -226,13 +175,6 @@ namespace HirePath.Migrations
                     b.Property<string>("PortfolioUrl")
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
-
-                    b.Property<string>("PreferredWorkMode")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<int?>("ProfilePictureId")
-                        .HasColumnType("int");
 
                     b.Property<DateTime?>("ProfileUpdatedAt")
                         .HasColumnType("datetime2");
@@ -250,10 +192,6 @@ namespace HirePath.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ProfilePictureId")
-                        .IsUnique()
-                        .HasFilter("[ProfilePictureId] IS NOT NULL");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -626,51 +564,6 @@ namespace HirePath.Migrations
                     b.ToTable("PendingRegistrations");
                 });
 
-            modelBuilder.Entity("HirePathAI.API.Models.Entities.ProfilePicture", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CandidateProfileId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("FileName")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<string>("FilePath")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<long>("FileSize")
-                        .HasColumnType("bigint");
-
-                    b.Property<string>("FileType")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<bool>("IsPrimary")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime>("UploadDate")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("ProfilePictures");
-                });
-
             modelBuilder.Entity("HirePathAI.API.Models.Entities.Resume", b =>
                 {
                     b.Property<int>("Id")
@@ -953,18 +846,11 @@ namespace HirePath.Migrations
 
             modelBuilder.Entity("HirePathAI.API.Models.Entities.CandidateProfile", b =>
                 {
-                    b.HasOne("HirePathAI.API.Models.Entities.ProfilePicture", "ProfilePicture")
-                        .WithOne("CandidateProfile")
-                        .HasForeignKey("HirePathAI.API.Models.Entities.CandidateProfile", "ProfilePictureId")
-                        .OnDelete(DeleteBehavior.SetNull);
-
                     b.HasOne("HirePathAI.API.Models.Entities.User", "User")
                         .WithOne("CandidateProfile")
                         .HasForeignKey("HirePathAI.API.Models.Entities.CandidateProfile", "UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("ProfilePicture");
 
                     b.Navigation("User");
                 });
@@ -1147,11 +1033,6 @@ namespace HirePath.Migrations
             modelBuilder.Entity("HirePathAI.API.Models.Entities.JobApplication", b =>
                 {
                     b.Navigation("Interviews");
-                });
-
-            modelBuilder.Entity("HirePathAI.API.Models.Entities.ProfilePicture", b =>
-                {
-                    b.Navigation("CandidateProfile");
                 });
 
             modelBuilder.Entity("HirePathAI.API.Models.Entities.User", b =>
