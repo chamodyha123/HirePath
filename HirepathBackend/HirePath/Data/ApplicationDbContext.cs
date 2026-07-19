@@ -18,7 +18,8 @@ namespace HirePathAI.API.Data
         // IDENTITY / AUTHENTICATION
         // =========================
 
-        public DbSet<EmailOtp> EmailOtps => Set<EmailOtp>();
+        public DbSet<EmailOtp> EmailOtps =>
+            Set<EmailOtp>();
 
         public DbSet<PendingRegistration> PendingRegistrations =>
             Set<PendingRegistration>();
@@ -27,9 +28,11 @@ namespace HirePathAI.API.Data
         // COMPANY MODULE
         // =========================
 
-        public DbSet<Company> Companies => Set<Company>();
+        public DbSet<Company> Companies =>
+            Set<Company>();
 
-        public DbSet<Department> Departments => Set<Department>();
+        public DbSet<Department> Departments =>
+            Set<Department>();
 
         public DbSet<CompanyMember> CompanyMembers =>
             Set<CompanyMember>();
@@ -150,6 +153,16 @@ namespace HirePathAI.API.Data
                 .WithMany(c => c.Jobs)
                 .HasForeignKey(j => j.CompanyId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // =========================
+            // DEPARTMENT -> JOBS
+            // =========================
+
+            modelBuilder.Entity<Job>()
+                .HasOne(j => j.Department)
+                .WithMany(d => d.Jobs)
+                .HasForeignKey(j => j.DepartmentId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             // =========================
             // COMPANY -> MEMBERS
@@ -333,7 +346,8 @@ namespace HirePathAI.API.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             // =========================
-            // RESUME
+            // CANDIDATE PROFILE ->
+            // RESUMES
             // =========================
 
             modelBuilder.Entity<Resume>()
@@ -344,23 +358,14 @@ namespace HirePathAI.API.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             // =========================
-            // DEPARTMENT -> JOBS
-            // =========================
-
-            modelBuilder.Entity<Job>()
-                .HasOne(j => j.Department)
-                .WithMany(d => d.Jobs)
-                .HasForeignKey(j => j.DepartmentId)
-                .OnDelete(DeleteBehavior.SetNull);
-
-            // =========================
             // JOB SKILLS
             // =========================
 
             modelBuilder.Entity<JobSkill>()
                 .HasOne(js => js.Job)
                 .WithMany(j => j.RequiredSkills)
-                .HasForeignKey(js => js.JobId)
+                .HasForeignKey(
+                    js => js.JobId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<JobSkill>()
@@ -372,14 +377,20 @@ namespace HirePathAI.API.Data
                 .IsUnique();
 
             // =========================
-            // JOB APPLICATIONS
+            // JOB APPLICATION -> JOB
             // =========================
 
             modelBuilder.Entity<JobApplication>()
                 .HasOne(ja => ja.Job)
                 .WithMany(j => j.Applications)
-                .HasForeignKey(ja => ja.JobId)
+                .HasForeignKey(
+                    ja => ja.JobId)
                 .OnDelete(DeleteBehavior.Restrict);
+
+            // =========================
+            // JOB APPLICATION ->
+            // CANDIDATE PROFILE
+            // =========================
 
             modelBuilder.Entity<JobApplication>()
                 .HasOne(ja => ja.CandidateProfile)

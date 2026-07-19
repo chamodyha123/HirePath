@@ -5,6 +5,7 @@ namespace HirePathAI.API.Models.Enums
         Pending = 1,
         Approved = 2,
         Rejected = 3,
-        Suspended = 4
+        Suspended = 4,
+        MoreInformationRequired = 5
     }
 }

@@ -13,6 +13,9 @@ namespace HirePathAI.API.Models.Entities
         [MaxLength(100)]
         public string? Industry { get; set; }
 
+        [MaxLength(100)]
+        public string? BusinessRegistrationNumber { get; set; }
+
         [EmailAddress]
         [MaxLength(150)]
         public string? Email { get; set; }
@@ -31,8 +34,6 @@ namespace HirePathAI.API.Models.Entities
         [MaxLength(250)]
         public string? Website { get; set; }
 
-        // Kept because the recruiter module
-        // may already use this field.
         [MaxLength(150)]
         public string? Location { get; set; }
 
@@ -40,9 +41,32 @@ namespace HirePathAI.API.Models.Entities
         [MaxLength(500)]
         public string? LogoUrl { get; set; }
 
+        // Company representative
+        [MaxLength(150)]
+        public string? RepresentativeName { get; set; }
+
+        [EmailAddress]
+        [MaxLength(150)]
+        public string? RepresentativeEmail { get; set; }
+
+        // Company approval status
         public CompanyStatus Status { get; set; }
             = CompanyStatus.Pending;
 
+        // Platform Admin review information
+        public DateTime? ApprovedAt { get; set; }
+
+        public DateTime? RejectedAt { get; set; }
+
+        public DateTime? SuspendedAt { get; set; }
+
+        [MaxLength(1000)]
+        public string? RejectionReason { get; set; }
+
+        [MaxLength(1000)]
+        public string? AdminNotes { get; set; }
+
+        // Relationships
         public ICollection<Department> Departments { get; set; }
             = new List<Department>();
 

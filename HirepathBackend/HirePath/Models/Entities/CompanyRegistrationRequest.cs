@@ -6,6 +6,10 @@ namespace HirePathAI.API.Models.Entities
 {
     public class CompanyRegistrationRequest : BaseEntity
     {
+        // =========================
+        // COMPANY INFORMATION
+        // =========================
+
         [Required]
         [MaxLength(150)]
         public string CompanyName { get; set; }
@@ -15,11 +19,7 @@ namespace HirePathAI.API.Models.Entities
         public string? Industry { get; set; }
 
         [MaxLength(100)]
-        public string? BusinessRegistrationNumber
-        {
-            get;
-            set;
-        }
+        public string? BusinessRegistrationNumber { get; set; }
 
         [Required]
         [EmailAddress]
@@ -45,6 +45,10 @@ namespace HirePathAI.API.Models.Entities
         [MaxLength(500)]
         public string? LogoUrl { get; set; }
 
+        // =========================
+        // COMPANY REPRESENTATIVE
+        // =========================
+
         [Required]
         [MaxLength(150)]
         public string RepresentativeName { get; set; }
@@ -60,8 +64,16 @@ namespace HirePathAI.API.Models.Entities
         [MaxLength(30)]
         public string? RepresentativePhone { get; set; }
 
+        // =========================
+        // REQUEST STATUS
+        // =========================
+
         public CompanyRegistrationStatus Status { get; set; }
             = CompanyRegistrationStatus.Pending;
+
+        // =========================
+        // PLATFORM ADMIN REVIEW
+        // =========================
 
         [MaxLength(1000)]
         public string? ReviewNote { get; set; }
@@ -71,6 +83,10 @@ namespace HirePathAI.API.Models.Entities
         public int? ReviewedByUserId { get; set; }
 
         public User? ReviewedByUser { get; set; }
+
+        // =========================
+        // APPROVED COMPANY
+        // =========================
 
         public int? CreatedCompanyId { get; set; }
 
