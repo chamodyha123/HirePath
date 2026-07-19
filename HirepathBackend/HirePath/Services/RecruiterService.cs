@@ -15,15 +15,20 @@ namespace HirePathAI.Services
 
         public async Task<CompanyResponseDTO> AddCompanyAsync(CompanyCreateDTO dto)
         {
-            var company = new Company { Name = dto.Name, Description = dto.Description, Website = dto.Website, Location = dto.Location };
+            var company = new Company
+            {
+                Name = dto.Name, Industry = dto.Industry, Email = dto.Email, Phone = dto.Phone,
+                Address = dto.Address, Description = dto.Description, Website = dto.Website,
+                Location = dto.Location, LogoUrl = dto.LogoUrl, Status = dto.Status
+            };
             var result = await _repository.CreateCompanyAsync(company);
-            return new CompanyResponseDTO { Id = result.Id, Name = result.Name, Description = result.Description, Website = result.Website, Location = result.Location };
+            return MapCompany(result);
         }
 
         public async Task<IEnumerable<CompanyResponseDTO>> GetAllCompaniesAsync()
         {
             var companies = await _repository.GetAllCompaniesAsync();
-            return companies.Select(c => new CompanyResponseDTO { Id = c.Id, Name = c.Name, Description = c.Description, Website = c.Website, Location = c.Location });
+            return companies.Select(MapCompany);
         }
 
         public async Task<DepartmentResponseDTO> AddDepartmentAsync(DepartmentCreateDTO dto)
@@ -149,5 +154,12 @@ namespace HirePathAI.Services
                 TotalCompaniesMapped = companies.Count()
             };
         }
+        private static CompanyResponseDTO MapCompany(Company c) => new()
+        {
+            Id = c.Id, Name = c.Name, Industry = c.Industry, Email = c.Email, Phone = c.Phone,
+            Address = c.Address, Description = c.Description, Website = c.Website,
+            Location = c.Location, LogoUrl = c.LogoUrl, Status = c.Status.ToString()
+        };
+
     }
 }

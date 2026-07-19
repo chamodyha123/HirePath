@@ -1,6 +1,7 @@
 ﻿using HirePathAI.DTOs;
 using HirePathAI.Services;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HirePathAI.Controllers
 {
@@ -15,6 +16,7 @@ namespace HirePathAI.Controllers
             _service = service;
         }
 
+        [Authorize(Roles = "Admin")]
         [HttpPost("companies")]
         public async Task<IActionResult> CreateCompany([FromBody] CompanyCreateDTO dto)
         {
@@ -29,6 +31,7 @@ namespace HirePathAI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "CompanyAdmin,Recruiter")]
         [HttpPost("departments")]
         public async Task<IActionResult> CreateDepartment([FromBody] DepartmentCreateDTO dto)
         {
@@ -43,6 +46,7 @@ namespace HirePathAI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "CompanyAdmin,Recruiter")]
         [HttpPost("jobs")]
         public async Task<IActionResult> PostJob([FromBody] JobCreateDTO dto)
         {
@@ -65,6 +69,7 @@ namespace HirePathAI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "CompanyAdmin,Recruiter")]
         [HttpPut("jobs/{id}")]
         public async Task<IActionResult> UpdateJob(int id, [FromBody] JobCreateDTO dto)
         {
@@ -73,6 +78,7 @@ namespace HirePathAI.Controllers
             return Ok(result);
         }
 
+        [Authorize(Roles = "CompanyAdmin,Recruiter")]
         [HttpDelete("jobs/{id}")]
         public async Task<IActionResult> DeleteJob(int id)
         {
