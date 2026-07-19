@@ -1,6 +1,6 @@
 ﻿namespace HirePath.Models.Enums
 {
-    public class UserRoleType
+    public class InvitationStatus
     {
     }
 }
