@@ -45,6 +45,14 @@ builder.Services.Configure<EmailSettings>(
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IOtpService, OtpService>();
 
+//
+// cloud storage service
+//
+builder.Services.Configure<CloudinarySettings>(
+    builder.Configuration.GetSection("CloudinarySettings"));
+
+builder.Services.AddScoped<ICloudStorageService, CloudinaryStorageService>();
+
 // ----------------------------------------------------
 // JWT Service
 // ----------------------------------------------------

@@ -26,8 +26,8 @@ namespace HirePathAI.API.Services.Implementations
             OtpPurpose purpose)
         {
             await RemoveExpiredOtpsAsync();
-            // Remove previous unused OTPs
 
+            // Remove previous unused OTPs
             var previousOtps = await _context.EmailOtps
                 .Where(x =>
                     x.Email == email &&
@@ -40,14 +40,12 @@ namespace HirePathAI.API.Services.Implementations
                 _context.EmailOtps.RemoveRange(previousOtps);
             }
 
-            // Generate 6 digit OTP
-
+            // Generate secure 6-digit OTP
             var otp = RandomNumberGenerator
                 .GetInt32(100000, 999999)
                 .ToString();
 
             // Hash OTP
-
             var hash = HashOtp(otp);
 
             var emailOtp = new EmailOtp
@@ -63,46 +61,19 @@ namespace HirePathAI.API.Services.Implementations
 
             await _context.SaveChangesAsync();
 
-            var subject =
-                purpose == OtpPurpose.EmailVerification
-                    ? "HirePath Email Verification"
-                    : "HirePath Password Reset";
+            // Determine email purpose
+            var purposeText = purpose switch
+            {
+                OtpPurpose.EmailVerification => "Email Verification",
+                OtpPurpose.PasswordReset => "Password Reset",
+                _ => "Verification"
+            };
 
-            var body = $@"
-<div style='font-family:Arial;padding:30px;background:#f5f5f5;'>
-
-<div style='max-width:600px;margin:auto;background:white;padding:30px;border-radius:10px;'>
-
-<h2 style='color:#0d6efd;'>HirePath AI</h2>
-
-<p>Hello,</p>
-
-<p>Your verification code is</p>
-
-<h1 style='letter-spacing:10px;
-color:#198754;
-text-align:center;'>{otp}</h1>
-
-<p>This code expires in <b>5 minutes</b>.</p>
-
-<p>If you didn't request this code, please ignore this email.</p>
-
-<hr>
-
-<p style='font-size:12px;color:gray;'>
-
-HirePath AI Recruitment Platform
-
-</p>
-
-</div>
-
-</div>";
-
-            await _emailService.SendEmailAsync(
+            // Send OTP using centralized EmailService
+            await _emailService.SendOtpEmailAsync(
                 email,
-                subject,
-                body);
+                otp,
+                purposeText);
         }
 
         public async Task<bool> VerifyOtpAsync(
@@ -135,9 +106,10 @@ HirePath AI Recruitment Platform
 
             return true;
         }
+
         public async Task ResendOtpAsync(
-    string email,
-    OtpPurpose purpose)
+            string email,
+            OtpPurpose purpose)
         {
             await GenerateOtpAsync(email, purpose);
         }
