@@ -12,6 +12,7 @@ using System.Text;
 using HirePathAI.API.Services.Interfaces;
 using HirePathAI.API.Services.Implementations;
 using HirePathAI.API.Configuration;
+using HirePath.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -92,6 +93,7 @@ builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
+builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
 // ----------------------------------------------------
 // Services
@@ -103,6 +105,11 @@ builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<ICandidateService, CandidateService>();
 builder.Services.AddScoped<IJobApplicationService, JobApplicationService>();
 builder.Services.AddScoped<IAIService, AIService>();
+
+// ----------------------------------------------------
+// AutoMapper
+// ----------------------------------------------------
+builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
 // ----------------------------------------------------
 // CORS for React frontend
@@ -122,9 +129,11 @@ builder.Services.AddCors(options =>
 });
 
 // ----------------------------------------------------
-// Controllers + Swagger
+// Controllers + Newtonsoft.Json for PATCH Support
 // ----------------------------------------------------
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddNewtonsoftJson();  // ✅ PATCH operations සඳහා අවශ්‍යයි!
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>

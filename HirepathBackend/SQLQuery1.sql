@@ -1,10 +1,8 @@
-﻿DELETE FROM AspNetUserRoles
-WHERE UserId IN
-(
-    SELECT Id
-    FROM AspNetUsers
-    WHERE Email = 'peshanchamoth759@gmail.com'
-);
-
-DELETE FROM AspNetUsers
-WHERE Email = 'peshanchamoth759@gmail.com';
+﻿SELECT 
+    COLUMN_NAME,
+    DATA_TYPE,
+    CHARACTER_MAXIMUM_LENGTH,
+    IS_NULLABLE
+FROM INFORMATION_SCHEMA.COLUMNS
+WHERE TABLE_NAME = 'CandidateEducations' 
+AND COLUMN_NAME = 'Grade';
