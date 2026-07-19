@@ -1,6 +1,15 @@
-﻿namespace HirePath.Models.Enums
+﻿namespace HirePathAI.API.Models.Enums
 {
-    public class CompanyStatus
+    public enum CompanyStatus
     {
+        Pending = 1,
+
+        Approved = 2,
+
+        Rejected = 3,
+
+        Suspended = 4,
+
+        MoreInformationRequired = 5
     }
 }
