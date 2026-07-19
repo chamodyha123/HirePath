@@ -1,57 +1,95 @@
-﻿using HirePathAI.API.Models.Enums;
+using System.ComponentModel.DataAnnotations;
+using HirePathAI.API.Models.Common;
+using HirePathAI.API.Models.Enums;
 
 namespace HirePathAI.API.Models.Entities
 {
-    public class CompanyRegistrationRequest
+    public class CompanyRegistrationRequest : BaseEntity
     {
-        public int Id { get; set; }
+        // =========================
+        // COMPANY INFORMATION
+        // =========================
 
-
-        // Company information
+        [Required]
+        [MaxLength(150)]
         public string CompanyName { get; set; }
             = string.Empty;
 
+        [MaxLength(100)]
         public string? Industry { get; set; }
 
+        [MaxLength(100)]
         public string? BusinessRegistrationNumber { get; set; }
 
+        [Required]
+        [EmailAddress]
+        [MaxLength(150)]
         public string CompanyEmail { get; set; }
             = string.Empty;
 
-        public string? Phone { get; set; }
+        [Phone]
+        [MaxLength(30)]
+        public string? CompanyPhone { get; set; }
 
+        [MaxLength(300)]
         public string? Address { get; set; }
 
+        [Url]
+        [MaxLength(250)]
+        public string? Website { get; set; }
+
+        [MaxLength(1000)]
         public string? Description { get; set; }
 
+        [Url]
+        [MaxLength(500)]
+        public string? LogoUrl { get; set; }
 
-        // Company representative
+        // =========================
+        // COMPANY REPRESENTATIVE
+        // =========================
+
+        [Required]
+        [MaxLength(150)]
         public string RepresentativeName { get; set; }
             = string.Empty;
 
+        [Required]
+        [EmailAddress]
+        [MaxLength(150)]
         public string RepresentativeEmail { get; set; }
             = string.Empty;
 
+        [Phone]
+        [MaxLength(30)]
+        public string? RepresentativePhone { get; set; }
 
-        // Request status
-        public CompanyStatus Status { get; set; }
-            = CompanyStatus.Pending;
+        // =========================
+        // REQUEST STATUS
+        // =========================
 
+        public CompanyRegistrationStatus Status { get; set; }
+            = CompanyRegistrationStatus.Pending;
 
-        // Platform Admin review information
-        public string? AdminNotes { get; set; }
+        // =========================
+        // PLATFORM ADMIN REVIEW
+        // =========================
 
-        public string? RejectionReason { get; set; }
-
-        public DateTime CreatedAt { get; set; }
-            = DateTime.UtcNow;
+        [MaxLength(1000)]
+        public string? ReviewNote { get; set; }
 
         public DateTime? ReviewedAt { get; set; }
 
+        public int? ReviewedByUserId { get; set; }
 
-        // Approved company
-        public int? CompanyId { get; set; }
+        public User? ReviewedByUser { get; set; }
 
-        public Company? Company { get; set; }
+        // =========================
+        // APPROVED COMPANY
+        // =========================
+
+        public int? CreatedCompanyId { get; set; }
+
+        public Company? CreatedCompany { get; set; }
     }
 }

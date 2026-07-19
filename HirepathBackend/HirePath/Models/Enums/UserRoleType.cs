@@ -1,15 +1,12 @@
-﻿namespace HirePathAI.API.Models.Enums
+namespace HirePathAI.API.Models.Enums
 {
     public enum UserRoleTypes
     {
-        Admin = 1,          // Existing Admin - keep existing value
-
+        Admin = 1,
         Recruiter = 2,
-
         Candidate = 3,
-
         HiringManager = 4,
-
-        SuperAdmin = 5
+        CompanyAdmin = 5,
+        SuperAdmin = 6
     }
 }
