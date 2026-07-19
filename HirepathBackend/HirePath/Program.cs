@@ -12,6 +12,8 @@ using System.Text;
 using HirePathAI.API.Services.Interfaces;
 using HirePathAI.API.Services.Implementations;
 using HirePathAI.API.Configuration;
+using HirePathAI.Repositories;
+using HirePathAI.Services;
 using HirePath.Mappings;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -94,6 +96,12 @@ builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+// ----------------------------------------------------
+// Recruiter Module Dependencies
+// ----------------------------------------------------
+builder.Services.AddScoped<IRecruiterRepository, RecruiterRepository>();
+builder.Services.AddScoped<IRecruiterService, RecruiterService>();
 
 // ----------------------------------------------------
 // Services
@@ -266,6 +274,7 @@ app.MapGet("/", async context =>
 
             .secondary:hover {
                 background: #157347;
+                transform: translateY(-2px);
             }
 
             .note {
