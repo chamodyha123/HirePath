@@ -2,6 +2,8 @@
 using System.Security.Claims;
 using System.Text;
 using HirePathAI.API.Models.Entities;
+using HirePathAI.API.Data;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
@@ -12,13 +14,16 @@ namespace HirePathAI.API.Services.Auth
     {
         private readonly IConfiguration _configuration;
         private readonly UserManager<User> _userManager;
+        private readonly ApplicationDbContext _context;
 
         public JwtTokenService(
             IConfiguration configuration,
-            UserManager<User> userManager)
+            UserManager<User> userManager,
+            ApplicationDbContext context)
         {
             _configuration = configuration;
             _userManager = userManager;
+            _context = context;
         }
 
         public async Task<(string Token, DateTime Expiration)> CreateTokenAsync(User user)
@@ -44,6 +49,16 @@ namespace HirePathAI.API.Services.Auth
             foreach (var role in userRoles)
             {
                 claims.Add(new Claim(ClaimTypes.Role, role));
+            }
+
+            var membership = await _context.CompanyMembers
+                .AsNoTracking()
+                .FirstOrDefaultAsync(x => x.UserId == user.Id && x.IsActive);
+
+            if (membership != null)
+            {
+                claims.Add(new Claim("companyId", membership.CompanyId.ToString()));
+                claims.Add(new Claim("companyRole", membership.Role.ToString()));
             }
 
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key!));
