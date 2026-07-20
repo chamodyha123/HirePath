@@ -26,10 +26,40 @@ namespace HirePathAI.API.Repositories.Implementations
                 .FirstOrDefaultAsync(i => i.Id == id);
         }
 
+        // Loads JobApplication -> Job -> Company so services can
+        // verify the interview belongs to the caller's company.
+        public async Task<Interview?> GetByIdWithCompanyAsync(int id)
+        {
+            return await _context.Interviews
+                .Include(i => i.JobApplication)
+                    .ThenInclude(a => a!.Job)
+                        .ThenInclude(j => j!.Company)
+                .Include(i => i.JobApplication)
+                    .ThenInclude(a => a!.CandidateProfile)
+                .FirstOrDefaultAsync(i => i.Id == id);
+        }
+
         public async Task<IEnumerable<Interview>> GetByApplicationIdAsync(int applicationId)
         {
             return await _context.Interviews
                 .Where(i => i.JobApplicationId == applicationId)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Interview>> GetByCompanyAsync(int companyId)
+        {
+            return await _context.Interviews
+                .Include(i => i.JobApplication)
+                    .ThenInclude(a => a!.Job)
+                .Where(i => i.JobApplication!.Job!.CompanyId == companyId)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Interview>> GetAllAsync()
+        {
+            return await _context.Interviews
+                .Include(i => i.JobApplication)
+                    .ThenInclude(a => a!.Job)
                 .ToListAsync();
         }
 

@@ -29,5 +29,26 @@ namespace HirePathAI.API.Repositories.Implementations
                 .Include(x => x.CandidateProfile)
                 .ToListAsync();
         }
+
+        public async Task<JobApplication?> GetByIdWithDetailsAsync(int id)
+        {
+            return await _context.JobApplications
+                .Include(x => x.Job)
+                    .ThenInclude(j => j!.Company)
+                .Include(x => x.CandidateProfile)
+                .Include(x => x.Interviews)
+                .Include(x => x.Evaluation)
+                .Include(x => x.StatusHistory)
+                .FirstOrDefaultAsync(x => x.Id == id);
+        }
+
+        public async Task<IEnumerable<JobApplication>> GetByCompanyAsync(int companyId)
+        {
+            return await _context.JobApplications
+                .Include(x => x.Job)
+                .Include(x => x.CandidateProfile)
+                .Where(x => x.Job!.CompanyId == companyId)
+                .ToListAsync();
+        }
     }
 }

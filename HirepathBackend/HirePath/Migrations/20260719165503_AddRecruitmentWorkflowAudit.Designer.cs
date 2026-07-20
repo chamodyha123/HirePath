@@ -4,6 +4,7 @@ using HirePathAI.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HirePath.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260719165503_AddRecruitmentWorkflowAudit")]
+    partial class AddRecruitmentWorkflowAudit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -564,9 +567,6 @@ namespace HirePath.Migrations
                     b.Property<string>("RecruiterNotes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ResumeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -578,8 +578,6 @@ namespace HirePath.Migrations
                     b.HasIndex("CandidateProfileId");
 
                     b.HasIndex("JobId");
-
-                    b.HasIndex("ResumeId");
 
                     b.ToTable("JobApplications");
                 });
@@ -1069,16 +1067,9 @@ namespace HirePath.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("HirePathAI.API.Models.Entities.Resume", "Resume")
-                        .WithMany()
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("CandidateProfile");
 
                     b.Navigation("Job");
-
-                    b.Navigation("Resume");
                 });
 
             modelBuilder.Entity("HirePathAI.API.Models.Entities.JobSkill", b =>

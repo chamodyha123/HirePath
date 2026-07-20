@@ -1,5 +1,5 @@
 using HirePathAI.API.DTOs.JobApplication;
-using HirePathAI.API.Models.Entities;
+using HirePathAI.API.Helpers;
 using HirePathAI.API.Models.Enums;
 using HirePathAI.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
@@ -13,33 +13,45 @@ namespace HirePathAI.API.Controllers
     {
         private readonly IApplicationService _service;
 
+        private static readonly HashSet<ApplicationStatus> RecruiterAllowedStatuses = new()
+        {
+            ApplicationStatus.UnderReview,
+            ApplicationStatus.Shortlisted,
+            ApplicationStatus.Rejected
+        };
+
+        private static readonly HashSet<ApplicationStatus> HiringManagerAllowedStatuses = new()
+        {
+            ApplicationStatus.Interviewed,
+            ApplicationStatus.Offered,
+            ApplicationStatus.Hired
+        };
+
         public ApplicationController(IApplicationService service)
         {
             _service = service;
         }
 
-        // APPLY FOR JOB
         [Authorize(Roles = "Candidate")]
         [HttpPost("apply")]
         public async Task<IActionResult> Apply(CreateApplicationDto dto)
         {
-            var application = new JobApplication
+            try
             {
-                JobId = dto.JobId,
-                CandidateProfileId = dto.CandidateProfileId,
-                CoverLetter = dto.CoverLetter
-            };
-
-            var result = await _service.ApplyAsync(application);
-            return Ok(result);
+                var result = await _service.ApplyAsync(dto.JobId, dto.CoverLetter, dto.ResumeId, this.GetUserId());
+                return Ok(result);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
-        // GET APPLICATION BY ID
         [Authorize]
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var result = await _service.GetByIdAsync(id);
+            var result = await _service.GetByIdAsync(id, this.GetUserId(), this.IsAdmin());
 
             if (result == null)
                 return NotFound("Application not found.");
@@ -47,68 +59,224 @@ namespace HirePathAI.API.Controllers
             return Ok(result);
         }
 
-        // GET ALL APPLICATIONS BY CANDIDATE
-        [Authorize(Roles = "Candidate,Admin")]
-        [HttpGet("candidate/{candidateId}")]
-        public async Task<IActionResult> GetByCandidate(int candidateId)
+        [Authorize(Roles = "Candidate")]
+        [HttpGet("mine")]
+        public async Task<IActionResult> GetMine()
         {
-            var result = await _service.GetByCandidateAsync(candidateId);
+            var result = await _service.GetMyApplicationsAsync(this.GetUserId());
             return Ok(result);
         }
 
-        // GET ALL APPLICATIONS BY JOB
+        [Authorize(Roles = "Admin")]
+        [HttpGet("candidate/{candidateProfileId}")]
+        public async Task<IActionResult> GetByCandidate(int candidateProfileId)
+        {
+            try
+            {
+                var result = await _service.GetByCandidateAsync(candidateProfileId, this.GetUserId(), this.IsAdmin());
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
+        }
+
         [Authorize(Roles = "Recruiter,Admin,HiringManager")]
         [HttpGet("job/{jobId}")]
         public async Task<IActionResult> GetByJob(int jobId)
         {
-            var result = await _service.GetByJobAsync(jobId);
+            try
+            {
+                var result = await _service.GetByJobAsync(jobId, this.GetUserId(), this.IsAdmin());
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Recruiter,Admin,HiringManager")]
+        [HttpGet("company")]
+        public async Task<IActionResult> GetByCompany()
+        {
+            var result = await _service.GetByCompanyAsync(this.GetUserId(), this.IsAdmin());
             return Ok(result);
         }
 
-        // UPDATE APPLICATION STATUS (Hiring Workflow)
         [Authorize(Roles = "Recruiter,Admin,HiringManager")]
         [HttpPut("status")]
         public async Task<IActionResult> UpdateStatus(UpdateApplicationStatusDto dto)
         {
-            var updated = await _service.UpdateStatusAsync(
-                dto.ApplicationId,
-                dto.Status,
-                dto.Feedback
-            );
+            var isAdmin = this.IsAdmin();
 
-            if (!updated)
-                return NotFound("Application not found.");
+            if (!isAdmin)
+            {
+                var isRecruiter = User.IsInRole("Recruiter");
+                var isHiringManager = User.IsInRole("HiringManager");
 
-            return Ok("Application status updated successfully.");
+                var allowed =
+                    (isRecruiter && RecruiterAllowedStatuses.Contains(dto.Status)) ||
+                    (isHiringManager && HiringManagerAllowedStatuses.Contains(dto.Status));
+
+                if (!allowed)
+                    return StatusCode(StatusCodes.Status403Forbidden, "Your role is not permitted to set this status.");
+            }
+
+            try
+            {
+                var updated = await _service.UpdateStatusAsync(
+                    dto.ApplicationId, dto.Status, dto.Feedback, this.GetUserId(), isAdmin);
+
+                if (!updated)
+                    return NotFound("Application not found.");
+
+                return Ok("Application status updated successfully.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
-        // ADD RECRUITER NOTES
+        [Authorize(Roles = "Recruiter,Admin")]
+        [HttpPut("shortlist")]
+        public async Task<IActionResult> Shortlist(WorkflowActionDto dto)
+        {
+            try
+            {
+                var updated = await _service.ShortlistAsync(dto.ApplicationId, dto.Notes, this.GetUserId(), this.IsAdmin());
+                return updated ? Ok("Candidate shortlisted.") : NotFound("Application not found.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "Recruiter,Admin")]
+        [HttpPut("reject")]
+        public async Task<IActionResult> Reject(WorkflowActionDto dto)
+        {
+            try
+            {
+                var updated = await _service.RejectAsync(dto.ApplicationId, dto.Notes, this.GetUserId(), this.IsAdmin());
+                return updated ? Ok("Candidate rejected.") : NotFound("Application not found.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "HiringManager,Admin")]
+        [HttpPut("interview")]
+        public async Task<IActionResult> MarkInterviewCompleted(WorkflowActionDto dto)
+        {
+            try
+            {
+                var updated = await _service.MarkInterviewCompletedAsync(dto.ApplicationId, dto.Notes, this.GetUserId(), this.IsAdmin());
+                return updated ? Ok("Application marked as interview completed.") : NotFound("Application not found.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "HiringManager,Admin")]
+        [HttpPut("offer")]
+        public async Task<IActionResult> Offer(WorkflowActionDto dto)
+        {
+            try
+            {
+                var updated = await _service.SendOfferAsync(dto.ApplicationId, dto.Notes, this.GetUserId(), this.IsAdmin());
+                return updated ? Ok("Offer sent.") : NotFound("Application not found.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
+        }
+
+        [Authorize(Roles = "HiringManager,Admin")]
+        [HttpPut("hire")]
+        public async Task<IActionResult> Hire(WorkflowActionDto dto)
+        {
+            try
+            {
+                var updated = await _service.MarkHiredAsync(dto.ApplicationId, dto.Notes, this.GetUserId(), this.IsAdmin());
+                return updated ? Ok("Candidate marked as hired.") : NotFound("Application not found.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
+        }
+
         [Authorize(Roles = "Recruiter,Admin,HiringManager")]
         [HttpPut("notes/{id}")]
         public async Task<IActionResult> AddNotes(int id, [FromBody] string notes)
         {
-            var updated = await _service.AddRecruiterNotesAsync(id, notes);
+            try
+            {
+                var updated = await _service.AddRecruiterNotesAsync(id, notes, this.GetUserId(), this.IsAdmin());
 
-            if (!updated)
-                return NotFound("Application not found.");
+                if (!updated)
+                    return NotFound("Application not found.");
 
-            return Ok("Notes added successfully.");
+                return Ok("Notes added successfully.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
         }
 
-        // WITHDRAW APPLICATION
         [Authorize(Roles = "Candidate")]
         [HttpPut("withdraw/{id}")]
         public async Task<IActionResult> Withdraw(int id)
         {
-            var withdrawn = await _service.WithdrawAsync(id);
+            try
+            {
+                var withdrawn = await _service.WithdrawAsync(id, this.GetUserId());
 
-            if (!withdrawn)
-                return NotFound("Application not found.");
+                if (!withdrawn)
+                    return NotFound("Application not found.");
 
-            return Ok("Application withdrawn successfully.");
+                return Ok("Application withdrawn successfully.");
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
-        // DELETE APPLICATION
         [Authorize(Roles = "Admin")]
         [HttpDelete("{id}")]
         public async Task<IActionResult> Delete(int id)

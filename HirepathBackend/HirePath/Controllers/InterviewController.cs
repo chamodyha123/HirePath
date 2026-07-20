@@ -1,4 +1,5 @@
 using HirePathAI.API.DTOs.Interview;
+using HirePathAI.API.Helpers;
 using HirePathAI.API.Models.Entities;
 using HirePathAI.API.Models.Enums;
 using HirePathAI.API.Services.Interfaces;
@@ -19,7 +20,7 @@ namespace HirePathAI.API.Controllers
         }
 
         // SCHEDULE INTERVIEW
-        [Authorize(Roles = "Recruiter,Admin")]
+        [Authorize(Roles = "Recruiter,Admin,HiringManager")]
         [HttpPost("schedule")]
         public async Task<IActionResult> Schedule(ScheduleInterviewDto dto)
         {
@@ -31,10 +32,13 @@ namespace HirePathAI.API.Controllers
                 JobApplicationId = dto.JobApplicationId,
                 ScheduledAt = dto.ScheduledAt,
                 InterviewType = interviewType,
-                MeetingLink = dto.MeetingLink
+                MeetingLink = dto.MeetingLink,
+                Location = dto.Location,
+                Panel = dto.Panel,
+                Notes = dto.Notes
             };
 
-            var result = await _service.ScheduleAsync(interview);
+            var result = await _service.ScheduleAsync(interview, this.GetUserId(), this.IsAdmin());
             return Ok(result);
         }
 
@@ -43,7 +47,7 @@ namespace HirePathAI.API.Controllers
         [HttpGet("application/{applicationId}")]
         public async Task<IActionResult> GetByApplication(int applicationId)
         {
-            var result = await _service.GetByApplicationIdAsync(applicationId);
+            var result = await _service.GetByApplicationIdAsync(applicationId, this.GetUserId(), this.IsAdmin());
             return Ok(result);
         }
 
@@ -52,7 +56,7 @@ namespace HirePathAI.API.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var result = await _service.GetByIdAsync(id);
+            var result = await _service.GetByIdAsync(id, this.GetUserId(), this.IsAdmin());
 
             if (result == null)
                 return NotFound("Interview not found.");
@@ -60,45 +64,63 @@ namespace HirePathAI.API.Controllers
             return Ok(result);
         }
 
+        // GET ALL INTERVIEWS FOR MY COMPANY
+        [Authorize(Roles = "Recruiter,Admin,HiringManager")]
+        [HttpGet("company")]
+        public async Task<IActionResult> GetByCompany()
+        {
+            var result = await _service.GetByCompanyAsync(this.GetUserId(), this.IsAdmin());
+            return Ok(result);
+        }
+
         // UPDATE INTERVIEW
-        [Authorize(Roles = "Recruiter,Admin")]
+        [Authorize(Roles = "Recruiter,Admin,HiringManager")]
         [HttpPut("update")]
         public async Task<IActionResult> Update(UpdateInterviewDto dto)
         {
-            if (!Enum.TryParse<InterviewStatus>(dto.Status, out var status))
-                return BadRequest("Invalid status. Use: Scheduled, Completed, Cancelled, Rescheduled, or NoShow");
-
-            var interview = new Interview
+            InterviewStatus? status = null;
+            if (!string.IsNullOrEmpty(dto.Status))
             {
-                Id = dto.InterviewId,
-                ScheduledAt = dto.ScheduledAt,
-                MeetingLink = dto.MeetingLink,
-                Status = status
-            };
+                if (!Enum.TryParse<InterviewStatus>(dto.Status, out var parsedStatus))
+                    return BadRequest("Invalid status. Use: Scheduled, Completed, Cancelled, Rescheduled, or NoShow");
+                status = parsedStatus;
+            }
 
-            var updated = await _service.UpdateAsync(interview);
+            try
+            {
+                var updated = await _service.UpdateAsync(
+                    dto.InterviewId,
+                    dto.ScheduledAt,
+                    dto.MeetingLink,
+                    dto.Location,
+                    dto.Panel,
+                    dto.Notes,
+                    status,
+                    this.GetUserId(),
+                    this.IsAdmin());
 
-            if (!updated)
-                return NotFound("Interview not found.");
+                if (!updated)
+                    return NotFound("Interview not found.");
 
-            return Ok("Interview updated successfully.");
+                return Ok("Interview updated successfully.");
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Forbid(ex.Message);
+            }
         }
 
-        // EVALUATE INTERVIEW
+        // CANCEL INTERVIEW
         [Authorize(Roles = "Recruiter,Admin,HiringManager")]
-        [HttpPut("evaluate")]
-        public async Task<IActionResult> Evaluate(EvaluateInterviewDto dto)
+        [HttpPut("cancel/{id}")]
+        public async Task<IActionResult> Cancel(int id, [FromBody] string? notes)
         {
-            var evaluated = await _service.EvaluateAsync(
-                dto.InterviewId,
-                dto.Score,
-                dto.Feedback
-            );
+            var cancelled = await _service.CancelAsync(id, notes, this.GetUserId(), this.IsAdmin());
 
-            if (!evaluated)
+            if (!cancelled)
                 return NotFound("Interview not found.");
 
-            return Ok("Evaluation submitted successfully.");
+            return Ok("Interview cancelled successfully.");
         }
 
         // DELETE INTERVIEW

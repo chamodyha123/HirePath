@@ -91,8 +91,11 @@ builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IJobRepository, JobRepository>();
 builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
-builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
-builder.Services.AddScoped<IInterviewRepository, InterviewRepository>(); // ✅ Added
+builder.Services.AddScoped<IInterviewRepository, InterviewRepository>();
+builder.Services.AddScoped<IInterviewFeedbackRepository, InterviewFeedbackRepository>();
+builder.Services.AddScoped<IEvaluationRepository, EvaluationRepository>();
+builder.Services.AddScoped<IApplicationStatusHistoryRepository, ApplicationStatusHistoryRepository>();
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>(); // ✅ Added — temporary, for testing
 
 // ----------------------------------------------------
 // Services
@@ -102,9 +105,11 @@ builder.Services.AddAuthorization();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IJobService, JobService>();
 builder.Services.AddScoped<ICandidateService, CandidateService>();
-builder.Services.AddScoped<IJobApplicationService, JobApplicationService>();
-builder.Services.AddScoped<IInterviewService, InterviewService>(); // ✅ Added
-builder.Services.AddScoped<IApplicationService, ApplicationService>(); // ✅ Added
+builder.Services.AddScoped<IInterviewService, InterviewService>();
+builder.Services.AddScoped<IApplicationService, ApplicationService>();
+builder.Services.AddScoped<IInterviewFeedbackService, InterviewFeedbackService>();
+builder.Services.AddScoped<IEvaluationService, EvaluationService>();
+builder.Services.AddScoped<ICompanyService, CompanyService>(); // ✅ Added — temporary, for testing
 builder.Services.AddScoped<IAIService, AIService>();
 
 // ----------------------------------------------------
@@ -127,7 +132,15 @@ builder.Services.AddCors(options =>
 // ----------------------------------------------------
 // Controllers + Swagger
 // ----------------------------------------------------
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        // Prevents "object cycle detected" crashes when serializing entities
+        // with circular navigation properties (JobApplication -> Job ->
+        // Applications -> Job -> ..., Interview -> JobApplication -> Interviews -> ..., etc.)
+        options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+    });
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>

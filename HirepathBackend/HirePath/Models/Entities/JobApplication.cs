@@ -11,18 +11,24 @@ namespace HirePathAI.API.Models.Entities
         public int CandidateProfileId { get; set; }
         public CandidateProfile? CandidateProfile { get; set; }
 
-        // ✅ Enum is correct and default is good
+        // The resume actually submitted for this application — resolved at
+        // apply-time (either the one the candidate picked, or their primary
+        // resume) and then frozen here so later resume edits/uploads don't
+        // change what a recruiter is looking at for this application.
+        public int? ResumeId { get; set; }
+        public Resume? Resume { get; set; }
+
         public ApplicationStatus Status { get; set; } = ApplicationStatus.Applied;
 
         public string? CoverLetter { get; set; }
 
-        // ⚠️ FIX: prevent EF precision warning (important)
         public decimal? MatchScore { get; set; }
 
         public string? RecruiterNotes { get; set; }
 
-        // ✅ Better initialization (cleaner than new List<Interview>())
         public ICollection<Interview> Interviews { get; set; } = new HashSet<Interview>();
+        public ICollection<ApplicationStatusHistory> StatusHistory { get; set; } = new List<ApplicationStatusHistory>();
+        public Evaluation? Evaluation { get; set; }
 
         public DateTime AppliedDate { get; set; } = DateTime.UtcNow;
         public string? CompanyFeedback { get; set; }

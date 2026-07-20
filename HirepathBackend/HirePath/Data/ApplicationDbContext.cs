@@ -23,6 +23,9 @@ namespace HirePathAI.API.Data
         public DbSet<JobSkill> JobSkills => Set<JobSkill>();
         public DbSet<JobApplication> JobApplications => Set<JobApplication>();
         public DbSet<Interview> Interviews => Set<Interview>();
+        public DbSet<InterviewFeedback> InterviewFeedbacks => Set<InterviewFeedback>();
+        public DbSet<Evaluation> Evaluations => Set<Evaluation>();
+        public DbSet<ApplicationStatusHistory> ApplicationStatusHistories => Set<ApplicationStatusHistory>();
 
         public DbSet<EmailOtp> EmailOtps => Set<EmailOtp>();
         public DbSet<PendingRegistration>
@@ -170,6 +173,15 @@ PendingRegistrations
                 .OnDelete(DeleteBehavior.Restrict);
 
             // =========================
+            // JOB APPLICATIONS -> RESUME
+            // =========================
+            modelBuilder.Entity<JobApplication>()
+                .HasOne(ja => ja.Resume)
+                .WithMany()
+                .HasForeignKey(ja => ja.ResumeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // =========================
             // INTERVIEWS
             // =========================
             modelBuilder.Entity<Interview>()
@@ -177,6 +189,78 @@ PendingRegistrations
                 .WithMany(ja => ja.Interviews)
                 .HasForeignKey(i => i.JobApplicationId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Interview>()
+                .HasOne(i => i.ScheduledByUser)
+                .WithMany()
+                .HasForeignKey(i => i.ScheduledByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // =========================
+            // USER -> COMPANY (Recruiter / Hiring Manager membership)
+            // =========================
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Company)
+                .WithMany(c => c.Employees)
+                .HasForeignKey(u => u.CompanyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // =========================
+            // INTERVIEW FEEDBACK
+            // =========================
+            modelBuilder.Entity<InterviewFeedback>()
+                .HasOne(f => f.Interview)
+                .WithMany()
+                .HasForeignKey(f => f.InterviewId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .HasOne(f => f.SubmittedByUser)
+                .WithMany()
+                .HasForeignKey(f => f.SubmittedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // =========================
+            // EVALUATION (1:1 with JobApplication)
+            // =========================
+            modelBuilder.Entity<Evaluation>()
+                .HasOne(e => e.JobApplication)
+                .WithOne(ja => ja.Evaluation)
+                .HasForeignKey<Evaluation>(e => e.JobApplicationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Evaluation>()
+                .HasOne(e => e.EvaluatedByUser)
+                .WithMany()
+                .HasForeignKey(e => e.EvaluatedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.ResumeScore).HasPrecision(5, 2);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.AIScore).HasPrecision(5, 2);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.InterviewScore).HasPrecision(5, 2);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.OverallScore).HasPrecision(5, 2);
+
+            // =========================
+            // APPLICATION STATUS HISTORY (audit trail)
+            // =========================
+            modelBuilder.Entity<ApplicationStatusHistory>()
+                .HasOne(h => h.JobApplication)
+                .WithMany(ja => ja.StatusHistory)
+                .HasForeignKey(h => h.JobApplicationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ApplicationStatusHistory>()
+                .HasOne(h => h.ChangedByUser)
+                .WithMany()
+                .HasForeignKey(h => h.ChangedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // =========================
             // DECIMAL PRECISION
