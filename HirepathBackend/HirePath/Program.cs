@@ -1,188 +1,434 @@
+using System.Text;
+using System.Text.Json.Serialization;
+
+using HirePath.Mappings;
+
+using HirePathAI.API.Configuration;
 using HirePathAI.API.Data;
 using HirePathAI.API.Models.Entities;
 using HirePathAI.API.Repositories.Implementations;
 using HirePathAI.API.Repositories.Interfaces;
 using HirePathAI.API.Services.Auth;
+using HirePathAI.API.Services.CompanyOnboarding;
+using HirePathAI.API.Services.Implementations;
+using HirePathAI.API.Services.Interfaces;
+using HirePathAI.API.Services.PlatformAdmin;
+
+using HirePathAI.Repositories;
+using HirePathAI.Services;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using System.Text;
-using HirePathAI.API.Services.Interfaces;
-using HirePathAI.API.Services.Implementations;
-using HirePathAI.API.Configuration;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// ----------------------------------------------------
-// Database
-// ----------------------------------------------------
+// ====================================================
+// DATABASE
+// ====================================================
+
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
-// ----------------------------------------------------
-// Identity
-// ----------------------------------------------------
-builder.Services.AddIdentity<User, IdentityRole<int>>(options =>
 {
-    options.Password.RequiredLength = 6;
-    options.Password.RequireDigit = true;
-    options.Password.RequireUppercase = false;
-    options.Password.RequireLowercase = true;
-    options.Password.RequireNonAlphanumeric = false;
-})
-.AddEntityFrameworkStores<ApplicationDbContext>()
-.AddDefaultTokenProviders();
+    var connectionString =
+        builder.Configuration.GetConnectionString("DefaultConnection");
 
-// ----------------------------------------------------
-// Email + OTP
-// ----------------------------------------------------
+    if (string.IsNullOrWhiteSpace(connectionString))
+    {
+        throw new InvalidOperationException(
+            "DefaultConnection is missing from appsettings.json.");
+    }
+
+    options.UseSqlServer(connectionString);
+});
+
+// ====================================================
+// IDENTITY
+// ====================================================
+
+builder.Services
+    .AddIdentity<User, IdentityRole<int>>(options =>
+    {
+        options.Password.RequiredLength = 6;
+        options.Password.RequireDigit = true;
+        options.Password.RequireUppercase = false;
+        options.Password.RequireLowercase = true;
+        options.Password.RequireNonAlphanumeric = false;
+
+        options.User.RequireUniqueEmail = true;
+
+        options.Lockout.DefaultLockoutTimeSpan =
+            TimeSpan.FromMinutes(5);
+
+        options.Lockout.MaxFailedAccessAttempts = 5;
+        options.Lockout.AllowedForNewUsers = true;
+    })
+    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddDefaultTokenProviders();
+
+// ====================================================
+// EMAIL SETTINGS AND OTP
+// ====================================================
+
 builder.Services.Configure<EmailSettings>(
     builder.Configuration.GetSection("EmailSettings"));
 
 builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IOtpService, OtpService>();
 
-//
-// cloud storage service
-//
+// ====================================================
+// CLOUDINARY / CLOUD STORAGE
+// ====================================================
+
 builder.Services.Configure<CloudinarySettings>(
     builder.Configuration.GetSection("CloudinarySettings"));
 
-builder.Services.AddScoped<ICloudStorageService, CloudinaryStorageService>();
+builder.Services.AddScoped<
+    ICloudStorageService,
+    CloudinaryStorageService>();
 
-// ----------------------------------------------------
-// JWT Service
-// ----------------------------------------------------
-builder.Services.AddScoped<IJwtTokenService, JwtTokenService>();
+// ====================================================
+// JWT SERVICE
+// ====================================================
 
-// ----------------------------------------------------
-// JWT Authentication
-// ----------------------------------------------------
-var jwtSettings = builder.Configuration.GetSection("Jwt");
-var key = jwtSettings["Key"];
+builder.Services.AddScoped<
+    IJwtTokenService,
+    JwtTokenService>();
 
-builder.Services.AddAuthentication(options =>
+// ====================================================
+// JWT AUTHENTICATION
+// ====================================================
+
+var jwtSettings =
+    builder.Configuration.GetSection("Jwt");
+
+var jwtKey = jwtSettings["Key"];
+
+if (string.IsNullOrWhiteSpace(jwtKey))
 {
-    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-})
-.AddJwtBearer(options =>
-{
-    options.TokenValidationParameters = new TokenValidationParameters
+    throw new InvalidOperationException(
+        "JWT Key is missing from appsettings.json.");
+}
+
+builder.Services
+    .AddAuthentication(options =>
     {
-        ValidateIssuer = true,
-        ValidateAudience = true,
-        ValidateLifetime = true,
-        ValidateIssuerSigningKey = true,
+        options.DefaultAuthenticateScheme =
+            JwtBearerDefaults.AuthenticationScheme;
 
-        ValidIssuer = jwtSettings["Issuer"],
-        ValidAudience = jwtSettings["Audience"],
-        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key!)),
-        ClockSkew = TimeSpan.Zero
-    };
-});
+        options.DefaultChallengeScheme =
+            JwtBearerDefaults.AuthenticationScheme;
 
-// ----------------------------------------------------
-// Repositories
-// ----------------------------------------------------
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IJobRepository, JobRepository>();
-builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
-builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
-builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
+        options.DefaultScheme =
+            JwtBearerDefaults.AuthenticationScheme;
+    })
+    .AddJwtBearer(options =>
+    {
+        options.SaveToken = true;
+        options.RequireHttpsMetadata = false;
 
-// ----------------------------------------------------
-// Services
-// ----------------------------------------------------
+        options.TokenValidationParameters =
+            new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidateAudience = true,
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+
+                ValidIssuer = jwtSettings["Issuer"],
+                ValidAudience = jwtSettings["Audience"],
+
+                IssuerSigningKey =
+                    new SymmetricSecurityKey(
+                        Encoding.UTF8.GetBytes(jwtKey)),
+
+                ClockSkew = TimeSpan.Zero
+            };
+    });
+
+// ====================================================
+// AUTHORIZATION
+// ====================================================
+
 builder.Services.AddAuthorization();
 
-builder.Services.AddScoped<IAuthService, AuthService>();
-builder.Services.AddScoped<IJobService, JobService>();
-builder.Services.AddScoped<ICandidateService, CandidateService>();
-builder.Services.AddScoped<IJobApplicationService, JobApplicationService>();
-builder.Services.AddScoped<IAIService, AIService>();
+// ====================================================
+// REPOSITORIES
+// ====================================================
 
-// ----------------------------------------------------
-// CORS for React frontend
-// ----------------------------------------------------
+builder.Services.AddScoped<
+    IUserRepository,
+    UserRepository>();
+
+builder.Services.AddScoped<
+    IJobRepository,
+    JobRepository>();
+
+builder.Services.AddScoped<
+    ICandidateRepository,
+    CandidateRepository>();
+
+builder.Services.AddScoped<
+    IApplicationRepository,
+    ApplicationRepository>();
+
+builder.Services.AddScoped<
+    IInterviewRepository,
+    InterviewRepository>();
+
+builder.Services.AddScoped<
+    IInterviewFeedbackRepository,
+    InterviewFeedbackRepository>();
+
+builder.Services.AddScoped<
+    IEvaluationRepository,
+    EvaluationRepository>();
+
+builder.Services.AddScoped<
+    IApplicationStatusHistoryRepository,
+    ApplicationStatusHistoryRepository>();
+
+builder.Services.AddScoped<
+    ICompanyRepository,
+    CompanyRepository>();
+
+builder.Services.AddScoped(
+    typeof(IGenericRepository<>),
+    typeof(GenericRepository<>));
+
+// ====================================================
+// RECRUITER MODULE
+// ====================================================
+
+builder.Services.AddScoped<
+    IRecruiterRepository,
+    RecruiterRepository>();
+
+builder.Services.AddScoped<
+    IRecruiterService,
+    RecruiterService>();
+
+// ====================================================
+// APPLICATION SERVICES
+// ====================================================
+
+builder.Services.AddScoped<
+    IAuthService,
+    AuthService>();
+
+builder.Services.AddScoped<
+    IJobService,
+    JobService>();
+
+builder.Services.AddScoped<
+    ICandidateService,
+    CandidateService>();
+
+builder.Services.AddScoped<
+    IApplicationService,
+    ApplicationService>();
+
+builder.Services.AddScoped<
+    IInterviewService,
+    InterviewService>();
+
+builder.Services.AddScoped<
+    IInterviewFeedbackService,
+    InterviewFeedbackService>();
+
+builder.Services.AddScoped<
+    IEvaluationService,
+    EvaluationService>();
+
+builder.Services.AddScoped<
+    ICompanyService,
+    CompanyService>();
+
+builder.Services.AddScoped<
+    IAIService,
+    AIService>();
+
+// ====================================================
+// PLATFORM ADMIN / SUPER ADMIN
+// ====================================================
+
+builder.Services.AddScoped<
+    IPlatformAdminService,
+    PlatformAdminService>();
+
+// ====================================================
+// COMPANY ONBOARDING / COMPANY ADMIN
+// ====================================================
+
+builder.Services.AddScoped<
+    ICompanyOnboardingService,
+    CompanyOnboardingService>();
+
+// ====================================================
+// AUTOMAPPER
+// ====================================================
+
+builder.Services.AddAutoMapper(
+    typeof(AutoMapperProfile));
+
+// ====================================================
+// CORS
+// ====================================================
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
+        var configuredOrigins = builder.Configuration
+            .GetSection("Cors:AllowedOrigins")
+            .Get<string[]>() ?? Array.Empty<string>();
+
+        var allowedOrigins = new[]
+        {
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "https://localhost:5173",
+            "https://127.0.0.1:5173"
+        }
+        .Concat(configuredOrigins)
+        .Distinct(StringComparer.OrdinalIgnoreCase)
+        .ToArray();
+
         policy
-            .WithOrigins(
-                "http://localhost:5173",
-                "https://localhost:5173"
-            )
+            .SetIsOriginAllowed(origin =>
+            {
+                if (allowedOrigins.Contains(
+                        origin,
+                        StringComparer.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+
+                if (!Uri.TryCreate(
+                        origin,
+                        UriKind.Absolute,
+                        out var uri))
+                {
+                    return false;
+                }
+
+                return uri.Host.Equals(
+                           "localhost",
+                           StringComparison.OrdinalIgnoreCase)
+                       || uri.Host.Equals(
+                           "127.0.0.1",
+                           StringComparison.OrdinalIgnoreCase);
+            })
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
 });
 
-// ----------------------------------------------------
-// Controllers + Swagger
-// ----------------------------------------------------
-builder.Services.AddControllers();
+// ====================================================
+// CONTROLLERS
+// ====================================================
+
+builder.Services
+    .AddControllers()
+    .AddNewtonsoftJson()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler =
+            ReferenceHandler.IgnoreCycles;
+    });
+
+// ====================================================
+// SWAGGER
+// ====================================================
+
 builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
 {
-    options.SwaggerDoc("v1", new OpenApiInfo
-    {
-        Title = "HirePath AI API",
-        Version = "v1"
-    });
-
-    options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
-        Name = "Authorization",
-        Type = SecuritySchemeType.Http,
-        Scheme = "bearer",
-        BearerFormat = "JWT",
-        In = ParameterLocation.Header,
-        Description = "Enter JWT token like: Bearer {your token}"
-    });
-
-    options.AddSecurityRequirement(new OpenApiSecurityRequirement
-    {
+    options.SwaggerDoc(
+        "v1",
+        new OpenApiInfo
         {
-            new OpenApiSecurityScheme
+            Title = "HirePath AI API",
+            Version = "v1",
+            Description =
+                "HirePath AI recruitment and company onboarding API"
+        });
+
+    options.AddSecurityDefinition(
+        "Bearer",
+        new OpenApiSecurityScheme
+        {
+            Name = "Authorization",
+            Type = SecuritySchemeType.Http,
+            Scheme = "bearer",
+            BearerFormat = "JWT",
+            In = ParameterLocation.Header,
+            Description =
+                "Enter your JWT token. Example: Bearer {token}"
+        });
+
+    options.AddSecurityRequirement(
+        new OpenApiSecurityRequirement
+        {
             {
-                Reference = new OpenApiReference
+                new OpenApiSecurityScheme
                 {
-                    Id = "Bearer",
-                    Type = ReferenceType.SecurityScheme
-                }
-            },
-            Array.Empty<string>()
-        }
-    });
+                    Reference =
+                        new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                },
+                Array.Empty<string>()
+            }
+        });
 });
 
 var app = builder.Build();
 
-// ----------------------------------------------------
-// Seed Roles + Admin
-// ----------------------------------------------------
+// ====================================================
+// SEED ROLES AND PLATFORM ADMIN
+// ====================================================
+
 using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
-    await SeedData.SeedRolesAndAdminAsync(services);
+
+    try
+    {
+        await SeedData.SeedRolesAndAdminAsync(services);
+    }
+    catch (Exception exception)
+    {
+        var logger =
+            services.GetRequiredService<ILogger<Program>>();
+
+        logger.LogError(
+            exception,
+            "An error occurred while seeding roles and admin.");
+    }
 }
 
-// ----------------------------------------------------
-// Middleware pipeline
-// ----------------------------------------------------
+// ====================================================
+// MIDDLEWARE PIPELINE
+// ====================================================
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Avoid redirecting local OPTIONS requests during development.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
+// CORS must run before authentication and authorization.
 app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
@@ -190,97 +436,166 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// ----------------------------------------------------
-// Start Page: Choose Swagger or Frontend
-// ----------------------------------------------------
-app.MapGet("/", async context =>
-{
-    context.Response.ContentType = "text/html";
+// ====================================================
+// START PAGE
+// ====================================================
 
-    await context.Response.WriteAsync("""
-    <!DOCTYPE html>
-    <html>
-    <head>
-        <title>HirePath AI</title>
-        <style>
-            body {
-                margin: 0;
-                min-height: 100vh;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-family: Arial, sans-serif;
-                background: linear-gradient(135deg, #07111f, #0f2742);
-                color: white;
-            }
+app.MapGet(
+    "/",
+    async context =>
+    {
+        context.Response.ContentType = "text/html";
 
-            .card {
-                width: 460px;
-                background: rgba(255, 255, 255, 0.1);
-                padding: 40px;
-                border-radius: 20px;
-                text-align: center;
-                box-shadow: 0 20px 50px rgba(0,0,0,0.3);
-                backdrop-filter: blur(12px);
-            }
+        await context.Response.WriteAsync(
+            """
+            <!DOCTYPE html>
+            <html lang="en">
+            <head>
+                <meta charset="UTF-8">
 
-            h1 {
-                margin-bottom: 10px;
-                color: #66b2ff;
-            }
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0">
 
-            p {
-                color: #d7e7ff;
-                margin-bottom: 30px;
-            }
+                <title>HirePath AI</title>
 
-            .btn {
-                display: block;
-                margin: 14px 0;
-                padding: 15px;
-                border-radius: 12px;
-                text-decoration: none;
-                font-weight: bold;
-                color: white;
-                background: #0d6efd;
-                transition: 0.2s;
-            }
+                <style>
+                    * {
+                        box-sizing: border-box;
+                    }
 
-            .btn:hover {
-                background: #0b5ed7;
-                transform: translateY(-2px);
-            }
+                    body {
+                        margin: 0;
+                        min-height: 100vh;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 24px;
+                        font-family: Arial, sans-serif;
+                        background:
+                            linear-gradient(
+                                135deg,
+                                #07111f,
+                                #0f2742
+                            );
+                        color: white;
+                    }
 
-            .secondary {
-                background: #198754;
-            }
+                    .card {
+                        width: 100%;
+                        max-width: 460px;
+                        padding: 40px;
+                        border-radius: 20px;
+                        text-align: center;
+                        background:
+                            rgba(
+                                255,
+                                255,
+                                255,
+                                0.10
+                            );
+                        box-shadow:
+                            0 20px 50px
+                            rgba(
+                                0,
+                                0,
+                                0,
+                                0.30
+                            );
+                        backdrop-filter: blur(12px);
+                        border:
+                            1px solid
+                            rgba(
+                                255,
+                                255,
+                                255,
+                                0.12
+                            );
+                    }
 
-            .secondary:hover {
-                background: #157347;
-            }
+                    h1 {
+                        margin-top: 0;
+                        margin-bottom: 10px;
+                        color: #66b2ff;
+                        font-size: 38px;
+                    }
 
-            .note {
-                margin-top: 25px;
-                font-size: 13px;
-                color: #aac7e8;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="card">
-            <h1>HirePath AI</h1>
-            <p>Choose how you want to continue</p>
+                    p {
+                        color: #d7e7ff;
+                        margin-bottom: 30px;
+                        line-height: 1.6;
+                    }
 
-            <a class="btn" href="/swagger">Open Swagger API</a>
-            <a class="btn secondary" href="http://localhost:5173">Open Frontend UI</a>
+                    .btn {
+                        display: block;
+                        margin: 14px 0;
+                        padding: 15px;
+                        border-radius: 12px;
+                        text-decoration: none;
+                        font-weight: bold;
+                        color: white;
+                        background: #0d6efd;
+                        transition:
+                            transform 0.2s,
+                            background 0.2s;
+                    }
 
-            <div class="note">
-                Backend API must be running here. Frontend must be running on http://localhost:5173
-            </div>
-        </div>
-    </body>
-    </html>
-    """);
-});
+                    .btn:hover {
+                        background: #0b5ed7;
+                        transform: translateY(-2px);
+                    }
+
+                    .secondary {
+                        background: #198754;
+                    }
+
+                    .secondary:hover {
+                        background: #157347;
+                        transform: translateY(-2px);
+                    }
+
+                    .note {
+                        margin-top: 25px;
+                        font-size: 13px;
+                        color: #aac7e8;
+                        line-height: 1.6;
+                    }
+                </style>
+            </head>
+
+            <body>
+                <div class="card">
+                    <h1>HirePath AI</h1>
+
+                    <p>
+                        Recruitment, company onboarding and
+                        AI-assisted candidate management platform.
+                    </p>
+
+                    <a
+                        class="btn"
+                        href="/swagger">
+
+                        Open Swagger API
+                    </a>
+
+                    <a
+                        class="btn secondary"
+                        href="http://localhost:5173">
+
+                        Open Frontend UI
+                    </a>
+
+                    <div class="note">
+                        Backend API is running successfully.
+                        <br>
+                        Frontend URL:
+                        http://localhost:5173
+                    </div>
+                </div>
+            </body>
+            </html>
+            """);
+    });
 
 app.Run();
