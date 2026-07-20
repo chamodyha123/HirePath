@@ -8,6 +8,7 @@ using HirePathAI.API.Models.Entities;
 using HirePathAI.API.Repositories.Implementations;
 using HirePathAI.API.Repositories.Interfaces;
 using HirePathAI.API.Services.Auth;
+using HirePathAI.API.Services.CompanyOnboarding;
 using HirePathAI.API.Services.Implementations;
 using HirePathAI.API.Services.Interfaces;
 using HirePathAI.API.Services.PlatformAdmin;
@@ -222,6 +223,14 @@ builder.Services.AddScoped<
     PlatformAdminService>();
 
 // ====================================================
+// COMPANY ONBOARDING / COMPANY ADMIN
+// ====================================================
+
+builder.Services.AddScoped<
+    ICompanyOnboardingService,
+    CompanyOnboardingService>();
+
+// ====================================================
 // AUTOMAPPER
 // ====================================================
 
@@ -239,9 +248,14 @@ builder.Services.AddCors(options =>
         policy =>
         {
             policy
-                .WithOrigins(
-                    "http://localhost:5173",
-                    "https://localhost:5173")
+                .SetIsOriginAllowed(origin =>
+                {
+                    if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri))
+                        return false;
+
+                    return uri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase)
+                        || uri.Host.Equals("127.0.0.1");
+                })
                 .AllowAnyHeader()
                 .AllowAnyMethod();
         });
