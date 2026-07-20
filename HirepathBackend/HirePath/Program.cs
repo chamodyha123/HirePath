@@ -178,10 +178,6 @@ builder.Services.AddScoped<
     ApplicationRepository>();
 
 builder.Services.AddScoped<
-    IJobApplicationRepository,
-    JobApplicationRepository>();
-
-builder.Services.AddScoped<
     IInterviewRepository,
     InterviewRepository>();
 
@@ -290,31 +286,51 @@ builder.Services.AddAutoMapper(
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(
-        "AllowFrontend",
-        policy =>
-        {
-            policy
-                .SetIsOriginAllowed(origin =>
-                {
-                    if (!Uri.TryCreate(
-                            origin,
-                            UriKind.Absolute,
-                            out var uri))
-                    {
-                        return false;
-                    }
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        var configuredOrigins = builder.Configuration
+            .GetSection("Cors:AllowedOrigins")
+            .Get<string[]>() ?? Array.Empty<string>();
 
-                    return uri.Host.Equals(
-                               "localhost",
-                               StringComparison.OrdinalIgnoreCase)
-                           || uri.Host.Equals(
-                               "127.0.0.1",
-                               StringComparison.OrdinalIgnoreCase);
-                })
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
+        var allowedOrigins = new[]
+        {
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "https://localhost:5173",
+            "https://127.0.0.1:5173"
+        }
+        .Concat(configuredOrigins)
+        .Distinct(StringComparer.OrdinalIgnoreCase)
+        .ToArray();
+
+        policy
+            .SetIsOriginAllowed(origin =>
+            {
+                if (allowedOrigins.Contains(
+                        origin,
+                        StringComparer.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+
+                if (!Uri.TryCreate(
+                        origin,
+                        UriKind.Absolute,
+                        out var uri))
+                {
+                    return false;
+                }
+
+                return uri.Host.Equals(
+                           "localhost",
+                           StringComparison.OrdinalIgnoreCase)
+                       || uri.Host.Equals(
+                           "127.0.0.1",
+                           StringComparison.OrdinalIgnoreCase);
+            })
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
 });
 
 // ====================================================
@@ -418,8 +434,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// Do not redirect local development requests because
+// redirecting OPTIONS requests can cause CORS failures.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
+// CORS must execute before authentication and authorization.
 app.UseCors("AllowFrontend");
 
 app.UseAuthentication();

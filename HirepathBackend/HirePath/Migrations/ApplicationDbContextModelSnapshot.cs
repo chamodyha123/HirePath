@@ -22,44 +22,6 @@ namespace HirePath.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("HirePathAI.API.Models.Entities.ApplicationStatusHistory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("ChangedByUserId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("FromStatus")
-                        .HasColumnType("int");
-
-                    b.Property<int>("JobApplicationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("ToStatus")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ChangedByUserId");
-
-                    b.HasIndex("JobApplicationId");
-
-                    b.ToTable("ApplicationStatusHistories");
-                });
-
             modelBuilder.Entity("HirePathAI.API.Models.Entities.CandidateEducation", b =>
                 {
                     b.Property<int>("Id")
@@ -686,52 +648,6 @@ namespace HirePath.Migrations
                     b.ToTable("EmailOtps");
                 });
 
-            modelBuilder.Entity("HirePathAI.API.Models.Entities.Evaluation", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<decimal>("AIScore")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("EvaluatedByUserId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("InterviewScore")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<int>("JobApplicationId")
-                        .HasColumnType("int");
-
-                    b.Property<decimal>("OverallScore")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<decimal>("ResumeScore")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("EvaluatedByUserId");
-
-                    b.HasIndex("JobApplicationId")
-                        .IsUnique();
-
-                    b.ToTable("Evaluations");
-                });
-
             modelBuilder.Entity("HirePathAI.API.Models.Entities.Interview", b =>
                 {
                     b.Property<int>("Id")
@@ -752,23 +668,11 @@ namespace HirePath.Migrations
                     b.Property<int>("JobApplicationId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Location")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("MeetingLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Notes")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Panel")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("ScheduledAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<int>("ScheduledByUserId")
-                        .HasColumnType("int");
 
                     b.Property<decimal?>("Score")
                         .HasPrecision(5, 2)
@@ -784,53 +688,7 @@ namespace HirePath.Migrations
 
                     b.HasIndex("JobApplicationId");
 
-                    b.HasIndex("ScheduledByUserId");
-
                     b.ToTable("Interviews");
-                });
-
-            modelBuilder.Entity("HirePathAI.API.Models.Entities.InterviewFeedback", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Comments")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CommunicationScore")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("InterviewId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProblemSolvingScore")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Recommendation")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SubmittedByUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("TechnicalScore")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InterviewId");
-
-                    b.HasIndex("SubmittedByUserId");
-
-                    b.ToTable("InterviewFeedbacks");
                 });
 
             modelBuilder.Entity("HirePathAI.API.Models.Entities.Job", b =>
@@ -930,9 +788,6 @@ namespace HirePath.Migrations
                     b.Property<string>("RecruiterNotes")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ResumeId")
-                        .HasColumnType("int");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
@@ -945,8 +800,6 @@ namespace HirePath.Migrations
 
                     b.HasIndex("JobId", "CandidateProfileId")
                         .IsUnique();
-
-                    b.HasIndex("ResumeId");
 
                     b.ToTable("JobApplications");
                 });
@@ -1131,9 +984,6 @@ namespace HirePath.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
-                    b.Property<int?>("CompanyId")
-                        .HasColumnType("int");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -1187,8 +1037,6 @@ namespace HirePath.Migrations
                         .HasColumnType("nvarchar(256)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("IX_User_NormalizedEmail");
@@ -1334,25 +1182,6 @@ namespace HirePath.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("HirePathAI.API.Models.Entities.ApplicationStatusHistory", b =>
-                {
-                    b.HasOne("HirePathAI.API.Models.Entities.User", "ChangedByUser")
-                        .WithMany()
-                        .HasForeignKey("ChangedByUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HirePathAI.API.Models.Entities.JobApplication", "JobApplication")
-                        .WithMany("StatusHistory")
-                        .HasForeignKey("JobApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("ChangedByUser");
-
-                    b.Navigation("JobApplication");
-                });
-
             modelBuilder.Entity("HirePathAI.API.Models.Entities.CandidateEducation", b =>
                 {
                     b.HasOne("HirePathAI.API.Models.Entities.CandidateProfile", "CandidateProfile")
@@ -1469,25 +1298,6 @@ namespace HirePath.Migrations
                     b.Navigation("Company");
                 });
 
-            modelBuilder.Entity("HirePathAI.API.Models.Entities.Evaluation", b =>
-                {
-                    b.HasOne("HirePathAI.API.Models.Entities.User", "EvaluatedByUser")
-                        .WithMany()
-                        .HasForeignKey("EvaluatedByUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("HirePathAI.API.Models.Entities.JobApplication", "JobApplication")
-                        .WithOne("Evaluation")
-                        .HasForeignKey("HirePathAI.API.Models.Entities.Evaluation", "JobApplicationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("EvaluatedByUser");
-
-                    b.Navigation("JobApplication");
-                });
-
             modelBuilder.Entity("HirePathAI.API.Models.Entities.Interview", b =>
                 {
                     b.HasOne("HirePathAI.API.Models.Entities.JobApplication", "JobApplication")
@@ -1496,34 +1306,7 @@ namespace HirePath.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("HirePathAI.API.Models.Entities.User", "ScheduledByUser")
-                        .WithMany()
-                        .HasForeignKey("ScheduledByUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("JobApplication");
-
-                    b.Navigation("ScheduledByUser");
-                });
-
-            modelBuilder.Entity("HirePathAI.API.Models.Entities.InterviewFeedback", b =>
-                {
-                    b.HasOne("HirePathAI.API.Models.Entities.Interview", "Interview")
-                        .WithMany()
-                        .HasForeignKey("InterviewId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("HirePathAI.API.Models.Entities.User", "SubmittedByUser")
-                        .WithMany()
-                        .HasForeignKey("SubmittedByUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Interview");
-
-                    b.Navigation("SubmittedByUser");
                 });
 
             modelBuilder.Entity("HirePathAI.API.Models.Entities.Job", b =>
@@ -1558,16 +1341,9 @@ namespace HirePath.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("HirePathAI.API.Models.Entities.Resume", "Resume")
-                        .WithMany()
-                        .HasForeignKey("ResumeId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
                     b.Navigation("CandidateProfile");
 
                     b.Navigation("Job");
-
-                    b.Navigation("Resume");
                 });
 
             modelBuilder.Entity("HirePathAI.API.Models.Entities.JobSkill", b =>
@@ -1590,16 +1366,6 @@ namespace HirePath.Migrations
                         .IsRequired();
 
                     b.Navigation("CandidateProfile");
-                });
-
-            modelBuilder.Entity("HirePathAI.API.Models.Entities.User", b =>
-                {
-                    b.HasOne("HirePathAI.API.Models.Entities.Company", "Company")
-                        .WithMany("Employees")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.Navigation("Company");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -1670,7 +1436,6 @@ namespace HirePath.Migrations
                 {
                     b.Navigation("Departments");
 
-                    b.Navigation("Employees");
                     b.Navigation("Invitations");
 
                     b.Navigation("Jobs");
@@ -1692,11 +1457,7 @@ namespace HirePath.Migrations
 
             modelBuilder.Entity("HirePathAI.API.Models.Entities.JobApplication", b =>
                 {
-                    b.Navigation("Evaluation");
-
                     b.Navigation("Interviews");
-
-                    b.Navigation("StatusHistory");
                 });
 
             modelBuilder.Entity("HirePathAI.API.Models.Entities.ProfilePicture", b =>

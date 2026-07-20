@@ -1,4 +1,4 @@
-﻿using HirePathAI.API.Data;
+using HirePathAI.API.Data;
 using HirePathAI.API.Models.Entities;
 using HirePathAI.API.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
@@ -22,12 +22,24 @@ namespace HirePathAI.API.Repositories.Implementations
         public async Task<InterviewFeedback?> GetByIdAsync(int id)
         {
             return await _context.InterviewFeedbacks
+                .AsNoTracking()
                 .FirstOrDefaultAsync(f => f.Id == id);
+        }
+
+        public async Task<InterviewFeedback?> GetByInterviewAndUserAsync(
+            int interviewId,
+            int submittedByUserId)
+        {
+            return await _context.InterviewFeedbacks
+                .FirstOrDefaultAsync(f =>
+                    f.InterviewId == interviewId &&
+                    f.SubmittedByUserId == submittedByUserId);
         }
 
         public async Task<IEnumerable<InterviewFeedback>> GetByInterviewIdAsync(int interviewId)
         {
             return await _context.InterviewFeedbacks
+                .AsNoTracking()
                 .Where(f => f.InterviewId == interviewId)
                 .ToListAsync();
         }
@@ -35,8 +47,11 @@ namespace HirePathAI.API.Repositories.Implementations
         public async Task<IEnumerable<InterviewFeedback>> GetByJobApplicationIdAsync(int jobApplicationId)
         {
             return await _context.InterviewFeedbacks
+                .AsNoTracking()
                 .Include(f => f.Interview)
-                .Where(f => f.Interview!.JobApplicationId == jobApplicationId)
+                .Where(f =>
+                    f.Interview != null &&
+                    f.Interview.JobApplicationId == jobApplicationId)
                 .ToListAsync();
         }
 

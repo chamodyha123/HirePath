@@ -1,6 +1,7 @@
-﻿using HirePathAI.API.Models.Entities;
+using HirePathAI.API.Models.Entities;
 using HirePathAI.API.Repositories.Interfaces;
 using HirePathAI.API.Services.Interfaces;
+using Microsoft.Extensions.Logging;
 
 namespace HirePathAI.API.Services.Implementations
 {
@@ -16,17 +17,20 @@ namespace HirePathAI.API.Services.Implementations
         private readonly IApplicationRepository _appRepo;
         private readonly IInterviewFeedbackRepository _feedbackRepo;
         private readonly IUserRepository _userRepo;
+        private readonly ILogger<EvaluationService> _logger;
 
         public EvaluationService(
             IEvaluationRepository evalRepo,
             IApplicationRepository appRepo,
             IInterviewFeedbackRepository feedbackRepo,
-            IUserRepository userRepo)
+            IUserRepository userRepo,
+            ILogger<EvaluationService> logger)
         {
             _evalRepo = evalRepo;
             _appRepo = appRepo;
             _feedbackRepo = feedbackRepo;
             _userRepo = userRepo;
+            _logger = logger;
         }
 
         private async Task<bool> HasCompanyAccessAsync(Job? job, int actingUserId, bool isAdmin)
@@ -38,41 +42,78 @@ namespace HirePathAI.API.Services.Implementations
                 return false;
 
             var user = await _userRepo.GetByIdAsync(actingUserId);
-            return user?.CompanyId != null && user.CompanyId == job.CompanyId;
+            return user?.CompanyId == job.CompanyId;
+        }
+
+        private static void ValidateScore(decimal? score, string name)
+        {
+            if (score.HasValue && (score.Value < 0m || score.Value > 100m))
+            {
+                throw new ArgumentOutOfRangeException(
+                    name,
+                    $"{name} must be between 0 and 100.");
+            }
         }
 
         private async Task<decimal> ComputeInterviewScoreAsync(int jobApplicationId)
         {
-            var feedbackList = (await _feedbackRepo.GetByJobApplicationIdAsync(jobApplicationId)).ToList();
-            if (feedbackList.Count == 0)
+            var feedback = (await _feedbackRepo
+                .GetByJobApplicationIdAsync(jobApplicationId))
+                .ToList();
+
+            if (feedback.Count == 0)
                 return 0m;
 
-            var average = feedbackList.Average(f =>
-                (f.TechnicalScore + f.CommunicationScore + f.ProblemSolvingScore) / 3.0);
+            // Feedback is stored on a 1-10 scale.
+            // Convert to a 0-100 score.
+            var averageOutOfTen = feedback.Average(f =>
+                (f.TechnicalScore +
+                 f.CommunicationScore +
+                 f.ProblemSolvingScore) / 3.0m);
 
-            return Math.Round((decimal)average, 2);
+            return Math.Round(averageOutOfTen * 10m, 2);
         }
 
-        public async Task<Evaluation> CreateOrUpdateAsync(int jobApplicationId, decimal? resumeScore, decimal? aiScore, int actingUserId, bool isAdmin)
+        public async Task<Evaluation> CreateOrUpdateAsync(
+            int jobApplicationId,
+            decimal? resumeScore,
+            decimal? aiScore,
+            int actingUserId,
+            bool isAdmin)
         {
-            var application = await _appRepo.GetByIdWithDetailsAsync(jobApplicationId);
-            if (application == null)
-                throw new KeyNotFoundException("Job application not found.");
+            ValidateScore(resumeScore, nameof(resumeScore));
+            ValidateScore(aiScore, nameof(aiScore));
 
-            if (!await HasCompanyAccessAsync(application.Job, actingUserId, isAdmin))
-                throw new UnauthorizedAccessException("You do not have access to this company's recruitment data.");
+            var application =
+                await _appRepo.GetByIdWithDetailsAsync(jobApplicationId)
+                ?? throw new KeyNotFoundException(
+                    "Job application not found.");
+
+            if (!await HasCompanyAccessAsync(
+                    application.Job,
+                    actingUserId,
+                    isAdmin))
+            {
+                throw new UnauthorizedAccessException(
+                    "You do not have access to this company's recruitment data.");
+            }
 
             var finalResumeScore = resumeScore ?? 0m;
-            var finalAIScore = aiScore ?? application.MatchScore ?? 0m;
-            var interviewScore = await ComputeInterviewScoreAsync(jobApplicationId);
+            var finalAiScore = aiScore ?? application.MatchScore ?? 0m;
+
+            ValidateScore(finalAiScore, nameof(aiScore));
+
+            var interviewScore =
+                await ComputeInterviewScoreAsync(jobApplicationId);
 
             var overallScore = Math.Round(
                 finalResumeScore * ResumeWeight +
-                finalAIScore * AIWeight +
+                finalAiScore * AIWeight +
                 interviewScore * InterviewWeight,
                 2);
 
-            var evaluation = await _evalRepo.GetByJobApplicationIdAsync(jobApplicationId);
+            var evaluation =
+                await _evalRepo.GetByJobApplicationIdAsync(jobApplicationId);
 
             if (evaluation == null)
             {
@@ -80,7 +121,7 @@ namespace HirePathAI.API.Services.Implementations
                 {
                     JobApplicationId = jobApplicationId,
                     ResumeScore = finalResumeScore,
-                    AIScore = finalAIScore,
+                    AIScore = finalAiScore,
                     InterviewScore = interviewScore,
                     OverallScore = overallScore,
                     EvaluatedByUserId = actingUserId
@@ -91,7 +132,7 @@ namespace HirePathAI.API.Services.Implementations
             else
             {
                 evaluation.ResumeScore = finalResumeScore;
-                evaluation.AIScore = finalAIScore;
+                evaluation.AIScore = finalAiScore;
                 evaluation.InterviewScore = interviewScore;
                 evaluation.OverallScore = overallScore;
                 evaluation.EvaluatedByUserId = actingUserId;
@@ -101,17 +142,34 @@ namespace HirePathAI.API.Services.Implementations
             }
 
             await _evalRepo.SaveChangesAsync();
+
+            _logger.LogInformation(
+                "Evaluation for application {ApplicationId} calculated as {OverallScore} by user {UserId}",
+                jobApplicationId,
+                overallScore,
+                actingUserId);
+
             return evaluation;
         }
 
-        public async Task<Evaluation?> GetByApplicationIdAsync(int jobApplicationId, int actingUserId, bool isAdmin)
+        public async Task<Evaluation?> GetByApplicationIdAsync(
+            int jobApplicationId,
+            int actingUserId,
+            bool isAdmin)
         {
-            var application = await _appRepo.GetByIdWithDetailsAsync(jobApplicationId);
+            var application =
+                await _appRepo.GetByIdWithDetailsAsync(jobApplicationId);
+
             if (application == null)
                 return null;
 
-            if (!await HasCompanyAccessAsync(application.Job, actingUserId, isAdmin))
+            if (!await HasCompanyAccessAsync(
+                    application.Job,
+                    actingUserId,
+                    isAdmin))
+            {
                 return null;
+            }
 
             return await _evalRepo.GetByJobApplicationIdAsync(jobApplicationId);
         }

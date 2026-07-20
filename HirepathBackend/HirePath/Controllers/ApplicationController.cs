@@ -105,6 +105,21 @@ namespace HirePathAI.API.Controllers
             return Ok(result);
         }
 
+        [Authorize]
+        [HttpGet("{id}/history")]
+        public async Task<IActionResult> GetHistory(int id)
+        {
+            try
+            {
+                var history = await _service.GetHistoryAsync(id, this.GetUserId(), this.IsAdmin());
+                return Ok(history);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
+        }
+
         [Authorize(Roles = "Recruiter,Admin,HiringManager")]
         [HttpPut("status")]
         public async Task<IActionResult> UpdateStatus(UpdateApplicationStatusDto dto)
