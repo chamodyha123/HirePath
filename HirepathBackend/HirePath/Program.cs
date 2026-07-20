@@ -32,8 +32,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
 {
     var connectionString =
-        builder.Configuration.GetConnectionString(
-            "DefaultConnection");
+        builder.Configuration.GetConnectionString("DefaultConnection");
 
     if (string.IsNullOrWhiteSpace(connectionString))
     {
@@ -137,11 +136,8 @@ builder.Services
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
 
-                ValidIssuer =
-                    jwtSettings["Issuer"],
-
-                ValidAudience =
-                    jwtSettings["Audience"],
+                ValidIssuer = jwtSettings["Issuer"],
+                ValidAudience = jwtSettings["Audience"],
 
                 IssuerSigningKey =
                     new SymmetricSecurityKey(
@@ -232,10 +228,6 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<
     IApplicationService,
     ApplicationService>();
-
-builder.Services.AddScoped<
-    IJobApplicationService,
-    JobApplicationService>();
 
 builder.Services.AddScoped<
     IInterviewService,
@@ -386,9 +378,7 @@ builder.Services.AddSwaggerGen(options =>
                     Reference =
                         new OpenApiReference
                         {
-                            Type =
-                                ReferenceType.SecurityScheme,
-
+                            Type = ReferenceType.SecurityScheme,
                             Id = "Bearer"
                         }
                 },
@@ -409,14 +399,12 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
-        await SeedData.SeedRolesAndAdminAsync(
-            services);
+        await SeedData.SeedRolesAndAdminAsync(services);
     }
     catch (Exception exception)
     {
         var logger =
-            services.GetRequiredService<
-                ILogger<Program>>();
+            services.GetRequiredService<ILogger<Program>>();
 
         logger.LogError(
             exception,
@@ -434,18 +422,16 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// Do not redirect local development requests because
-// redirecting OPTIONS requests can cause CORS failures.
+// Avoid redirecting local OPTIONS requests during development.
 if (!app.Environment.IsDevelopment())
 {
     app.UseHttpsRedirection();
 }
 
-// CORS must execute before authentication and authorization.
+// CORS must run before authentication and authorization.
 app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
-
 app.UseAuthorization();
 
 app.MapControllers();
@@ -458,8 +444,7 @@ app.MapGet(
     "/",
     async context =>
     {
-        context.Response.ContentType =
-            "text/html";
+        context.Response.ContentType = "text/html";
 
         await context.Response.WriteAsync(
             """
