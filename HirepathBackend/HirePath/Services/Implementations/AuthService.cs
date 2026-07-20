@@ -33,10 +33,10 @@ namespace HirePathAI.API.Services.Implementations
 
         public async Task<AuthResponseDto> StartRegistrationAsync(RegisterRequestDto dto)
         {
-            var allowedRoles = new[] { "Candidate", "Recruiter", "HiringManager" };
+            var allowedRoles = new[] { "Candidate" };
 
             if (!allowedRoles.Contains(dto.Role))
-                return Fail("Invalid role.");
+                return Fail("Only candidates can self-register. Company staff must use a secure invitation.");
 
             if (await _userManager.Users.AnyAsync(x => x.Email == dto.Email))
                 return Fail("Email already exists.");
