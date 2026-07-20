@@ -282,31 +282,28 @@ builder.Services.AddAutoMapper(
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(
-        "AllowFrontend",
-        policy =>
-        {
-            policy
-                .SetIsOriginAllowed(origin =>
-                {
-                    if (!Uri.TryCreate(
-                            origin,
-                            UriKind.Absolute,
-                            out var uri))
-                    {
-                        return false;
-                    }
+    options.AddPolicy("AllowFrontend", policy =>
+    {
+        var configuredOrigins = builder.Configuration
+            .GetSection("Cors:AllowedOrigins")
+            .Get<string[]>() ?? Array.Empty<string>();
 
-                    return uri.Host.Equals(
-                               "localhost",
-                               StringComparison.OrdinalIgnoreCase)
-                           || uri.Host.Equals(
-                               "127.0.0.1",
-                               StringComparison.OrdinalIgnoreCase);
-                })
-                .AllowAnyHeader()
-                .AllowAnyMethod();
-        });
+        var allowedOrigins = new[]
+        {
+            "http://localhost:5173",
+            "http://127.0.0.1:5173",
+            "https://localhost:5173",
+            "https://127.0.0.1:5173"
+        }
+        .Concat(configuredOrigins)
+        .Distinct(StringComparer.OrdinalIgnoreCase)
+        .ToArray();
+
+        policy
+            .WithOrigins(allowedOrigins)
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
 });
 
 // ====================================================
@@ -410,8 +407,15 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+// In local development the React app calls the HTTP profile on port 5139.
+// Redirecting an OPTIONS preflight request to HTTPS causes the browser to block it.
+// Keep HTTPS redirection for production, but do not redirect local development traffic.
+if (!app.Environment.IsDevelopment())
+{
+    app.UseHttpsRedirection();
+}
 
+// CORS must execute before authentication/authorization.
 app.UseCors("AllowFrontend");
 
 app.UseAuthentication();
