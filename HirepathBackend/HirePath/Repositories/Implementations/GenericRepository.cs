@@ -51,5 +51,18 @@ namespace HirePathAI.API.Repositories.Implementations
         {
             await _context.SaveChangesAsync();
         }
+
+        // Implement async methods
+        public async Task UpdateAsync(T entity)
+        {
+            _dbSet.Update(entity);
+            await Task.CompletedTask; // This is just to make it async
+        }
+
+        public async Task DeleteAsync(T entity)
+        {
+            _dbSet.Remove(entity);
+            await Task.CompletedTask; // This is just to make it async
+        }
     }
 }

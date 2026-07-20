@@ -4,6 +4,7 @@ using HirePathAI.API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HirePath.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260718050610_AddProfilePictureAndFixDecimalPrecision")]
+    partial class AddProfilePictureAndFixDecimalPrecision
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -64,8 +67,7 @@ namespace HirePath.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<decimal?>("GPA")
-                        .HasPrecision(3, 2)
-                        .HasColumnType("decimal(3,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Grade")
                         .HasMaxLength(10)
@@ -83,8 +85,7 @@ namespace HirePath.Migrations
                         .HasColumnType("bit");
 
                     b.Property<decimal?>("Percentage")
-                        .HasPrecision(5, 2)
-                        .HasColumnType("decimal(5,2)");
+                        .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("Qualification")
                         .IsRequired()
@@ -251,9 +252,7 @@ namespace HirePath.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ProfilePictureId")
-                        .IsUnique()
-                        .HasFilter("[ProfilePictureId] IS NOT NULL");
+                    b.HasIndex("ProfilePictureId");
 
                     b.HasIndex("UserId")
                         .IsUnique();
@@ -668,7 +667,9 @@ namespace HirePath.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("ProfilePictures");
+                    b.HasIndex("CandidateProfileId");
+
+                    b.ToTable("ProfilePicture");
                 });
 
             modelBuilder.Entity("HirePathAI.API.Models.Entities.Resume", b =>
@@ -954,9 +955,8 @@ namespace HirePath.Migrations
             modelBuilder.Entity("HirePathAI.API.Models.Entities.CandidateProfile", b =>
                 {
                     b.HasOne("HirePathAI.API.Models.Entities.ProfilePicture", "ProfilePicture")
-                        .WithOne("CandidateProfile")
-                        .HasForeignKey("HirePathAI.API.Models.Entities.CandidateProfile", "ProfilePictureId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .WithMany()
+                        .HasForeignKey("ProfilePictureId");
 
                     b.HasOne("HirePathAI.API.Models.Entities.User", "User")
                         .WithOne("CandidateProfile")
@@ -1048,6 +1048,17 @@ namespace HirePath.Migrations
                         .IsRequired();
 
                     b.Navigation("Job");
+                });
+
+            modelBuilder.Entity("HirePathAI.API.Models.Entities.ProfilePicture", b =>
+                {
+                    b.HasOne("HirePathAI.API.Models.Entities.CandidateProfile", "CandidateProfile")
+                        .WithMany()
+                        .HasForeignKey("CandidateProfileId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("CandidateProfile");
                 });
 
             modelBuilder.Entity("HirePathAI.API.Models.Entities.Resume", b =>
@@ -1147,11 +1158,6 @@ namespace HirePath.Migrations
             modelBuilder.Entity("HirePathAI.API.Models.Entities.JobApplication", b =>
                 {
                     b.Navigation("Interviews");
-                });
-
-            modelBuilder.Entity("HirePathAI.API.Models.Entities.ProfilePicture", b =>
-                {
-                    b.Navigation("CandidateProfile");
                 });
 
             modelBuilder.Entity("HirePathAI.API.Models.Entities.User", b =>

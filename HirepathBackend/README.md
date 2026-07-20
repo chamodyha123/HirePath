@@ -200,7 +200,7 @@ Develop:
 
 ---
 
-## Member 05 - Sashin Peiris
+## Member 05 - Sachintha
 
 ### AI & Analytics Module
 
@@ -220,7 +220,7 @@ Develop:
 
 ---
 
-## Member 06
+## Member 06 -sashin
 
 ### External Integrations & Communication Module
 
