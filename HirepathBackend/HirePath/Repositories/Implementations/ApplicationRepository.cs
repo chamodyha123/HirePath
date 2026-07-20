@@ -19,6 +19,8 @@ namespace HirePathAI.API.Repositories.Implementations
             return await _context.JobApplications
                 .Where(x => x.CandidateProfileId == candidateId)
                 .Include(x => x.Job)
+                    .ThenInclude(j => j!.Company)
+                .Include(x => x.Resume)
                 .ToListAsync();
         }
 
@@ -27,6 +29,8 @@ namespace HirePathAI.API.Repositories.Implementations
             return await _context.JobApplications
                 .Where(x => x.JobId == jobId)
                 .Include(x => x.CandidateProfile)
+                    .ThenInclude(cp => cp!.User)
+                .Include(x => x.Resume)
                 .ToListAsync();
         }
 
@@ -36,6 +40,8 @@ namespace HirePathAI.API.Repositories.Implementations
                 .Include(x => x.Job)
                     .ThenInclude(j => j!.Company)
                 .Include(x => x.CandidateProfile)
+                    .ThenInclude(cp => cp!.User)
+                .Include(x => x.Resume)
                 .Include(x => x.Interviews)
                 .Include(x => x.Evaluation)
                 .Include(x => x.StatusHistory)
@@ -47,6 +53,8 @@ namespace HirePathAI.API.Repositories.Implementations
             return await _context.JobApplications
                 .Include(x => x.Job)
                 .Include(x => x.CandidateProfile)
+                    .ThenInclude(cp => cp!.User)
+                .Include(x => x.Resume)
                 .Where(x => x.Job!.CompanyId == companyId)
                 .ToListAsync();
         }

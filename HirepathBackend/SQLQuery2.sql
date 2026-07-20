@@ -1,0 +1,1 @@
+﻿SELECT Id, UserName, Email, CompanyId FROM AspNetUsers WHERE Id = 3;
