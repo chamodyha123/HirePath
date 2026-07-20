@@ -178,10 +178,6 @@ builder.Services.AddScoped<
     ApplicationRepository>();
 
 builder.Services.AddScoped<
-    IJobApplicationRepository,
-    JobApplicationRepository>();
-
-builder.Services.AddScoped<
     IInterviewRepository,
     InterviewRepository>();
 
@@ -236,10 +232,6 @@ builder.Services.AddScoped<
 builder.Services.AddScoped<
     IApplicationService,
     ApplicationService>();
-
-builder.Services.AddScoped<
-    IJobApplicationService,
-    JobApplicationService>();
 
 builder.Services.AddScoped<
     IInterviewService,
