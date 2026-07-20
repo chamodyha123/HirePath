@@ -1,4 +1,4 @@
-﻿using HirePathAI.API.Data;
+using HirePathAI.API.Data;
 using HirePathAI.API.Models.Entities;
 using HirePathAI.API.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;

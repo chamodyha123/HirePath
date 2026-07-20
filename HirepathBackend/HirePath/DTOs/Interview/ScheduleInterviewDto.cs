@@ -1,18 +1,21 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations;
 
 namespace HirePathAI.API.DTOs.Interview
 {
     public class ScheduleInterviewDto
     {
-        [Range(1, int.MaxValue)]
+        [Range(1, int.MaxValue, ErrorMessage = "JobApplicationId must be greater than 0.")]
         public int JobApplicationId { get; set; }
 
+        [Required(ErrorMessage = "ScheduledAt is required.")]
         public DateTime ScheduledAt { get; set; }
 
-        [Required, StringLength(30)]
+        [Required]
+        [StringLength(30)]
         public string InterviewType { get; set; } = string.Empty;
 
-        [Url, StringLength(500)]
+        [Url]
+        [StringLength(500)]
         public string? MeetingLink { get; set; }
 
         [StringLength(300)]

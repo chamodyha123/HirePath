@@ -1,4 +1,4 @@
-﻿using HirePathAI.API.DTOs.Interview;
+using HirePathAI.API.DTOs.Interview;
 using HirePathAI.API.Helpers;
 using HirePathAI.API.Models.Entities;
 using HirePathAI.API.Models.Enums;
@@ -22,10 +22,17 @@ namespace HirePathAI.API.Controllers
         // SCHEDULE INTERVIEW
         [Authorize(Roles = "Recruiter,Admin,HiringManager")]
         [HttpPost("schedule")]
-        public async Task<IActionResult> Schedule(ScheduleInterviewDto dto)
+        public async Task<IActionResult> Schedule(
+            [FromBody] ScheduleInterviewDto dto)
         {
-            if (!Enum.TryParse<InterviewType>(dto.InterviewType, true, out var interviewType))
-                return BadRequest("Invalid interview type. Use: Online, Physical, or Phone");
+            if (!Enum.TryParse<InterviewType>(
+                    dto.InterviewType,
+                    true,
+                    out var interviewType))
+            {
+                return BadRequest(
+                    "Invalid interview type. Use: Online, Physical, or Phone.");
+            }
 
             var interview = new Interview
             {
@@ -40,34 +47,80 @@ namespace HirePathAI.API.Controllers
 
             try
             {
-                var result = await _service.ScheduleAsync(interview, this.GetUserId(), this.IsAdmin());
+                var result = await _service.ScheduleAsync(
+                    interview,
+                    this.GetUserId(),
+                    this.IsAdmin());
+
                 return Ok(result);
             }
-            catch (KeyNotFoundException ex) { return NotFound(ex.Message); }
-            catch (UnauthorizedAccessException ex) { return StatusCode(StatusCodes.Status403Forbidden, ex.Message); }
-            catch (InvalidOperationException ex) { return Conflict(ex.Message); }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
         // GET BY APPLICATION
         [Authorize]
-        [HttpGet("application/{applicationId}")]
-        public async Task<IActionResult> GetByApplication(int applicationId)
+        [HttpGet("application/{applicationId:int}")]
+        public async Task<IActionResult> GetByApplication(
+            int applicationId)
         {
-            var result = await _service.GetByApplicationIdAsync(applicationId, this.GetUserId(), this.IsAdmin());
-            return Ok(result);
+            try
+            {
+                var result =
+                    await _service.GetByApplicationIdAsync(
+                        applicationId,
+                        this.GetUserId(),
+                        this.IsAdmin());
+
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
 
         // GET BY ID
         [Authorize]
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById(int id)
         {
-            var result = await _service.GetByIdAsync(id, this.GetUserId(), this.IsAdmin());
+            try
+            {
+                var result = await _service.GetByIdAsync(
+                    id,
+                    this.GetUserId(),
+                    this.IsAdmin());
 
-            if (result == null)
-                return NotFound("Interview not found.");
+                if (result == null)
+                    return NotFound("Interview not found.");
 
-            return Ok(result);
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    ex.Message);
+            }
         }
 
         // GET ALL INTERVIEWS FOR MY COMPANY
@@ -75,20 +128,41 @@ namespace HirePathAI.API.Controllers
         [HttpGet("company")]
         public async Task<IActionResult> GetByCompany()
         {
-            var result = await _service.GetByCompanyAsync(this.GetUserId(), this.IsAdmin());
-            return Ok(result);
+            try
+            {
+                var result = await _service.GetByCompanyAsync(
+                    this.GetUserId(),
+                    this.IsAdmin());
+
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    ex.Message);
+            }
         }
 
         // UPDATE INTERVIEW
         [Authorize(Roles = "Recruiter,Admin,HiringManager")]
         [HttpPut("update")]
-        public async Task<IActionResult> Update(UpdateInterviewDto dto)
+        public async Task<IActionResult> Update(
+            [FromBody] UpdateInterviewDto dto)
         {
             InterviewStatus? status = null;
-            if (!string.IsNullOrEmpty(dto.Status))
+
+            if (!string.IsNullOrWhiteSpace(dto.Status))
             {
-                if (!Enum.TryParse<InterviewStatus>(dto.Status, true, out var parsedStatus))
-                    return BadRequest("Invalid status. Use: Scheduled, Completed, Cancelled, Rescheduled, or NoShow");
+                if (!Enum.TryParse<InterviewStatus>(
+                        dto.Status,
+                        true,
+                        out var parsedStatus))
+                {
+                    return BadRequest(
+                        "Invalid status. Use: Scheduled, Completed, Cancelled, Rescheduled, or NoShow.");
+                }
+
                 status = parsedStatus;
             }
 
@@ -112,7 +186,9 @@ namespace HirePathAI.API.Controllers
             }
             catch (UnauthorizedAccessException ex)
             {
-                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    ex.Message);
             }
             catch (InvalidOperationException ex)
             {
@@ -122,22 +198,39 @@ namespace HirePathAI.API.Controllers
 
         // CANCEL INTERVIEW
         [Authorize(Roles = "Recruiter,Admin,HiringManager")]
-        [HttpPut("cancel/{id}")]
-        public async Task<IActionResult> Cancel(int id, [FromBody] string? notes)
+        [HttpPut("cancel/{id:int}")]
+        public async Task<IActionResult> Cancel(
+            int id,
+            [FromBody] string? notes)
         {
             try
             {
-                var cancelled = await _service.CancelAsync(id, notes, this.GetUserId(), this.IsAdmin());
-                if (!cancelled) return NotFound("Interview not found.");
+                var cancelled = await _service.CancelAsync(
+                    id,
+                    notes,
+                    this.GetUserId(),
+                    this.IsAdmin());
+
+                if (!cancelled)
+                    return NotFound("Interview not found.");
+
                 return Ok("Interview cancelled successfully.");
             }
-            catch (UnauthorizedAccessException ex) { return StatusCode(StatusCodes.Status403Forbidden, ex.Message); }
-            catch (InvalidOperationException ex) { return Conflict(ex.Message); }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(
+                    StatusCodes.Status403Forbidden,
+                    ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
+            }
         }
 
         // DELETE INTERVIEW
         [Authorize(Roles = "Admin")]
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             var deleted = await _service.DeleteAsync(id);

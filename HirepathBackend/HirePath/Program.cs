@@ -234,6 +234,10 @@ builder.Services.AddScoped<
     ApplicationService>();
 
 builder.Services.AddScoped<
+    IJobApplicationService,
+    JobApplicationService>();
+
+builder.Services.AddScoped<
     IInterviewService,
     InterviewService>();
 
@@ -300,7 +304,30 @@ builder.Services.AddCors(options =>
         .ToArray();
 
         policy
-            .WithOrigins(allowedOrigins)
+            .SetIsOriginAllowed(origin =>
+            {
+                if (allowedOrigins.Contains(
+                        origin,
+                        StringComparer.OrdinalIgnoreCase))
+                {
+                    return true;
+                }
+
+                if (!Uri.TryCreate(
+                        origin,
+                        UriKind.Absolute,
+                        out var uri))
+                {
+                    return false;
+                }
+
+                return uri.Host.Equals(
+                           "localhost",
+                           StringComparison.OrdinalIgnoreCase)
+                       || uri.Host.Equals(
+                           "127.0.0.1",
+                           StringComparison.OrdinalIgnoreCase);
+            })
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
@@ -407,15 +434,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-// In local development the React app calls the HTTP profile on port 5139.
-// Redirecting an OPTIONS preflight request to HTTPS causes the browser to block it.
-// Keep HTTPS redirection for production, but do not redirect local development traffic.
+// Do not redirect local development requests because
+// redirecting OPTIONS requests can cause CORS failures.
 if (!app.Environment.IsDevelopment())
 {
     app.UseHttpsRedirection();
 }
 
-// CORS must execute before authentication/authorization.
+// CORS must execute before authentication and authorization.
 app.UseCors("AllowFrontend");
 
 app.UseAuthentication();

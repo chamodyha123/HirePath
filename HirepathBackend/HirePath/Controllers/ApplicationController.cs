@@ -1,4 +1,4 @@
-﻿using HirePathAI.API.DTOs.JobApplication;
+using HirePathAI.API.DTOs.JobApplication;
 using HirePathAI.API.Helpers;
 using HirePathAI.API.Models.Enums;
 using HirePathAI.API.Services.Interfaces;

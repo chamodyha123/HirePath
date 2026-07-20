@@ -1,4 +1,4 @@
-﻿using HirePathAI.API.DTOs.Interview;
+using HirePathAI.API.DTOs.Interview;
 using HirePathAI.API.Helpers;
 using HirePathAI.API.Models.Entities;
 using HirePathAI.API.Models.Enums;
@@ -22,10 +22,15 @@ namespace HirePathAI.API.Controllers
         // SUBMIT INTERVIEW FEEDBACK (Hiring Manager)
         [Authorize(Roles = "HiringManager,Admin")]
         [HttpPost]
-        public async Task<IActionResult> Submit(SubmitInterviewFeedbackDto dto)
+        public async Task<IActionResult> Submit([FromBody] SubmitInterviewFeedbackDto dto)
         {
-            if (!Enum.TryParse<RecommendationType>(dto.Recommendation, true, out var recommendation))
+            if (!Enum.TryParse<RecommendationType>(
+                    dto.Recommendation,
+                    true,
+                    out var recommendation))
+            {
                 return BadRequest("Invalid recommendation. Use: Hire, Hold, or Reject");
+            }
 
             var feedback = new InterviewFeedback
             {
@@ -39,7 +44,11 @@ namespace HirePathAI.API.Controllers
 
             try
             {
-                var result = await _service.SubmitAsync(feedback, this.GetUserId(), this.IsAdmin());
+                var result = await _service.SubmitAsync(
+                    feedback,
+                    this.GetUserId(),
+                    this.IsAdmin());
+
                 return Ok(result);
             }
             catch (KeyNotFoundException ex)
@@ -62,11 +71,26 @@ namespace HirePathAI.API.Controllers
 
         // GET FEEDBACK FOR AN APPLICATION
         [Authorize(Roles = "Recruiter,Admin,HiringManager")]
-        [HttpGet("{applicationId}")]
+        [HttpGet("{applicationId:int}")]
         public async Task<IActionResult> GetByApplication(int applicationId)
         {
-            var result = await _service.GetByApplicationIdAsync(applicationId, this.GetUserId(), this.IsAdmin());
-            return Ok(result);
+            try
+            {
+                var result = await _service.GetByApplicationIdAsync(
+                    applicationId,
+                    this.GetUserId(),
+                    this.IsAdmin());
+
+                return Ok(result);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(ex.Message);
+            }
         }
     }
 }
