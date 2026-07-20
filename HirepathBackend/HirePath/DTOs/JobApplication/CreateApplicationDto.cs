@@ -3,7 +3,10 @@
     public class CreateApplicationDto
     {
         public int JobId { get; set; }
-        public int CandidateProfileId { get; set; }
+
+        // Optional — if omitted, the candidate's primary resume is used.
+        public int? ResumeId { get; set; }
+
         public string? CoverLetter { get; set; }
     }
 }

@@ -41,7 +41,7 @@ namespace HirePathAI.API.Models.Entities
         [MaxLength(500)]
         public string? LogoUrl { get; set; }
 
-        // Company representative
+        // Company Representative
         [MaxLength(150)]
         public string? RepresentativeName { get; set; }
 
@@ -49,11 +49,10 @@ namespace HirePathAI.API.Models.Entities
         [MaxLength(150)]
         public string? RepresentativeEmail { get; set; }
 
-        // Company approval status
+        // Platform Admin approval
         public CompanyStatus Status { get; set; }
             = CompanyStatus.Pending;
 
-        // Platform Admin review information
         public DateTime? ApprovedAt { get; set; }
 
         public DateTime? RejectedAt { get; set; }
@@ -72,6 +71,10 @@ namespace HirePathAI.API.Models.Entities
 
         public ICollection<Job> Jobs { get; set; }
             = new List<Job>();
+
+        // Recruiters / Hiring Managers working for this company
+        public ICollection<User> Employees { get; set; }
+            = new List<User>();
 
         public ICollection<CompanyMember> Members { get; set; }
             = new List<CompanyMember>();

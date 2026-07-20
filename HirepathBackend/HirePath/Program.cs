@@ -1,4 +1,5 @@
 using System.Text;
+using System.Text.Json.Serialization;
 
 using HirePath.Mappings;
 
@@ -33,6 +34,12 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     var connectionString =
         builder.Configuration.GetConnectionString(
             "DefaultConnection");
+
+    if (string.IsNullOrWhiteSpace(connectionString))
+    {
+        throw new InvalidOperationException(
+            "DefaultConnection is missing from appsettings.json.");
+    }
 
     options.UseSqlServer(connectionString);
 });
@@ -174,6 +181,26 @@ builder.Services.AddScoped<
     IJobApplicationRepository,
     JobApplicationRepository>();
 
+builder.Services.AddScoped<
+    IInterviewRepository,
+    InterviewRepository>();
+
+builder.Services.AddScoped<
+    IInterviewFeedbackRepository,
+    InterviewFeedbackRepository>();
+
+builder.Services.AddScoped<
+    IEvaluationRepository,
+    EvaluationRepository>();
+
+builder.Services.AddScoped<
+    IApplicationStatusHistoryRepository,
+    ApplicationStatusHistoryRepository>();
+
+builder.Services.AddScoped<
+    ICompanyRepository,
+    CompanyRepository>();
+
 builder.Services.AddScoped(
     typeof(IGenericRepository<>),
     typeof(GenericRepository<>));
@@ -207,8 +234,28 @@ builder.Services.AddScoped<
     CandidateService>();
 
 builder.Services.AddScoped<
+    IApplicationService,
+    ApplicationService>();
+
+builder.Services.AddScoped<
     IJobApplicationService,
     JobApplicationService>();
+
+builder.Services.AddScoped<
+    IInterviewService,
+    InterviewService>();
+
+builder.Services.AddScoped<
+    IInterviewFeedbackService,
+    InterviewFeedbackService>();
+
+builder.Services.AddScoped<
+    IEvaluationService,
+    EvaluationService>();
+
+builder.Services.AddScoped<
+    ICompanyService,
+    CompanyService>();
 
 builder.Services.AddScoped<
     IAIService,
@@ -250,11 +297,20 @@ builder.Services.AddCors(options =>
             policy
                 .SetIsOriginAllowed(origin =>
                 {
-                    if (!Uri.TryCreate(origin, UriKind.Absolute, out var uri))
+                    if (!Uri.TryCreate(
+                            origin,
+                            UriKind.Absolute,
+                            out var uri))
+                    {
                         return false;
+                    }
 
-                    return uri.Host.Equals("localhost", StringComparison.OrdinalIgnoreCase)
-                        || uri.Host.Equals("127.0.0.1");
+                    return uri.Host.Equals(
+                               "localhost",
+                               StringComparison.OrdinalIgnoreCase)
+                           || uri.Host.Equals(
+                               "127.0.0.1",
+                               StringComparison.OrdinalIgnoreCase);
                 })
                 .AllowAnyHeader()
                 .AllowAnyMethod();
@@ -267,7 +323,12 @@ builder.Services.AddCors(options =>
 
 builder.Services
     .AddControllers()
-    .AddNewtonsoftJson();
+    .AddNewtonsoftJson()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.ReferenceHandler =
+            ReferenceHandler.IgnoreCycles;
+    });
 
 // ====================================================
 // SWAGGER

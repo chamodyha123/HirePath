@@ -82,6 +82,15 @@ namespace HirePathAI.API.Data
         public DbSet<Interview> Interviews =>
             Set<Interview>();
 
+        public DbSet<InterviewFeedback> InterviewFeedbacks =>
+            Set<InterviewFeedback>();
+
+        public DbSet<Evaluation> Evaluations =>
+            Set<Evaluation>();
+
+        public DbSet<ApplicationStatusHistory> ApplicationStatusHistories =>
+            Set<ApplicationStatusHistory>();
+
         protected override void OnModelCreating(
             ModelBuilder modelBuilder)
         {
@@ -283,8 +292,7 @@ namespace HirePathAI.API.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             // =========================
-            // CANDIDATE PROFILE ->
-            // PROFILE PICTURE
+            // CANDIDATE -> PROFILE PICTURE
             // =========================
 
             modelBuilder.Entity<CandidateProfile>()
@@ -295,14 +303,13 @@ namespace HirePathAI.API.Data
                 .OnDelete(DeleteBehavior.SetNull);
 
             // =========================
-            // CANDIDATE PROFILE -> SKILLS
+            // CANDIDATE -> SKILLS
             // =========================
 
             modelBuilder.Entity<CandidateSkill>()
                 .HasOne(cs => cs.CandidateProfile)
                 .WithMany(cp => cp.Skills)
-                .HasForeignKey(
-                    cs => cs.CandidateProfileId)
+                .HasForeignKey(cs => cs.CandidateProfileId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CandidateSkill>()
@@ -314,15 +321,13 @@ namespace HirePathAI.API.Data
                 .IsUnique();
 
             // =========================
-            // CANDIDATE PROFILE ->
-            // EDUCATIONS
+            // CANDIDATE -> EDUCATIONS
             // =========================
 
             modelBuilder.Entity<CandidateEducation>()
                 .HasOne(e => e.CandidateProfile)
                 .WithMany(cp => cp.Educations)
-                .HasForeignKey(
-                    e => e.CandidateProfileId)
+                .HasForeignKey(e => e.CandidateProfileId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<CandidateEducation>()
@@ -334,27 +339,23 @@ namespace HirePathAI.API.Data
                 .HasPrecision(5, 2);
 
             // =========================
-            // CANDIDATE PROFILE ->
-            // EXPERIENCES
+            // CANDIDATE -> EXPERIENCES
             // =========================
 
             modelBuilder.Entity<CandidateExperience>()
                 .HasOne(e => e.CandidateProfile)
                 .WithMany(cp => cp.Experiences)
-                .HasForeignKey(
-                    e => e.CandidateProfileId)
+                .HasForeignKey(e => e.CandidateProfileId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // =========================
-            // CANDIDATE PROFILE ->
-            // RESUMES
+            // CANDIDATE -> RESUMES
             // =========================
 
             modelBuilder.Entity<Resume>()
                 .HasOne(r => r.CandidateProfile)
                 .WithMany(cp => cp.Resumes)
-                .HasForeignKey(
-                    r => r.CandidateProfileId)
+                .HasForeignKey(r => r.CandidateProfileId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             // =========================
@@ -364,8 +365,7 @@ namespace HirePathAI.API.Data
             modelBuilder.Entity<JobSkill>()
                 .HasOne(js => js.Job)
                 .WithMany(j => j.RequiredSkills)
-                .HasForeignKey(
-                    js => js.JobId)
+                .HasForeignKey(js => js.JobId)
                 .OnDelete(DeleteBehavior.Cascade);
 
             modelBuilder.Entity<JobSkill>()
@@ -383,20 +383,17 @@ namespace HirePathAI.API.Data
             modelBuilder.Entity<JobApplication>()
                 .HasOne(ja => ja.Job)
                 .WithMany(j => j.Applications)
-                .HasForeignKey(
-                    ja => ja.JobId)
+                .HasForeignKey(ja => ja.JobId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             // =========================
-            // JOB APPLICATION ->
-            // CANDIDATE PROFILE
+            // JOB APPLICATION -> CANDIDATE
             // =========================
 
             modelBuilder.Entity<JobApplication>()
                 .HasOne(ja => ja.CandidateProfile)
                 .WithMany(cp => cp.Applications)
-                .HasForeignKey(
-                    ja => ja.CandidateProfileId)
+                .HasForeignKey(ja => ja.CandidateProfileId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             modelBuilder.Entity<JobApplication>()
@@ -412,15 +409,105 @@ namespace HirePathAI.API.Data
                 .HasPrecision(5, 2);
 
             // =========================
+            // JOB APPLICATION -> RESUME
+            // =========================
+
+            modelBuilder.Entity<JobApplication>()
+                .HasOne(ja => ja.Resume)
+                .WithMany()
+                .HasForeignKey(ja => ja.ResumeId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // =========================
             // INTERVIEWS
             // =========================
 
             modelBuilder.Entity<Interview>()
                 .HasOne(i => i.JobApplication)
                 .WithMany(ja => ja.Interviews)
-                .HasForeignKey(
-                    i => i.JobApplicationId)
+                .HasForeignKey(i => i.JobApplicationId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Interview>()
+                .HasOne(i => i.ScheduledByUser)
+                .WithMany()
+                .HasForeignKey(i => i.ScheduledByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // =========================
+            // USER -> COMPANY
+            // =========================
+
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Company)
+                .WithMany(c => c.Employees)
+                .HasForeignKey(u => u.CompanyId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // =========================
+            // INTERVIEW FEEDBACK
+            // =========================
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .HasOne(f => f.Interview)
+                .WithMany()
+                .HasForeignKey(f => f.InterviewId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .HasOne(f => f.SubmittedByUser)
+                .WithMany()
+                .HasForeignKey(f => f.SubmittedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            // =========================
+            // EVALUATION
+            // =========================
+
+            modelBuilder.Entity<Evaluation>()
+                .HasOne(e => e.JobApplication)
+                .WithOne(ja => ja.Evaluation)
+                .HasForeignKey<Evaluation>(
+                    e => e.JobApplicationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Evaluation>()
+                .HasOne(e => e.EvaluatedByUser)
+                .WithMany()
+                .HasForeignKey(e => e.EvaluatedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.ResumeScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.AIScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.InterviewScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.OverallScore)
+                .HasPrecision(5, 2);
+
+            // =========================
+            // APPLICATION STATUS HISTORY
+            // =========================
+
+            modelBuilder.Entity<ApplicationStatusHistory>()
+                .HasOne(h => h.JobApplication)
+                .WithMany(ja => ja.StatusHistory)
+                .HasForeignKey(h => h.JobApplicationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ApplicationStatusHistory>()
+                .HasOne(h => h.ChangedByUser)
+                .WithMany()
+                .HasForeignKey(h => h.ChangedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
 
             // =========================
             // DECIMAL PRECISION
