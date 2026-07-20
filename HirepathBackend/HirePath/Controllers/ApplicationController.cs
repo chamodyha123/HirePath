@@ -1,4 +1,4 @@
-using HirePathAI.API.DTOs.JobApplication;
+﻿using HirePathAI.API.DTOs.JobApplication;
 using HirePathAI.API.Helpers;
 using HirePathAI.API.Models.Enums;
 using HirePathAI.API.Services.Interfaces;
@@ -103,6 +103,21 @@ namespace HirePathAI.API.Controllers
         {
             var result = await _service.GetByCompanyAsync(this.GetUserId(), this.IsAdmin());
             return Ok(result);
+        }
+
+        [Authorize]
+        [HttpGet("{id}/history")]
+        public async Task<IActionResult> GetHistory(int id)
+        {
+            try
+            {
+                var history = await _service.GetHistoryAsync(id, this.GetUserId(), this.IsAdmin());
+                return Ok(history);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
         }
 
         [Authorize(Roles = "Recruiter,Admin,HiringManager")]

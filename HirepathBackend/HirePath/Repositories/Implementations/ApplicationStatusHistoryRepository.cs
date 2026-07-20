@@ -22,6 +22,7 @@ namespace HirePathAI.API.Repositories.Implementations
         public async Task<IEnumerable<ApplicationStatusHistory>> GetByJobApplicationIdAsync(int jobApplicationId)
         {
             return await _context.ApplicationStatusHistories
+                .AsNoTracking()
                 .Where(h => h.JobApplicationId == jobApplicationId)
                 .OrderBy(h => h.CreatedAt)
                 .ToListAsync();

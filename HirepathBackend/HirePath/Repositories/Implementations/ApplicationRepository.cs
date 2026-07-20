@@ -17,6 +17,7 @@ namespace HirePathAI.API.Repositories.Implementations
         public async Task<IEnumerable<JobApplication>> GetCandidateApplications(int candidateId)
         {
             return await _context.JobApplications
+                .AsNoTracking()
                 .Where(x => x.CandidateProfileId == candidateId)
                 .Include(x => x.Job)
                 .ToListAsync();
@@ -25,6 +26,7 @@ namespace HirePathAI.API.Repositories.Implementations
         public async Task<IEnumerable<JobApplication>> GetJobApplications(int jobId)
         {
             return await _context.JobApplications
+                .AsNoTracking()
                 .Where(x => x.JobId == jobId)
                 .Include(x => x.CandidateProfile)
                 .ToListAsync();
@@ -45,6 +47,7 @@ namespace HirePathAI.API.Repositories.Implementations
         public async Task<IEnumerable<JobApplication>> GetByCompanyAsync(int companyId)
         {
             return await _context.JobApplications
+                .AsNoTracking()
                 .Include(x => x.Job)
                 .Include(x => x.CandidateProfile)
                 .Where(x => x.Job!.CompanyId == companyId)

@@ -24,7 +24,7 @@ namespace HirePathAI.API.Controllers
         [HttpPost]
         public async Task<IActionResult> Submit(SubmitInterviewFeedbackDto dto)
         {
-            if (!Enum.TryParse<RecommendationType>(dto.Recommendation, out var recommendation))
+            if (!Enum.TryParse<RecommendationType>(dto.Recommendation, true, out var recommendation))
                 return BadRequest("Invalid recommendation. Use: Hire, Hold, or Reject");
 
             var feedback = new InterviewFeedback
@@ -48,7 +48,15 @@ namespace HirePathAI.API.Controllers
             }
             catch (UnauthorizedAccessException ex)
             {
-                return Forbid(ex.Message);
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
             }
         }
 

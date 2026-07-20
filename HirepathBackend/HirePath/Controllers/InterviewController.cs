@@ -1,4 +1,4 @@
-using HirePathAI.API.DTOs.Interview;
+﻿using HirePathAI.API.DTOs.Interview;
 using HirePathAI.API.Helpers;
 using HirePathAI.API.Models.Entities;
 using HirePathAI.API.Models.Enums;
@@ -24,7 +24,7 @@ namespace HirePathAI.API.Controllers
         [HttpPost("schedule")]
         public async Task<IActionResult> Schedule(ScheduleInterviewDto dto)
         {
-            if (!Enum.TryParse<InterviewType>(dto.InterviewType, out var interviewType))
+            if (!Enum.TryParse<InterviewType>(dto.InterviewType, true, out var interviewType))
                 return BadRequest("Invalid interview type. Use: Online, Physical, or Phone");
 
             var interview = new Interview
@@ -38,8 +38,14 @@ namespace HirePathAI.API.Controllers
                 Notes = dto.Notes
             };
 
-            var result = await _service.ScheduleAsync(interview, this.GetUserId(), this.IsAdmin());
-            return Ok(result);
+            try
+            {
+                var result = await _service.ScheduleAsync(interview, this.GetUserId(), this.IsAdmin());
+                return Ok(result);
+            }
+            catch (KeyNotFoundException ex) { return NotFound(ex.Message); }
+            catch (UnauthorizedAccessException ex) { return StatusCode(StatusCodes.Status403Forbidden, ex.Message); }
+            catch (InvalidOperationException ex) { return Conflict(ex.Message); }
         }
 
         // GET BY APPLICATION
@@ -81,7 +87,7 @@ namespace HirePathAI.API.Controllers
             InterviewStatus? status = null;
             if (!string.IsNullOrEmpty(dto.Status))
             {
-                if (!Enum.TryParse<InterviewStatus>(dto.Status, out var parsedStatus))
+                if (!Enum.TryParse<InterviewStatus>(dto.Status, true, out var parsedStatus))
                     return BadRequest("Invalid status. Use: Scheduled, Completed, Cancelled, Rescheduled, or NoShow");
                 status = parsedStatus;
             }
@@ -106,7 +112,11 @@ namespace HirePathAI.API.Controllers
             }
             catch (UnauthorizedAccessException ex)
             {
-                return Forbid(ex.Message);
+                return StatusCode(StatusCodes.Status403Forbidden, ex.Message);
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(ex.Message);
             }
         }
 
@@ -115,12 +125,14 @@ namespace HirePathAI.API.Controllers
         [HttpPut("cancel/{id}")]
         public async Task<IActionResult> Cancel(int id, [FromBody] string? notes)
         {
-            var cancelled = await _service.CancelAsync(id, notes, this.GetUserId(), this.IsAdmin());
-
-            if (!cancelled)
-                return NotFound("Interview not found.");
-
-            return Ok("Interview cancelled successfully.");
+            try
+            {
+                var cancelled = await _service.CancelAsync(id, notes, this.GetUserId(), this.IsAdmin());
+                if (!cancelled) return NotFound("Interview not found.");
+                return Ok("Interview cancelled successfully.");
+            }
+            catch (UnauthorizedAccessException ex) { return StatusCode(StatusCodes.Status403Forbidden, ex.Message); }
+            catch (InvalidOperationException ex) { return Conflict(ex.Message); }
         }
 
         // DELETE INTERVIEW
