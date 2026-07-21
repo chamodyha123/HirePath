@@ -1,6 +1,6 @@
-using HirePathAI.API.Models.Entities;
-using HirePathAI.API.DTOs.PlatformAdmin.Users;
 using HirePathAI.API.Data;
+using HirePathAI.API.DTOs.PlatformAdmin.Users;
+using HirePathAI.API.Models.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,14 +10,26 @@ namespace HirePathAI.API.Controllers.PlatformAdmin
 {
     [ApiController]
     [Route("api/platform-admin/users")]
-    [Authorize(Roles = "SuperAdmin")]
+    [Authorize(Roles = "SuperAdmin,Admin")]
     public class PlatformAdminUsersController : ControllerBase
     {
         private readonly UserManager<User> _userManager;
+        private readonly RoleManager<IdentityRole<int>> _roleManager;
+        private readonly ApplicationDbContext _context;
 
-        public PlatformAdminUsersController(UserManager<User> userManager)
+        public PlatformAdminUsersController(
+            UserManager<User> userManager,
+            RoleManager<IdentityRole<int>> roleManager,
+            ApplicationDbContext context)
         {
-            _userManager = userManager;
+            _userManager = userManager
+                ?? throw new ArgumentNullException(nameof(userManager));
+
+            _roleManager = roleManager
+                ?? throw new ArgumentNullException(nameof(roleManager));
+
+            _context = context
+                ?? throw new ArgumentNullException(nameof(context));
         }
 
         // GET: api/platform-admin/users
@@ -27,50 +39,81 @@ namespace HirePathAI.API.Controllers.PlatformAdmin
             [FromQuery] string? role = null,
             [FromQuery] string? status = null)
         {
-            var queryable = _userManager.Users.AsQueryable();
+            IQueryable<User> usersQuery = _userManager.Users;
 
-            // 1. Search filter
-            if (!string.IsNullOrEmpty(query))
+            // Search filter
+            if (!string.IsNullOrWhiteSpace(query))
             {
-                query = query.ToLower();
-                queryable = queryable.Where(u => 
-                    u.FullName.ToLower().Contains(query) || 
-                    (u.Email ?? "").ToLower().Contains(query) || 
-                    (u.UserName ?? "").ToLower().Contains(query));
+                var searchText = query.Trim();
+
+                usersQuery = usersQuery.Where(user =>
+                    EF.Functions.Like(
+                        user.FullName ?? string.Empty,
+                        $"%{searchText}%") ||
+                    EF.Functions.Like(
+                        user.Email ?? string.Empty,
+                        $"%{searchText}%") ||
+                    EF.Functions.Like(
+                        user.UserName ?? string.Empty,
+                        $"%{searchText}%"));
             }
 
-            // 2. Role filter
-            if (!string.IsNullOrEmpty(role) && !string.Equals(role, "All", StringComparison.OrdinalIgnoreCase))
+            // Role filter
+            if (!string.IsNullOrWhiteSpace(role) &&
+                !string.Equals(
+                    role,
+                    "All",
+                    StringComparison.OrdinalIgnoreCase))
             {
-                var roleEntity = await _roleManager.FindByNameAsync(role);
-                if (roleEntity != null)
+                var roleEntity =
+                    await _roleManager.FindByNameAsync(role.Trim());
+
+                if (roleEntity == null)
                 {
-                    var userIdsInRole = await _context.UserRoles
-                        .Where(ur => ur.RoleId == roleEntity.Id)
-                        .Select(ur => ur.UserId)
-                        .ToListAsync();
-                    queryable = queryable.Where(u => userIdsInRole.Contains(u.Id));
+                    return Ok(new List<UserResponseDto>());
                 }
-                else
+
+                var userIdsInRole = await _context.UserRoles
+                    .Where(userRole =>
+                        userRole.RoleId == roleEntity.Id)
+                    .Select(userRole =>
+                        userRole.UserId)
+                    .ToListAsync();
+
+                usersQuery = usersQuery.Where(user =>
+                    userIdsInRole.Contains(user.Id));
+            }
+
+            // Status filter
+            if (!string.IsNullOrWhiteSpace(status) &&
+                !string.Equals(
+                    status,
+                    "All",
+                    StringComparison.OrdinalIgnoreCase))
+            {
+                if (string.Equals(
+                    status,
+                    "Suspended",
+                    StringComparison.OrdinalIgnoreCase))
                 {
-                    return Ok(new List<object>());
+                    usersQuery = usersQuery.Where(user =>
+                        user.LockoutEnd.HasValue &&
+                        user.LockoutEnd.Value >
+                        DateTimeOffset.UtcNow);
+                }
+                else if (string.Equals(
+                    status,
+                    "Active",
+                    StringComparison.OrdinalIgnoreCase))
+                {
+                    usersQuery = usersQuery.Where(user =>
+                        !user.LockoutEnd.HasValue ||
+                        user.LockoutEnd.Value <=
+                        DateTimeOffset.UtcNow);
                 }
             }
 
-            // 3. Status filter
-            if (!string.IsNullOrEmpty(status) && !string.Equals(status, "All", StringComparison.OrdinalIgnoreCase))
-            {
-                if (string.Equals(status, "Suspended", StringComparison.OrdinalIgnoreCase))
-                {
-                    queryable = queryable.Where(u => u.LockoutEnd.HasValue && u.LockoutEnd.Value > DateTimeOffset.UtcNow);
-                }
-                else if (string.Equals(status, "Active", StringComparison.OrdinalIgnoreCase))
-                {
-                    queryable = queryable.Where(u => !u.LockoutEnd.HasValue || u.LockoutEnd.Value <= DateTimeOffset.UtcNow);
-                }
-            }
-
-            var users = await queryable
+            var users = await usersQuery
                 .OrderByDescending(user => user.Id)
                 .ToListAsync();
 
@@ -78,22 +121,27 @@ namespace HirePathAI.API.Controllers.PlatformAdmin
 
             foreach (var user in users)
             {
-                var roles = await _userManager.GetRolesAsync(user);
+                var userRoles =
+                    await _userManager.GetRolesAsync(user);
 
                 var isSuspended =
                     user.LockoutEnd.HasValue &&
-                    user.LockoutEnd.Value > DateTimeOffset.UtcNow;
+                    user.LockoutEnd.Value >
+                    DateTimeOffset.UtcNow;
 
                 result.Add(new UserResponseDto
                 {
-                    user.Id,
-                    user.FullName,
-                    user.UserName,
-                    user.Email,
-                    Role = roles.FirstOrDefault() ?? "Unassigned",
-                    Roles = roles,
-                    Status = isSuspended ? "Suspended" : "Active",
-                    PhoneNumber = user.PhoneNumber
+                    Id = user.Id,
+                    FullName = user.FullName ?? string.Empty,
+                    UserName = user.UserName ?? string.Empty,
+                    Email = user.Email ?? string.Empty,
+                    PhoneNumber = user.PhoneNumber ?? string.Empty,
+                    Role = userRoles.FirstOrDefault()
+                        ?? "Unassigned",
+                    Roles = userRoles.ToList(),
+                    Status = isSuspended
+                        ? "Suspended"
+                        : "Active"
                 });
             }
 

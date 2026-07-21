@@ -316,6 +316,28 @@ namespace HirePathAI.API.Controllers.PlatformAdmin
             }
         }
 
+        // DELETE: api/platform-admin/companies/1
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> DeleteCompany(int id)
+        {
+            var result =
+                await _platformAdminService
+                    .DeleteCompanyAsync(id);
+
+            if (!result)
+            {
+                return NotFound(new
+                {
+                    message = "Company not found."
+                });
+            }
+
+            return Ok(new
+            {
+                message = "Company deleted successfully."
+            });
+        }
+
         private int CurrentUserId()
         {
             var value =
@@ -329,24 +351,6 @@ namespace HirePathAI.API.Controllers.PlatformAdmin
             }
 
             return userId;
-        }
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult>
-            DeleteCompany(int id)
-        {
-            var result =
-                await _service
-                    .DeleteCompanyAsync(id);
-
-            if (!result)
-                return NotFound("Company not found.");
-
-            return Ok(new
-            {
-                message =
-                    "Company deleted successfully."
-            });
         }
     }
 }
