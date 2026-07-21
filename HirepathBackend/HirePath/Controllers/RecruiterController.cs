@@ -1,7 +1,8 @@
-﻿using HirePathAI.DTOs;
+using HirePathAI.DTOs;
 using HirePathAI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using System.Security.Claims;
 
 namespace HirePathAI.Controllers
 {
@@ -16,7 +17,7 @@ namespace HirePathAI.Controllers
             _service = service;
         }
 
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,CompanyAdmin,Recruiter")]
         [HttpPost("companies")]
         public async Task<IActionResult> CreateCompany([FromBody] CompanyCreateDTO dto)
         {
@@ -87,10 +88,15 @@ namespace HirePathAI.Controllers
             return Ok(new { message = "Job deleted successfully." });
         }
 
+        [Authorize(Roles = "CompanyAdmin,Recruiter")]
         [HttpGet("dashboard/stats")]
         public async Task<IActionResult> GetDashboardStats()
         {
-            var stats = await _service.GetDashboardStatsAsync();
+            // Extract companyId from the JWT token claims
+            var companyIdClaim = User.FindFirstValue("companyId");
+            int? companyId = int.TryParse(companyIdClaim, out var cid) ? cid : null;
+
+            var stats = await _service.GetDashboardStatsAsync(companyId);
             return Ok(stats);
         }
     }

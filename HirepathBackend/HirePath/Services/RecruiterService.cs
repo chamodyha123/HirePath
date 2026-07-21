@@ -1,16 +1,21 @@
-﻿using HirePathAI.DTOs;
+using HirePathAI.DTOs;
+using HirePathAI.API.Data;
 using HirePathAI.API.Models.Entities;
+using HirePathAI.API.Models.Enums;
 using HirePathAI.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace HirePathAI.Services
 {
     public class RecruiterService : IRecruiterService
     {
         private readonly IRecruiterRepository _repository;
+        private readonly ApplicationDbContext _context;
 
-        public RecruiterService(IRecruiterRepository repository)
+        public RecruiterService(IRecruiterRepository repository, ApplicationDbContext context)
         {
             _repository = repository;
+            _context = context;
         }
 
         public async Task<CompanyResponseDTO> AddCompanyAsync(CompanyCreateDTO dto)
@@ -142,24 +147,59 @@ namespace HirePathAI.Services
             return await _repository.DeleteJobAsync(id);
         }
 
-        public async Task<object> GetDashboardStatsAsync()
+        public async Task<object> GetDashboardStatsAsync(int? companyId)
         {
-            var jobs = await _repository.GetAllJobsAsync(null, null);
-            var companies = await _repository.GetAllCompaniesAsync();
+            var now = DateTime.UtcNow;
+            var weekStart = now.AddDays(-(int)now.DayOfWeek);
+            var weekEnd = weekStart.AddDays(7);
+
+            // Base queries scoped by company if companyId is provided
+            var jobsQuery = _context.Jobs.AsQueryable();
+            if (companyId.HasValue)
+                jobsQuery = jobsQuery.Where(j => j.CompanyId == companyId.Value);
+
+            var activeJobs = await jobsQuery.CountAsync(j => j.IsActive);
+
+            var jobIds = await jobsQuery.Select(j => j.Id).ToListAsync();
+
+            var newApplications = await _context.JobApplications
+                .CountAsync(ja => jobIds.Contains(ja.JobId) && ja.Status == ApplicationStatus.Applied);
+
+            var interviewsThisWeek = await _context.Interviews
+                .Where(i => jobIds.Contains(i.JobApplication!.JobId)
+                         && i.ScheduledAt >= weekStart
+                         && i.ScheduledAt < weekEnd)
+                .CountAsync();
+
+            // Top 5 most recent active jobs with applicant counts
+            var recentJobs = await jobsQuery
+                .Where(j => j.IsActive)
+                .OrderByDescending(j => j.CreatedAt)
+                .Take(5)
+                .Select(j => new
+                {
+                    j.Id,
+                    j.Title,
+                    Department = j.Department != null ? j.Department.Name : "General",
+                    Applicants = j.Applications.Count,
+                    Status = j.IsActive ? "Active" : "Closed"
+                })
+                .ToListAsync();
 
             return new
             {
-                TotalJobsPosted = jobs.Count(),
-                ActiveJobs = jobs.Count(j => j.IsActive),
-                TotalCompaniesMapped = companies.Count()
+                ActiveJobs = activeJobs,
+                NewApplications = newApplications,
+                InterviewsThisWeek = interviewsThisWeek,
+                RecentJobs = recentJobs
             };
         }
+
         private static CompanyResponseDTO MapCompany(Company c) => new()
         {
             Id = c.Id, Name = c.Name, Industry = c.Industry, Email = c.Email, Phone = c.Phone,
             Address = c.Address, Description = c.Description, Website = c.Website,
             Location = c.Location, LogoUrl = c.LogoUrl, Status = c.Status.ToString()
         };
-
     }
 }

@@ -225,6 +225,15 @@ namespace HirePathAI.API.Services.CompanyOnboarding
                         Location =
                             request.Address,
 
+                        BusinessRegistrationNumber =
+                            request.BusinessRegistrationNumber,
+
+                        RepresentativeName =
+                            request.RepresentativeName,
+
+                        RepresentativeEmail =
+                            request.RepresentativeEmail,
+
                         Status =
                             CompanyStatus.Approved
                     };

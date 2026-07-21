@@ -1,4 +1,4 @@
-﻿using HirePathAI.DTOs;
+using HirePathAI.DTOs;
 
 namespace HirePathAI.Services
 {
@@ -13,6 +13,6 @@ namespace HirePathAI.Services
         Task<IEnumerable<JobResponseDTO>> SearchJobsAsync(string? search, string? location);
         Task<JobResponseDTO?> EditJobAsync(int id, JobCreateDTO dto);
         Task<bool> RemoveJobAsync(int id);
-        Task<object> GetDashboardStatsAsync();
+        Task<object> GetDashboardStatsAsync(int? companyId);
     }
 }

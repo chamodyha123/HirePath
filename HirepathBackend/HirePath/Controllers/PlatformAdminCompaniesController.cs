@@ -1,4 +1,4 @@
-﻿using HirePathAI.API.DTOs.PlatformAdmin.Companies;
+using HirePathAI.API.DTOs.PlatformAdmin.Companies;
 using HirePathAI.API.Services.PlatformAdmin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -146,6 +146,24 @@ namespace HirePathAI.API.Controllers.PlatformAdmin
             {
                 message =
                     "Company activated successfully."
+            });
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult>
+            DeleteCompany(int id)
+        {
+            var result =
+                await _service
+                    .DeleteCompanyAsync(id);
+
+            if (!result)
+                return NotFound("Company not found.");
+
+            return Ok(new
+            {
+                message =
+                    "Company deleted successfully."
             });
         }
     }

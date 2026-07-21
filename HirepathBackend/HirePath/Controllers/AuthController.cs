@@ -1,4 +1,4 @@
-﻿using HirePathAI.API.DTOs.Auth;
+using HirePathAI.API.DTOs.Auth;
 using HirePathAI.API.Models.Enums;
 using HirePathAI.API.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
@@ -60,6 +60,25 @@ namespace HirePathAI.API.Controllers
             {
                 Success = true,
                 Message = "Verification OTP resent to your email."
+            });
+        }
+
+        [HttpPost("resend-password-otp")]
+        public async Task<IActionResult> ResendPasswordOtp(ResendOtpDto dto)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var result = await _authService.ForgotPasswordAsync(
+                new ForgotPasswordDto { Email = dto.Email.Trim() });
+
+            if (!result.IsSuccess)
+                return BadRequest(result);
+
+            return Ok(new
+            {
+                IsSuccess = true,
+                Message = "Password reset OTP resent to your email."
             });
         }
 
