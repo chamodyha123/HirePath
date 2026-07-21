@@ -7,9 +7,8 @@ namespace HirePathAI.API.Services.CompanyOnboarding
         Task<object> SubmitRegistrationAsync(
             SubmitCompanyRegistrationDto dto);
 
-        Task<IEnumerable<object>>
-            GetRegistrationRequestsAsync(
-                string? status);
+        Task<IEnumerable<object>> GetRegistrationRequestsAsync(
+            string? status);
 
         Task<object> ApproveRegistrationAsync(
             int requestId,

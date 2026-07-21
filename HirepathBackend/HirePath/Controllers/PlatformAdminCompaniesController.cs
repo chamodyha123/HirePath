@@ -1,4 +1,8 @@
-﻿using HirePathAI.API.DTOs.PlatformAdmin.Companies;
+﻿using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using HirePathAI.API.DTOs.CompanyOnboarding;
+using HirePathAI.API.DTOs.PlatformAdmin.Companies;
+using HirePathAI.API.Services.CompanyOnboarding;
 using HirePathAI.API.Services.PlatformAdmin;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -7,146 +11,324 @@ namespace HirePathAI.API.Controllers.PlatformAdmin
 {
     [ApiController]
     [Route("api/platform-admin/companies")]
-    [Authorize(Roles = "SuperAdmin")]
-    public class PlatformAdminCompaniesController
-        : ControllerBase
+    [Authorize(Roles = "Admin")]
+    public class PlatformAdminCompaniesController : ControllerBase
     {
-        private readonly IPlatformAdminService _service;
+        private readonly IPlatformAdminService _platformAdminService;
+        private readonly ICompanyOnboardingService _onboardingService;
 
         public PlatformAdminCompaniesController(
-            IPlatformAdminService service)
+            IPlatformAdminService platformAdminService,
+            ICompanyOnboardingService onboardingService)
         {
-            _service = service;
+            _platformAdminService = platformAdminService;
+            _onboardingService = onboardingService;
         }
 
+        // GET: api/platform-admin/companies
         [HttpGet]
-        public async Task<IActionResult>
-            GetAllCompanies()
+        public async Task<IActionResult> GetAllCompanies()
         {
-            return Ok(
-                await _service
-                    .GetAllCompaniesAsync());
+            var companies =
+                await _platformAdminService.GetAllCompaniesAsync();
+
+            return Ok(companies);
         }
 
+        // GET: api/platform-admin/companies/pending
         [HttpGet("pending")]
-        public async Task<IActionResult>
-            GetPendingCompanies()
+        public async Task<IActionResult> GetPendingRegistrations()
         {
-            return Ok(
-                await _service
-                    .GetPendingCompaniesAsync());
+            try
+            {
+                var registrations =
+                    await _onboardingService
+                        .GetRegistrationRequestsAsync("Pending");
+
+                return Ok(registrations);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (Exception)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new
+                    {
+                        message =
+                            "An unexpected error occurred while loading pending registrations."
+                    });
+            }
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult>
-            GetCompany(int id)
+        // GET: api/platform-admin/companies/1
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> GetCompany(int id)
         {
             var company =
-                await _service
+                await _platformAdminService
                     .GetCompanyByIdAsync(id);
 
             if (company == null)
-                return NotFound();
+            {
+                return NotFound(new
+                {
+                    message = "Company not found."
+                });
+            }
 
             return Ok(company);
         }
 
-        [HttpPut("{id}/approve")]
-        public async Task<IActionResult>
-            ApproveCompany(
-                int id,
-                ApproveCompanyDto request)
+        // GET: api/platform-admin/companies/registrations
+        [HttpGet("registrations")]
+        public async Task<IActionResult> GetRegistrationRequests(
+            [FromQuery] string? status = null)
         {
-            var result =
-                await _service
-                    .ApproveCompanyAsync(id, request);
-
-            if (!result)
-                return NotFound();
-
-            return Ok(new
+            try
             {
-                message =
-                    "Company approved successfully."
-            });
+                var registrations =
+                    await _onboardingService
+                        .GetRegistrationRequestsAsync(status);
+
+                return Ok(registrations);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (Exception)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new
+                    {
+                        message =
+                            "An unexpected error occurred while loading registration requests."
+                    });
+            }
         }
 
-        [HttpPut("{id}/reject")]
-        public async Task<IActionResult>
-            RejectCompany(
-                int id,
-                RejectCompanyDto request)
+        // PUT: api/platform-admin/companies/registrations/2/approve
+        [HttpPut("registrations/{id:int}/approve")]
+        public async Task<IActionResult> ApproveRegistration(
+            int id,
+            [FromBody] ReviewCompanyRegistrationDto request)
         {
-            var result =
-                await _service
-                    .RejectCompanyAsync(id, request);
-
-            if (!result)
-                return NotFound();
-
-            return Ok(new
+            try
             {
-                message =
-                    "Company rejected successfully."
-            });
+                var result =
+                    await _onboardingService
+                        .ApproveRegistrationAsync(
+                            id,
+                            CurrentUserId(),
+                            request.Note);
+
+                return Ok(result);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (Exception)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new
+                    {
+                        message =
+                            "An unexpected error occurred while approving the registration."
+                    });
+            }
         }
 
-        [HttpPut("{id}/request-information")]
-        public async Task<IActionResult>
-            RequestInformation(
-                int id,
-                RequestInformationDto request)
+        // PUT: api/platform-admin/companies/registrations/3/reject
+        [HttpPut("registrations/{id:int}/reject")]
+        public async Task<IActionResult> RejectRegistration(
+            int id,
+            [FromBody] ReviewCompanyRegistrationDto request)
         {
-            var result =
-                await _service
-                    .RequestInformationAsync(
-                        id,
-                        request);
-
-            if (!result)
-                return NotFound();
-
-            return Ok(new
+            try
             {
-                message =
-                    "Additional information requested."
-            });
+                var result =
+                    await _onboardingService
+                        .RejectRegistrationAsync(
+                            id,
+                            CurrentUserId(),
+                            request.Note);
+
+                return Ok(result);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                return Unauthorized(new
+                {
+                    message = ex.Message
+                });
+            }
+            catch (Exception)
+            {
+                return StatusCode(
+                    StatusCodes.Status500InternalServerError,
+                    new
+                    {
+                        message =
+                            "An unexpected error occurred while rejecting the registration."
+                    });
+            }
         }
 
-        [HttpPut("{id}/suspend")]
-        public async Task<IActionResult>
-            SuspendCompany(int id)
+        // PUT: api/platform-admin/companies/1/request-information
+        [HttpPut("{id:int}/request-information")]
+        public async Task<IActionResult> RequestInformation(
+            int id,
+            [FromBody] RequestInformationDto request)
         {
-            var result =
-                await _service
-                    .SuspendCompanyAsync(id);
-
-            if (!result)
-                return NotFound();
-
-            return Ok(new
+            try
             {
-                message =
-                    "Company suspended successfully."
-            });
+                var result =
+                    await _platformAdminService
+                        .RequestInformationAsync(id, request);
+
+                if (!result)
+                {
+                    return NotFound(new
+                    {
+                        message = "Company not found."
+                    });
+                }
+
+                return Ok(new
+                {
+                    message =
+                        "Additional information requested successfully."
+                });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new
+                {
+                    message = ex.Message
+                });
+            }
         }
 
-        [HttpPut("{id}/activate")]
-        public async Task<IActionResult>
-            ActivateCompany(int id)
+        // PUT: api/platform-admin/companies/1/suspend
+        [HttpPut("{id:int}/suspend")]
+        public async Task<IActionResult> SuspendCompany(int id)
         {
-            var result =
-                await _service
-                    .ActivateCompanyAsync(id);
-
-            if (!result)
-                return NotFound();
-
-            return Ok(new
+            try
             {
-                message =
-                    "Company activated successfully."
-            });
+                var result =
+                    await _platformAdminService
+                        .SuspendCompanyAsync(id);
+
+                if (!result)
+                {
+                    return NotFound(new
+                    {
+                        message = "Company not found."
+                    });
+                }
+
+                return Ok(new
+                {
+                    message = "Company suspended successfully."
+                });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new
+                {
+                    message = ex.Message
+                });
+            }
+        }
+
+        // PUT: api/platform-admin/companies/1/activate
+        [HttpPut("{id:int}/activate")]
+        public async Task<IActionResult> ActivateCompany(int id)
+        {
+            try
+            {
+                var result =
+                    await _platformAdminService
+                        .ActivateCompanyAsync(id);
+
+                if (!result)
+                {
+                    return NotFound(new
+                    {
+                        message = "Company not found."
+                    });
+                }
+
+                return Ok(new
+                {
+                    message = "Company activated successfully."
+                });
+            }
+            catch (InvalidOperationException ex)
+            {
+                return Conflict(new
+                {
+                    message = ex.Message
+                });
+            }
+        }
+
+        private int CurrentUserId()
+        {
+            var value =
+                User.FindFirstValue(ClaimTypes.NameIdentifier)
+                ?? User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+
+            if (!int.TryParse(value, out var userId))
+            {
+                throw new UnauthorizedAccessException(
+                    "Invalid administrator token.");
+            }
+
+            return userId;
         }
     }
 }

@@ -14,26 +14,13 @@ namespace HirePathAI.API.Services.PlatformAdmin
         Task<CompanyResponseDto?>
             GetCompanyByIdAsync(int id);
 
-        Task<bool>
-            ApproveCompanyAsync(
-                int id,
-                ApproveCompanyDto request);
+        Task<bool> RequestInformationAsync(
+            int id,
+            RequestInformationDto request);
 
-        Task<bool>
-            RejectCompanyAsync(
-                int id,
-                RejectCompanyDto request);
+        Task<bool> SuspendCompanyAsync(int id);
 
-        Task<bool>
-            RequestInformationAsync(
-                int id,
-                RequestInformationDto request);
-
-        Task<bool>
-            SuspendCompanyAsync(int id);
-
-        Task<bool>
-            ActivateCompanyAsync(int id);
+        Task<bool> ActivateCompanyAsync(int id);
 
         Task<PlatformDashboardDto>
             GetDashboardAsync();

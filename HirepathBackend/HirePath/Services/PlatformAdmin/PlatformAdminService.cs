@@ -10,12 +10,14 @@ namespace HirePathAI.API.Services.PlatformAdmin
     {
         private readonly ApplicationDbContext _context;
 
-        public PlatformAdminService(ApplicationDbContext context)
+        public PlatformAdminService(
+            ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async Task<List<CompanyResponseDto>> GetAllCompaniesAsync()
+        public async Task<List<CompanyResponseDto>>
+            GetAllCompaniesAsync()
         {
             return await _context.Companies
                 .AsNoTracking()
@@ -27,6 +29,7 @@ namespace HirePathAI.API.Services.PlatformAdmin
                     Website = company.Website,
                     Location = company.Location,
                     Industry = company.Industry,
+
                     BusinessRegistrationNumber =
                         company.BusinessRegistrationNumber,
 
@@ -34,22 +37,29 @@ namespace HirePathAI.API.Services.PlatformAdmin
 
                     Phone = company.Phone,
                     Address = company.Address,
+
                     RepresentativeName =
                         company.RepresentativeName,
+
                     RepresentativeEmail =
                         company.RepresentativeEmail,
+
                     Status = company.Status.ToString(),
+
                     ApprovedAt = company.ApprovedAt,
                     RejectedAt = company.RejectedAt,
                     SuspendedAt = company.SuspendedAt,
+
                     RejectionReason =
                         company.RejectionReason,
+
                     AdminNotes = company.AdminNotes
                 })
                 .ToListAsync();
         }
 
-        public async Task<List<CompanyResponseDto>> GetPendingCompaniesAsync()
+        public async Task<List<CompanyResponseDto>>
+            GetPendingCompaniesAsync()
         {
             return await _context.Companies
                 .AsNoTracking()
@@ -63,6 +73,7 @@ namespace HirePathAI.API.Services.PlatformAdmin
                     Website = company.Website,
                     Location = company.Location,
                     Industry = company.Industry,
+
                     BusinessRegistrationNumber =
                         company.BusinessRegistrationNumber,
 
@@ -70,22 +81,29 @@ namespace HirePathAI.API.Services.PlatformAdmin
 
                     Phone = company.Phone,
                     Address = company.Address,
+
                     RepresentativeName =
                         company.RepresentativeName,
+
                     RepresentativeEmail =
                         company.RepresentativeEmail,
+
                     Status = company.Status.ToString(),
+
                     ApprovedAt = company.ApprovedAt,
                     RejectedAt = company.RejectedAt,
                     SuspendedAt = company.SuspendedAt,
+
                     RejectionReason =
                         company.RejectionReason,
+
                     AdminNotes = company.AdminNotes
                 })
                 .ToListAsync();
         }
 
-        public async Task<CompanyResponseDto?> GetCompanyByIdAsync(int id)
+        public async Task<CompanyResponseDto?>
+            GetCompanyByIdAsync(int id)
         {
             return await _context.Companies
                 .AsNoTracking()
@@ -98,6 +116,7 @@ namespace HirePathAI.API.Services.PlatformAdmin
                     Website = company.Website,
                     Location = company.Location,
                     Industry = company.Industry,
+
                     BusinessRegistrationNumber =
                         company.BusinessRegistrationNumber,
 
@@ -105,71 +124,33 @@ namespace HirePathAI.API.Services.PlatformAdmin
 
                     Phone = company.Phone,
                     Address = company.Address,
+
                     RepresentativeName =
                         company.RepresentativeName,
+
                     RepresentativeEmail =
                         company.RepresentativeEmail,
+
                     Status = company.Status.ToString(),
+
                     ApprovedAt = company.ApprovedAt,
                     RejectedAt = company.RejectedAt,
                     SuspendedAt = company.SuspendedAt,
+
                     RejectionReason =
                         company.RejectionReason,
+
                     AdminNotes = company.AdminNotes
                 })
                 .FirstOrDefaultAsync();
-        }
-
-        public async Task<bool> ApproveCompanyAsync(
-            int id,
-            ApproveCompanyDto request)
-        {
-            var company = await _context.Companies.FindAsync(id);
-
-            if (company == null)
-            {
-                return false;
-            }
-
-            company.Status = CompanyStatus.Approved;
-            company.ApprovedAt = DateTime.UtcNow;
-            company.RejectedAt = null;
-            company.SuspendedAt = null;
-            company.RejectionReason = null;
-            company.AdminNotes = request.AdminNotes;
-
-            await _context.SaveChangesAsync();
-
-            return true;
-        }
-
-        public async Task<bool> RejectCompanyAsync(
-            int id,
-            RejectCompanyDto request)
-        {
-            var company = await _context.Companies.FindAsync(id);
-
-            if (company == null)
-            {
-                return false;
-            }
-
-            company.Status = CompanyStatus.Rejected;
-            company.RejectedAt = DateTime.UtcNow;
-            company.ApprovedAt = null;
-            company.SuspendedAt = null;
-            company.RejectionReason = request.RejectionReason;
-
-            await _context.SaveChangesAsync();
-
-            return true;
         }
 
         public async Task<bool> RequestInformationAsync(
             int id,
             RequestInformationDto request)
         {
-            var company = await _context.Companies.FindAsync(id);
+            var company =
+                await _context.Companies.FindAsync(id);
 
             if (company == null)
             {
@@ -188,11 +169,18 @@ namespace HirePathAI.API.Services.PlatformAdmin
 
         public async Task<bool> SuspendCompanyAsync(int id)
         {
-            var company = await _context.Companies.FindAsync(id);
+            var company =
+                await _context.Companies.FindAsync(id);
 
             if (company == null)
             {
                 return false;
+            }
+
+            if (company.Status == CompanyStatus.Suspended)
+            {
+                throw new InvalidOperationException(
+                    "Company is already suspended.");
             }
 
             company.Status = CompanyStatus.Suspended;
@@ -205,11 +193,18 @@ namespace HirePathAI.API.Services.PlatformAdmin
 
         public async Task<bool> ActivateCompanyAsync(int id)
         {
-            var company = await _context.Companies.FindAsync(id);
+            var company =
+                await _context.Companies.FindAsync(id);
 
             if (company == null)
             {
                 return false;
+            }
+
+            if (company.Status == CompanyStatus.Approved)
+            {
+                throw new InvalidOperationException(
+                    "Company is already active.");
             }
 
             company.Status = CompanyStatus.Approved;
@@ -221,7 +216,8 @@ namespace HirePathAI.API.Services.PlatformAdmin
             return true;
         }
 
-        public async Task<PlatformDashboardDto> GetDashboardAsync()
+        public async Task<PlatformDashboardDto>
+            GetDashboardAsync()
         {
             return new PlatformDashboardDto
             {
