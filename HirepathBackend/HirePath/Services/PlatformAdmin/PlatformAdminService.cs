@@ -2,22 +2,16 @@ using HirePathAI.API.Data;
 using HirePathAI.API.DTOs.PlatformAdmin.Companies;
 using HirePathAI.API.DTOs.PlatformAdmin.Dashboard;
 using HirePathAI.API.Models.Enums;
+using HirePathAI.API.Services.PlatformAdmin;
 using Microsoft.EntityFrameworkCore;
 
-namespace HirePathAI.API.Services.PlatformAdmin
+namespace HirePath.Services.PlatformAdmin
 {
-    public class PlatformAdminService : IPlatformAdminService
+    public class PlatformAdminService(ApplicationDbContext context) : IPlatformAdminService
     {
-        private readonly ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context = context;
 
-        public PlatformAdminService(
-            ApplicationDbContext context)
-        {
-            _context = context;
-        }
-
-        public async Task<List<CompanyResponseDto>>
-            GetAllCompaniesAsync()
+        public async Task<List<CompanyResponseDto>> GetAllCompaniesAsync()
         {
             return await _context.Companies
                 .AsNoTracking()
@@ -29,42 +23,27 @@ namespace HirePathAI.API.Services.PlatformAdmin
                     Website = company.Website,
                     Location = company.Location,
                     Industry = company.Industry,
-
-                    BusinessRegistrationNumber =
-                        company.BusinessRegistrationNumber,
-
+                    BusinessRegistrationNumber = company.BusinessRegistrationNumber,
                     CompanyEmail = company.Email,
-
                     Phone = company.Phone,
                     Address = company.Address,
-
-                    RepresentativeName =
-                        company.RepresentativeName,
-
-                    RepresentativeEmail =
-                        company.RepresentativeEmail,
-
+                    RepresentativeName = company.RepresentativeName,
+                    RepresentativeEmail = company.RepresentativeEmail,
                     Status = company.Status.ToString(),
-
                     ApprovedAt = company.ApprovedAt,
                     RejectedAt = company.RejectedAt,
                     SuspendedAt = company.SuspendedAt,
-
-                    RejectionReason =
-                        company.RejectionReason,
-
+                    RejectionReason = company.RejectionReason,
                     AdminNotes = company.AdminNotes
                 })
                 .ToListAsync();
         }
 
-        public async Task<List<CompanyResponseDto>>
-            GetPendingCompaniesAsync()
+        public async Task<List<CompanyResponseDto>> GetPendingCompaniesAsync()
         {
             return await _context.Companies
                 .AsNoTracking()
-                .Where(company =>
-                    company.Status == CompanyStatus.Pending)
+                .Where(company => company.Status == CompanyStatus.Pending)
                 .Select(company => new CompanyResponseDto
                 {
                     Id = company.Id,
@@ -73,37 +52,23 @@ namespace HirePathAI.API.Services.PlatformAdmin
                     Website = company.Website,
                     Location = company.Location,
                     Industry = company.Industry,
-
-                    BusinessRegistrationNumber =
-                        company.BusinessRegistrationNumber,
-
+                    BusinessRegistrationNumber = company.BusinessRegistrationNumber,
                     CompanyEmail = company.Email,
-
                     Phone = company.Phone,
                     Address = company.Address,
-
-                    RepresentativeName =
-                        company.RepresentativeName,
-
-                    RepresentativeEmail =
-                        company.RepresentativeEmail,
-
+                    RepresentativeName = company.RepresentativeName,
+                    RepresentativeEmail = company.RepresentativeEmail,
                     Status = company.Status.ToString(),
-
                     ApprovedAt = company.ApprovedAt,
                     RejectedAt = company.RejectedAt,
                     SuspendedAt = company.SuspendedAt,
-
-                    RejectionReason =
-                        company.RejectionReason,
-
+                    RejectionReason = company.RejectionReason,
                     AdminNotes = company.AdminNotes
                 })
                 .ToListAsync();
         }
 
-        public async Task<CompanyResponseDto?>
-            GetCompanyByIdAsync(int id)
+        public async Task<CompanyResponseDto?> GetCompanyByIdAsync(int id)
         {
             return await _context.Companies
                 .AsNoTracking()
@@ -116,50 +81,32 @@ namespace HirePathAI.API.Services.PlatformAdmin
                     Website = company.Website,
                     Location = company.Location,
                     Industry = company.Industry,
-
-                    BusinessRegistrationNumber =
-                        company.BusinessRegistrationNumber,
-
+                    BusinessRegistrationNumber = company.BusinessRegistrationNumber,
                     CompanyEmail = company.Email,
-
                     Phone = company.Phone,
                     Address = company.Address,
-
-                    RepresentativeName =
-                        company.RepresentativeName,
-
-                    RepresentativeEmail =
-                        company.RepresentativeEmail,
-
+                    RepresentativeName = company.RepresentativeName,
+                    RepresentativeEmail = company.RepresentativeEmail,
                     Status = company.Status.ToString(),
-
                     ApprovedAt = company.ApprovedAt,
                     RejectedAt = company.RejectedAt,
                     SuspendedAt = company.SuspendedAt,
-
-                    RejectionReason =
-                        company.RejectionReason,
-
+                    RejectionReason = company.RejectionReason,
                     AdminNotes = company.AdminNotes
                 })
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<bool> RequestInformationAsync(
-            int id,
-            RequestInformationDto request)
+        public async Task<bool> RequestInformationAsync(int id, RequestInformationDto request)
         {
-            var company =
-                await _context.Companies.FindAsync(id);
+            var company = await _context.Companies.FindAsync(id);
 
             if (company == null)
             {
                 return false;
             }
 
-            company.Status =
-                CompanyStatus.MoreInformationRequired;
-
+            company.Status = CompanyStatus.MoreInformationRequired;
             company.AdminNotes = request.Message;
 
             await _context.SaveChangesAsync();
@@ -169,8 +116,7 @@ namespace HirePathAI.API.Services.PlatformAdmin
 
         public async Task<bool> SuspendCompanyAsync(int id)
         {
-            var company =
-                await _context.Companies.FindAsync(id);
+            var company = await _context.Companies.FindAsync(id);
 
             if (company == null)
             {
@@ -179,8 +125,7 @@ namespace HirePathAI.API.Services.PlatformAdmin
 
             if (company.Status == CompanyStatus.Suspended)
             {
-                throw new InvalidOperationException(
-                    "Company is already suspended.");
+                throw new InvalidOperationException("Company is already suspended.");
             }
 
             company.Status = CompanyStatus.Suspended;
@@ -193,8 +138,7 @@ namespace HirePathAI.API.Services.PlatformAdmin
 
         public async Task<bool> ActivateCompanyAsync(int id)
         {
-            var company =
-                await _context.Companies.FindAsync(id);
+            var company = await _context.Companies.FindAsync(id);
 
             if (company == null)
             {
@@ -203,8 +147,7 @@ namespace HirePathAI.API.Services.PlatformAdmin
 
             if (company.Status == CompanyStatus.Approved)
             {
-                throw new InvalidOperationException(
-                    "Company is already active.");
+                throw new InvalidOperationException("Company is already active.");
             }
 
             company.Status = CompanyStatus.Approved;
@@ -216,38 +159,15 @@ namespace HirePathAI.API.Services.PlatformAdmin
             return true;
         }
 
-        public async Task<PlatformDashboardDto>
-            GetDashboardAsync()
+        public async Task<PlatformDashboardDto> GetDashboardAsync()
         {
             return new PlatformDashboardDto
             {
-                TotalCompanies =
-                    await _context.Companies.CountAsync(),
-
-                PendingCompanies =
-                    await _context.Companies.CountAsync(
-                        company =>
-                            company.Status ==
-                            CompanyStatus.Pending),
-
-                ApprovedCompanies =
-                    await _context.Companies.CountAsync(
-                        company =>
-                            company.Status ==
-                            CompanyStatus.Approved),
-
-                RejectedCompanies =
-                    await _context.Companies.CountAsync(
-                        company =>
-                            company.Status ==
-                            CompanyStatus.Rejected),
-
-                SuspendedCompanies =
-                    await _context.Companies.CountAsync(
-                        company =>
-                            company.Status ==
-                            CompanyStatus.Suspended),
-
+                TotalCompanies = await _context.Companies.CountAsync(),
+                PendingCompanies = await _context.Companies.CountAsync(company => company.Status == CompanyStatus.Pending),
+                ApprovedCompanies = await _context.Companies.CountAsync(company => company.Status == CompanyStatus.Approved),
+                RejectedCompanies = await _context.Companies.CountAsync(company => company.Status == CompanyStatus.Rejected),
+                SuspendedCompanies = await _context.Companies.CountAsync(company => company.Status == CompanyStatus.Suspended),
                 TotalUsers = await _context.Users.CountAsync(),
                 TotalJobs = await _context.Jobs.CountAsync(),
                 TotalApplications = await _context.JobApplications.CountAsync()
@@ -266,7 +186,7 @@ namespace HirePathAI.API.Services.PlatformAdmin
             }
 
             // Cascading clean up due to Restrict behavior
-            if (company.Jobs != null && company.Jobs.Any())
+            if (company.Jobs != null && company.Jobs.Count > 0)
             {
                 var jobIds = company.Jobs.Select(j => j.Id).ToList();
 
