@@ -7,6 +7,10 @@ namespace HirePathAI.API.Models.Entities
         public string FullName { get; set; } = string.Empty;
         public bool IsActive { get; set; } = true;
 
+        // optional company link for recruiter/admin users
+        public int? CompanyId { get; set; }
+        public Company? Company { get; set; }
+
         public CandidateProfile? CandidateProfile { get; set; }
     }
 }

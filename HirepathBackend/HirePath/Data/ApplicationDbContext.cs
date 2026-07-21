@@ -12,6 +12,7 @@ namespace HirePathAI.API.Data
         {
         }
 
+        // ============ EXISTING DBSETS ============
         public DbSet<Company> Companies => Set<Company>();
         public DbSet<Department> Departments => Set<Department>();
         public DbSet<CandidateProfile> CandidateProfiles => Set<CandidateProfile>();
@@ -27,6 +28,11 @@ namespace HirePathAI.API.Data
         public DbSet<EmailOtp> EmailOtps => Set<EmailOtp>();
         public DbSet<PendingRegistration> PendingRegistrations => Set<PendingRegistration>();
 
+        // ============ NEW DBSETS (Member 04) ============
+        public DbSet<ApplicationStatusHistory> ApplicationStatusHistories => Set<ApplicationStatusHistory>();
+        public DbSet<InterviewFeedback> InterviewFeedbacks => Set<InterviewFeedback>();
+        public DbSet<Evaluation> Evaluations => Set<Evaluation>();
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -37,6 +43,13 @@ namespace HirePathAI.API.Data
             modelBuilder.Entity<User>()
                 .HasIndex(u => u.NormalizedEmail)
                 .HasDatabaseName("IX_User_NormalizedEmail");
+
+            // optional: user -> company (many users may belong to a company)
+            modelBuilder.Entity<User>()
+                .HasOne(u => u.Company)
+                .WithMany(c => c.Users)
+                .HasForeignKey(u => u.CompanyId)
+                .OnDelete(DeleteBehavior.SetNull);
 
             // =========================
             // EMAIL OTP
@@ -190,7 +203,123 @@ namespace HirePathAI.API.Data
                 .OnDelete(DeleteBehavior.Cascade);
 
             // =========================
-            // DECIMAL PRECISION
+            // APPLICATION STATUS HISTORY (NEW)
+            // =========================
+            modelBuilder.Entity<ApplicationStatusHistory>()
+                .HasOne(ash => ash.Application)
+                .WithMany() // No navigation from JobApplication to history to avoid circular reference
+                .HasForeignKey(ash => ash.ApplicationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<ApplicationStatusHistory>()
+                .HasOne(ash => ash.ChangedByUser)
+                .WithMany()
+                .HasForeignKey(ash => ash.ChangedByUserId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<ApplicationStatusHistory>()
+                .Property(ash => ash.Status)
+                .HasConversion<int>();
+
+            modelBuilder.Entity<ApplicationStatusHistory>()
+                .HasIndex(ash => ash.ApplicationId);
+
+            modelBuilder.Entity<ApplicationStatusHistory>()
+                .HasIndex(ash => ash.ChangedAt);
+
+            // =========================
+            // INTERVIEW FEEDBACK (NEW)
+            // =========================
+            modelBuilder.Entity<InterviewFeedback>()
+                .HasOne(ifb => ifb.Interview)
+                .WithMany() // No navigation from Interview to Feedback to avoid circular reference
+                .HasForeignKey(ifb => ifb.InterviewId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .HasOne(ifb => ifb.Application)
+                .WithMany() // No navigation from JobApplication to Feedback to avoid circular reference
+                .HasForeignKey(ifb => ifb.ApplicationId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .HasOne(ifb => ifb.Evaluator)
+                .WithMany()
+                .HasForeignKey(ifb => ifb.EvaluatorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .Property(ifb => ifb.TechnicalScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .Property(ifb => ifb.CommunicationScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .Property(ifb => ifb.ProblemSolvingScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .Property(ifb => ifb.CulturalFitScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .Property(ifb => ifb.OverallScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .Property(ifb => ifb.Recommendation)
+                .HasConversion<int>();
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .HasIndex(ifb => ifb.ApplicationId);
+
+            modelBuilder.Entity<InterviewFeedback>()
+                .HasIndex(ifb => ifb.InterviewId)
+                .IsUnique(); // One feedback per interview
+
+            // =========================
+            // EVALUATION (NEW)
+            // =========================
+            modelBuilder.Entity<Evaluation>()
+                .HasOne(e => e.Application)
+                .WithMany() // No navigation from JobApplication to Evaluation to avoid circular reference
+                .HasForeignKey(e => e.ApplicationId)
+                .OnDelete(DeleteBehavior.Cascade);
+
+            modelBuilder.Entity<Evaluation>()
+                .HasOne(e => e.Evaluator)
+                .WithMany()
+                .HasForeignKey(e => e.EvaluatorId)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.ResumeScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.AIScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.InterviewScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.HiringManagerScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<Evaluation>()
+                .Property(e => e.OverallScore)
+                .HasPrecision(5, 2);
+
+            modelBuilder.Entity<Evaluation>()
+                .HasIndex(e => e.ApplicationId)
+                .IsUnique(); // One evaluation per application
+
+            // =========================
+            // DECIMAL PRECISION (EXISTING)
             // =========================
             modelBuilder.Entity<Job>()
                 .Property(j => j.SalaryMin)

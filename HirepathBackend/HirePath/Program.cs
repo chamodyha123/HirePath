@@ -55,6 +55,21 @@ builder.Services.Configure<CloudinarySettings>(
 
 builder.Services.AddScoped<ICloudStorageService, CloudinaryStorageService>();
 
+
+// Add these lines:
+
+// Repositories
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+
+// Services
+builder.Services.AddScoped<ICompanyService, CompanyService>();
+// Add these lines in Program.cs under repositories and services:
+
+// Repository
+builder.Services.AddScoped<ICompanyRepository, CompanyRepository>();
+
+// Service
+builder.Services.AddScoped<ICompanyService, CompanyService>();
 // ----------------------------------------------------
 // JWT Service
 // ----------------------------------------------------
@@ -96,6 +111,16 @@ builder.Services.AddScoped<ICandidateRepository, CandidateRepository>();
 builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
 builder.Services.AddScoped<IJobApplicationRepository, JobApplicationRepository>();
 builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+// Repositories
+builder.Services.AddScoped<IJobRepository, JobRepository>();
+builder.Services.AddScoped<IInterviewRepository, InterviewRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IApplicationRepository, ApplicationRepository>();
+
+// Services
+builder.Services.AddScoped<IApplicationService, ApplicationService>();
+builder.Services.AddScoped<IInterviewService, InterviewService>();
+
 
 // ----------------------------------------------------
 // Recruiter Module Dependencies
