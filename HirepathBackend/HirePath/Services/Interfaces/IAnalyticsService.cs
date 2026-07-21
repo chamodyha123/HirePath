@@ -1,6 +1,9 @@
-﻿namespace HirePath.Services.Interfaces
+using HirePathAI.API.DTOs.PlatformAdmin.Analytics;
+
+namespace HirePathAI.API.Services.Interfaces
 {
-    public class IAnalyticsService
+    public interface IAnalyticsService
     {
+        Task<AnalyticsResponseDto> GetAnalyticsDataAsync();
     }
 }

@@ -1,4 +1,4 @@
-using HirePathAI.API.DTOs.Candidate;
+﻿using HirePathAI.API.DTOs.Candidate;
 using HirePathAI.API.Services.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
@@ -8,8 +8,7 @@ using System.Security.Claims;
 namespace HirePathAI.API.Controllers
 {
     [ApiController]
-    [Route("api/Candidate")]
-    [Route("api/candidates")]
+    [Route("api/[controller]")]
     [Authorize]
     public class CandidateController : ControllerBase
     {

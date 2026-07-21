@@ -257,6 +257,10 @@ builder.Services.AddScoped<
     IPlatformAdminService,
     PlatformAdminService>();
 
+builder.Services.AddScoped<
+    HirePathAI.API.Services.Interfaces.IAnalyticsService,
+    HirePathAI.API.Services.Implementations.AnalyticsService>();
+
 // ====================================================
 // COMPANY ONBOARDING / COMPANY ADMIN
 // ====================================================
@@ -399,6 +403,9 @@ using (var scope = app.Services.CreateScope())
 
     try
     {
+        var dbContext = services.GetRequiredService<ApplicationDbContext>();
+        await dbContext.Database.MigrateAsync();
+
         await SeedData.SeedRolesAndAdminAsync(services);
     }
     catch (Exception exception)

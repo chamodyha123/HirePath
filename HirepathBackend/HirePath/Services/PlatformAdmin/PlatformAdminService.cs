@@ -1,4 +1,4 @@
-﻿using HirePathAI.API.Data;
+using HirePathAI.API.Data;
 using HirePathAI.API.DTOs.PlatformAdmin.Companies;
 using HirePathAI.API.DTOs.PlatformAdmin.Dashboard;
 using HirePathAI.API.Models.Enums;
@@ -246,8 +246,47 @@ namespace HirePathAI.API.Services.PlatformAdmin
                     await _context.Companies.CountAsync(
                         company =>
                             company.Status ==
-                            CompanyStatus.Suspended)
+                            CompanyStatus.Suspended),
+
+                TotalUsers = await _context.Users.CountAsync(),
+                TotalJobs = await _context.Jobs.CountAsync(),
+                TotalApplications = await _context.JobApplications.CountAsync()
             };
+        }
+
+        public async Task<bool> DeleteCompanyAsync(int id)
+        {
+            var company = await _context.Companies
+                .Include(c => c.Jobs)
+                .FirstOrDefaultAsync(c => c.Id == id);
+
+            if (company == null)
+            {
+                return false;
+            }
+
+            // Cascading clean up due to Restrict behavior
+            if (company.Jobs != null && company.Jobs.Any())
+            {
+                var jobIds = company.Jobs.Select(j => j.Id).ToList();
+
+                var jobApplications = await _context.JobApplications
+                    .Where(ja => jobIds.Contains(ja.JobId))
+                    .ToListAsync();
+                _context.JobApplications.RemoveRange(jobApplications);
+
+                var jobSkills = await _context.JobSkills
+                    .Where(js => jobIds.Contains(js.JobId))
+                    .ToListAsync();
+                _context.JobSkills.RemoveRange(jobSkills);
+
+                _context.Jobs.RemoveRange(company.Jobs);
+            }
+
+            _context.Companies.Remove(company);
+            await _context.SaveChangesAsync();
+
+            return true;
         }
     }
 }

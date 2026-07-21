@@ -1,4 +1,4 @@
-﻿using System.IdentityModel.Tokens.Jwt;
+using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using HirePathAI.API.DTOs.CompanyOnboarding;
 using HirePathAI.API.DTOs.PlatformAdmin.Companies;
@@ -329,6 +329,24 @@ namespace HirePathAI.API.Controllers.PlatformAdmin
             }
 
             return userId;
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult>
+            DeleteCompany(int id)
+        {
+            var result =
+                await _service
+                    .DeleteCompanyAsync(id);
+
+            if (!result)
+                return NotFound("Company not found.");
+
+            return Ok(new
+            {
+                message =
+                    "Company deleted successfully."
+            });
         }
     }
 }

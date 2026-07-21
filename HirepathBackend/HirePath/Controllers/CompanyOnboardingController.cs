@@ -11,241 +11,43 @@ namespace HirePathAI.API.Controllers
     [Route("api/company-onboarding")]
     public class CompanyOnboardingController : ControllerBase
     {
+        private const string PlatformAdminRoles = "Admin,SuperAdmin,PlatformAdmin";
         private readonly ICompanyOnboardingService _service;
+        public CompanyOnboardingController(ICompanyOnboardingService service) => _service = service;
 
-        public CompanyOnboardingController(
-            ICompanyOnboardingService service)
-        {
-            _service = service;
-        }
+        [AllowAnonymous, HttpPost("registrations")]
+        public async Task<IActionResult> SubmitRegistration(SubmitCompanyRegistrationDto dto) =>
+            Ok(await _service.SubmitRegistrationAsync(dto));
 
-        [AllowAnonymous]
-        [HttpPost("registrations")]
-        public async Task<IActionResult> SubmitRegistration(
-            [FromBody] SubmitCompanyRegistrationDto dto)
-        {
-            try
-            {
-                var result =
-                    await _service.SubmitRegistrationAsync(dto);
+        [Authorize(Roles = "Admin"), HttpGet("registrations")]
+        public async Task<IActionResult> GetRegistrations([FromQuery] string? status = null) =>
+            Ok(await _service.GetRegistrationRequestsAsync(status));
 
-                return Ok(result);
-            }
-            catch (InvalidOperationException ex)
-            {
-                return Conflict(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (Exception)
-            {
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    new
-                    {
-                        message =
-                            "An unexpected error occurred while submitting the company registration."
-                    });
-            }
-        }
+        [Authorize(Roles = "Admin"), HttpPost("registrations/{id:int}/approve")]
+        public async Task<IActionResult> Approve(int id, ReviewCompanyRegistrationDto dto) =>
+            Ok(await _service.ApproveRegistrationAsync(id, CurrentUserId(), dto.Note));
 
-        [Authorize(Roles = "Admin")]
-        [HttpGet("registrations")]
-        public async Task<IActionResult> GetRegistrations(
-            [FromQuery] string? status = null)
-        {
-            try
-            {
-                var result =
-                    await _service.GetRegistrationRequestsAsync(status);
+        [Authorize(Roles = "Admin"), HttpPost("registrations/{id:int}/reject")]
+        public async Task<IActionResult> Reject(int id, ReviewCompanyRegistrationDto dto) =>
+            Ok(await _service.RejectRegistrationAsync(id, CurrentUserId(), dto.Note));
 
-                return Ok(result);
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (Exception)
-            {
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    new
-                    {
-                        message =
-                            "An unexpected error occurred while loading company registrations."
-                    });
-            }
-        }
+        [Authorize(Roles = "CompanyAdmin"), HttpPost("members/invite")]
+        public async Task<IActionResult> InviteMember(InviteCompanyMemberDto dto) =>
+            Ok(await _service.InviteMemberAsync(CurrentUserId(), dto));
 
-        [Authorize(Roles = "CompanyAdmin")]
-        [HttpPost("members/invite")]
-        public async Task<IActionResult> InviteMember(
-            [FromBody] InviteCompanyMemberDto dto)
-        {
-            try
-            {
-                var result =
-                    await _service.InviteMemberAsync(
-                        CurrentUserId(),
-                        dto);
+        [AllowAnonymous, HttpGet("invitations/validate")]
+        public async Task<IActionResult> ValidateInvitation([FromQuery] string token) =>
+            Ok(await _service.ValidateInvitationAsync(token));
 
-                return Ok(result);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (InvalidOperationException ex)
-            {
-                return Conflict(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (UnauthorizedAccessException ex)
-            {
-                return Unauthorized(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (Exception)
-            {
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    new
-                    {
-                        message =
-                            "An unexpected error occurred while inviting the company member."
-                    });
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpGet("invitations/validate")]
-        public async Task<IActionResult> ValidateInvitation(
-            [FromQuery] string token)
-        {
-            try
-            {
-                var result =
-                    await _service.ValidateInvitationAsync(token);
-
-                return Ok(result);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (InvalidOperationException ex)
-            {
-                return Conflict(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (Exception)
-            {
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    new
-                    {
-                        message =
-                            "An unexpected error occurred while validating the invitation."
-                    });
-            }
-        }
-
-        [AllowAnonymous]
-        [HttpPost("invitations/accept")]
-        public async Task<IActionResult> AcceptInvitation(
-            [FromBody] AcceptCompanyInvitationDto dto)
-        {
-            try
-            {
-                var result =
-                    await _service.AcceptInvitationAsync(dto);
-
-                return Ok(result);
-            }
-            catch (KeyNotFoundException ex)
-            {
-                return NotFound(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (InvalidOperationException ex)
-            {
-                return Conflict(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (ArgumentException ex)
-            {
-                return BadRequest(new
-                {
-                    message = ex.Message
-                });
-            }
-            catch (Exception)
-            {
-                return StatusCode(
-                    StatusCodes.Status500InternalServerError,
-                    new
-                    {
-                        message =
-                            "An unexpected error occurred while accepting the invitation."
-                    });
-            }
-        }
+        [AllowAnonymous, HttpPost("invitations/accept")]
+        public async Task<IActionResult> AcceptInvitation(AcceptCompanyInvitationDto dto) =>
+            Ok(await _service.AcceptInvitationAsync(dto));
 
         private int CurrentUserId()
         {
-            var value =
-                User.FindFirstValue(ClaimTypes.NameIdentifier)
-                ?? User.FindFirstValue(
-                    JwtRegisteredClaimNames.Sub);
-
-            if (!int.TryParse(value, out var id))
-            {
-                throw new UnauthorizedAccessException(
-                    "Invalid user token.");
-            }
-
-            return id;
+            var value = User.FindFirstValue(ClaimTypes.NameIdentifier)
+                        ?? User.FindFirstValue(JwtRegisteredClaimNames.Sub);
+            return int.TryParse(value, out var id) ? id : throw new UnauthorizedAccessException("Invalid user token.");
         }
     }
 }

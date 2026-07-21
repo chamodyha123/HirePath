@@ -1,4 +1,4 @@
-﻿using HirePathAI.API.Models.Entities;
+using HirePathAI.API.Models.Entities;
 using Microsoft.AspNetCore.Identity;
 
 namespace HirePathAI.API.Data
@@ -10,7 +10,7 @@ namespace HirePathAI.API.Data
             var roleManager = serviceProvider.GetRequiredService<RoleManager<IdentityRole<int>>>();
             var userManager = serviceProvider.GetRequiredService<UserManager<User>>();
 
-            string[] roles = { "Admin", "Candidate", "Recruiter", "HiringManager" };
+            string[] roles = { "Admin", "SuperAdmin", "CompanyAdmin", "Candidate", "Recruiter", "HiringManager" };
 
             // Create roles if they do not exist
             foreach (var role in roles)
@@ -45,7 +45,19 @@ namespace HirePathAI.API.Data
 
                 if (result.Succeeded)
                 {
+                    await userManager.AddToRolesAsync(adminUser, new[] { "Admin", "SuperAdmin" });
+                }
+            }
+            else
+            {
+                // Ensure existing admin user has both Admin and SuperAdmin roles
+                if (!await userManager.IsInRoleAsync(adminUser, "Admin"))
+                {
                     await userManager.AddToRoleAsync(adminUser, "Admin");
+                }
+                if (!await userManager.IsInRoleAsync(adminUser, "SuperAdmin"))
+                {
+                    await userManager.AddToRoleAsync(adminUser, "SuperAdmin");
                 }
             }
         }

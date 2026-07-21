@@ -1,4 +1,4 @@
-﻿using HirePathAI.API.DTOs.PlatformAdmin.Companies;
+using HirePathAI.API.DTOs.PlatformAdmin.Companies;
 using HirePathAI.API.DTOs.PlatformAdmin.Dashboard;
 
 namespace HirePathAI.API.Services.PlatformAdmin
@@ -21,6 +21,9 @@ namespace HirePathAI.API.Services.PlatformAdmin
         Task<bool> SuspendCompanyAsync(int id);
 
         Task<bool> ActivateCompanyAsync(int id);
+
+        Task<bool>
+            DeleteCompanyAsync(int id);
 
         Task<PlatformDashboardDto>
             GetDashboardAsync();
