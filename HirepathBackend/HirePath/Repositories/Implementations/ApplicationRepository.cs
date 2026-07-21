@@ -1,5 +1,6 @@
 ﻿using HirePathAI.API.Data;
 using HirePathAI.API.Models.Entities;
+using HirePathAI.API.Models.Enums;
 using HirePathAI.API.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
@@ -22,6 +23,7 @@ namespace HirePathAI.API.Repositories.Implementations
                 .Include(x => x.Job)
                     .ThenInclude(j => j!.Company)
                 .Include(x => x.Resume)
+                .Include(x => x.StatusHistory)
                 .ToListAsync();
         }
 
@@ -33,6 +35,7 @@ namespace HirePathAI.API.Repositories.Implementations
                 .Include(x => x.CandidateProfile)
                     .ThenInclude(cp => cp!.User)
                 .Include(x => x.Resume)
+                .Include(x => x.StatusHistory)
                 .ToListAsync();
         }
 

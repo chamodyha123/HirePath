@@ -39,7 +39,7 @@ namespace HirePathAI.API.Models.Entities
         // ============ PROFILE PICTURE ============
         public int? ProfilePictureId { get; set; }
 
-        [ForeignKey(nameof(ProfilePictureId))]
+        // REMOVE [ForeignKey] from here - it's already defined in ProfilePicture
         public ProfilePicture? ProfilePicture { get; set; }
 
         // ============ PERSONAL INFORMATION ============

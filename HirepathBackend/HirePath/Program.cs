@@ -78,6 +78,13 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IOtpService, OtpService>();
 
 // ====================================================
+// AI SETTINGS - ADDED THIS SECTION
+// ====================================================
+
+builder.Services.Configure<AISettings>(
+    builder.Configuration.GetSection("AISettings"));
+
+// ====================================================
 // CLOUDINARY / CLOUD STORAGE
 // ====================================================
 
@@ -335,7 +342,14 @@ builder.Services.AddCors(options =>
 
 builder.Services
     .AddControllers()
-    .AddNewtonsoftJson()
+    .AddNewtonsoftJson(options =>
+    {
+        // The project uses Newtonsoft.Json as the MVC output formatter.
+        // Configure it directly so EF Core navigation properties cannot
+        // produce self-referencing loop exceptions and HTTP 500 responses.
+        options.SerializerSettings.ReferenceLoopHandling =
+            Newtonsoft.Json.ReferenceLoopHandling.Ignore;
+    })
     .AddJsonOptions(options =>
     {
         options.JsonSerializerOptions.ReferenceHandler =

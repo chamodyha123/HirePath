@@ -2,10 +2,11 @@
 {
     public enum ExperienceLevel
     {
-        EntryLevel = 1,
+        Entry = 1,
         Junior = 2,
-        MidLevel = 3,
+        Mid = 3,
         Senior = 4,
-        Lead = 5
+        Lead = 5,
+        Executive = 6
     }
 }

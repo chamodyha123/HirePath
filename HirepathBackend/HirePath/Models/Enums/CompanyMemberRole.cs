@@ -1,9 +1,9 @@
-namespace HirePathAI.API.Models.Enums
+﻿namespace HirePathAI.API.Models.Enums
 {
     public enum CompanyMemberRole
     {
         CompanyAdmin = 1,
-        Recruiter = 2,
-        HiringManager = 3
+        HiringManager = 2,
+        Recruiter = 3
     }
 }

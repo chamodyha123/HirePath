@@ -24,7 +24,8 @@ namespace HirePathAI.API.Controllers
         {
             ApplicationStatus.Interviewed,
             ApplicationStatus.Offered,
-            ApplicationStatus.Hired
+            ApplicationStatus.Hired,
+            ApplicationStatus.Rejected
         };
 
         public ApplicationController(IApplicationService service)
@@ -178,7 +179,7 @@ namespace HirePathAI.API.Controllers
             }
         }
 
-        [Authorize(Roles = "Recruiter,Admin")]
+        [Authorize(Roles = "Recruiter,Admin,HiringManager")]
         [HttpPut("reject")]
         public async Task<IActionResult> Reject(WorkflowActionDto dto)
         {

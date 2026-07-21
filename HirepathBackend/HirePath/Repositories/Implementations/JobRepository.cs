@@ -5,11 +5,9 @@ using Microsoft.EntityFrameworkCore;
 
 namespace HirePathAI.API.Repositories.Implementations
 {
-    public class JobRepository
-        : GenericRepository<Job>, IJobRepository
+    public class JobRepository : GenericRepository<Job>, IJobRepository
     {
-        public JobRepository(ApplicationDbContext context)
-            : base(context)
+        public JobRepository(ApplicationDbContext context) : base(context)
         {
         }
 
@@ -17,17 +15,56 @@ namespace HirePathAI.API.Repositories.Implementations
         {
             return await _context.Jobs
                 .Where(j => j.IsActive)
+                .Include(j => j.RequiredSkills)
                 .Include(j => j.Company)
                 .Include(j => j.Department)
+                .ToListAsync();
+        }
+
+        public async Task<IEnumerable<Job>> GetActiveJobsWithSkillsAsync()
+        {
+            return await _context.Jobs
+                .Where(j => j.IsActive)
+                .Include(j => j.RequiredSkills)
+                .Include(j => j.Company)
                 .ToListAsync();
         }
 
         public async Task<IEnumerable<Job>> SearchJobsAsync(string keyword)
         {
             return await _context.Jobs
-                .Where(j =>
+                .Where(j => j.IsActive && (
                     j.Title.Contains(keyword) ||
-                    j.Description.Contains(keyword))
+                    j.Description.Contains(keyword) ||
+                    j.Location.Contains(keyword)
+                ))
+                .Include(j => j.RequiredSkills)
+                .Include(j => j.Company)
+                .ToListAsync();
+        }
+
+        public new async Task<Job?> GetByIdAsync(int id)
+        {
+            return await _context.Jobs
+                .Include(j => j.RequiredSkills)
+                .Include(j => j.Company)
+                .Include(j => j.Department)
+                .FirstOrDefaultAsync(j => j.Id == id);
+        }
+
+        public async Task<Job?> GetByIdWithSkillsAsync(int id)
+        {
+            return await _context.Jobs
+                .Include(j => j.RequiredSkills)
+                .FirstOrDefaultAsync(j => j.Id == id);
+        }
+
+        public new async Task<IEnumerable<Job>> GetAllAsync()
+        {
+            return await _context.Jobs
+                .Include(j => j.RequiredSkills)
+                .Include(j => j.Company)
+                .Include(j => j.Department)
                 .ToListAsync();
         }
     }
