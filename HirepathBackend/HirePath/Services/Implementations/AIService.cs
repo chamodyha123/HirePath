@@ -199,7 +199,7 @@ namespace HirePathAI.API.Services.Implementations
             foreach (var line in lines)
             {
                 var trimmed = line.Trim();
-                if (trimmed.Length > 50 && !trimmed.Contains("@") && !trimmed.Contains("http") && 
+                if (trimmed.Length > 50 && !trimmed.Contains("@") && !trimmed.Contains("http") &&
                     !trimmed.Contains("Skills") && !trimmed.Contains("Experience") && !trimmed.Contains("Education"))
                 {
                     return trimmed.Length > 500 ? trimmed.Substring(0, 500) + "..." : trimmed;
@@ -562,7 +562,7 @@ namespace HirePathAI.API.Services.Implementations
         }
 
         // ============================================================
-        // JOB RECOMMENDATIONS
+        // JOB RECOMMENDATIONS - UPDATED TO USE GetActiveJobsWithSkillsAsync
         // ============================================================
 
         public async Task<JobRecommendationResponseDto> GetJobRecommendationsAsync(JobRecommendationRequestDto request)
@@ -573,7 +573,8 @@ namespace HirePathAI.API.Services.Implementations
                 if (candidate == null)
                     return new JobRecommendationResponseDto { Success = false, ErrorMessage = "Candidate not found" };
 
-                var allJobs = await _jobRepository.GetActiveJobsAsync();
+                // ✅ FIX: Use GetActiveJobsWithSkillsAsync to ensure RequiredSkills are loaded
+                var allJobs = await _jobRepository.GetActiveJobsWithSkillsAsync();
                 var jobList = allJobs.ToList();
 
                 var applications = await _applicationRepository.GetCandidateApplications(candidate.Id);
@@ -642,6 +643,7 @@ namespace HirePathAI.API.Services.Implementations
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error getting recommendations: {Message}", ex.Message);
                 return new JobRecommendationResponseDto
                 {
                     Success = false,

@@ -1,4 +1,4 @@
-using HirePathAI.API.Data;
+﻿using HirePathAI.API.Data;
 using HirePathAI.API.DTOs.PlatformAdmin.Companies;
 using HirePathAI.API.DTOs.PlatformAdmin.Dashboard;
 using HirePathAI.API.Models.Enums;
@@ -177,7 +177,7 @@ namespace HirePathAI.API.Services.PlatformAdmin
             }
 
             company.Status =
-                CompanyStatus.MoreInformationRequired;
+                CompanyStatus.Pending;
 
             company.AdminNotes = request.Message;
 
