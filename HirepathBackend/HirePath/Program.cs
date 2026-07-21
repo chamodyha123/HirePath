@@ -78,6 +78,13 @@ builder.Services.AddScoped<IEmailService, EmailService>();
 builder.Services.AddScoped<IOtpService, OtpService>();
 
 // ====================================================
+// AI SETTINGS - ADDED THIS SECTION
+// ====================================================
+
+builder.Services.Configure<AISettings>(
+    builder.Configuration.GetSection("AISettings"));
+
+// ====================================================
 // CLOUDINARY / CLOUD STORAGE
 // ====================================================
 
