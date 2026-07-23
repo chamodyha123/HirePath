@@ -1,454 +1,1179 @@
-# HirePath AI - AI Powered Recruitment & Talent Management Platform
+HirePath AI
 
-## Software Architecture (SE205.3)
+AI-Powered Recruitment & Talent Management Platform
+
+Software Architecture – SE205.3
+
 NSBM Green University
 
----
+Project Overview
 
-# Project Overview
+HirePath AI is an AI-powered Recruitment and Talent Management Platform developed for the Software Architecture (SE205.3) module.
 
-HirePath AI is an AI-powered Recruitment and Talent Management Platform developed as part of the Software Architecture (SE205.3) module.
+The platform connects candidates, companies, recruiters, hiring managers, and platform administrators through a centralized recruitment workflow.
 
-The system modernizes recruitment by providing:
+The system provides:
 
-- Candidate Portal
-- Recruiter Portal
-- Hiring Manager Dashboard
-- Administrator Dashboard
-- AI-powered Job Matching
-- Resume Management
-- Interview Scheduling
-- Recruitment Analytics
+Candidate Portal
 
-Backend is developed using **ASP.NET Core Web API** with **SQL Server**.
+Company Admin Portal
 
----
+Recruiter Portal
 
-# Technologies
+Hiring Manager Portal
+
+Platform Admin Portal
+
+Company Registration and Approval
+
+Recruiter and Hiring Manager Invitations
+
+Job Posting and Management
+
+Candidate Profile and Resume Management
+
+Job Application Tracking
+
+Interview Scheduling
+
+Candidate Evaluation and Feedback
+
+Application Status Management
+
+Recruitment Analytics
+
+AI-Powered Candidate and Job Matching
+
+Email and OTP Verification
+
+Role-Based Authentication and Authorization
+
+The backend is developed using ASP.NET Core 8 Web API, Entity Framework Core, and SQL Server.
+
+The frontend is developed using React and Vite.
+
+Technologies
 
 Backend
-- ASP.NET Core 8 Web API
-- Entity Framework Core
-- SQL Server
-- ASP.NET Identity
-- JWT Authentication
 
-Tools
-- Visual Studio 2022
-- SQL Server
-- Git & GitHub
-- Swagger
+ASP.NET Core 8 Web API
 
-Architecture
-- Repository Pattern
-- Dependency Injection
-- REST API
-- Identity Authentication
-- Role Based Authorization
+Entity Framework Core
 
----
+SQL Server
 
-# Current Progress
+ASP.NET Core Identity
 
-✅ Phase 01 Completed
+JWT Authentication
 
-- Project Structure
-- Entity Models
-- Enums
-- ApplicationDbContext
-- Relationships
-- SQL Server Integration
-- Migrations
+Repository Pattern
 
-✅ Phase 02 Completed
+Service Layer
 
-- ASP.NET Identity
-- JWT Authentication
-- Register API
-- Login API
-- Role Management
-- Admin Seed
-- Repository Pattern
-- Swagger Authentication
+Dependency Injection
 
----
-## ✅ Phase 03 - Service Layer & API Architecture (Completed)
+REST APIs
 
-- Service Layer Implementation
-- Business Logic Separation
-- Repository-Service Architecture
-- Dependency Injection for Services
-- API Response Handling
-- Clean Architecture Principles
-- Reusable Business Services
-- Controller-Service Communication
-- Code Organization Improvements
+Swagger / OpenAPI
 
----
+Cloudinary File Storage
 
-## Current Architecture
+SMTP Email Services
 
-```
-Controllers
+Frontend
+
+React
+
+Vite
+
+Axios
+
+React Router
+
+CSS
+
+Role-Protected Routes
+
+Local Storage JWT Management
+
+Development Tools
+
+Visual Studio 2022
+
+Visual Studio Code
+
+SQL Server Management Studio
+
+Git
+
+GitHub
+
+Swagger
+
+Postman
+
+Figma
+
+Architecture and Design Concepts
+
+Layered Architecture
+
+Repository Pattern
+
+Service Layer Pattern
+
+Dependency Injection
+
+REST API Architecture
+
+DTO Pattern
+
+Role-Based Authorization
+
+ASP.NET Identity
+
+Separation of Concerns
+
+Object-Oriented Programming
+
+Centralized API Communication
+
+Frontend Component-Based Architecture
+
+Current Architecture
+
+React Frontend
       │
       ▼
-Services (Business Logic)
+Axios API Services
       │
       ▼
-Repositories (Data Access)
+ASP.NET Core Controllers
+      │
+      ▼
+Services / Business Logic
+      │
+      ▼
+Repositories / Data Access
       │
       ▼
 Entity Framework Core
       │
       ▼
-SQL Server
-```
+SQL Server Database
 
-The project foundation is now complete. Team members can begin implementing their assigned modules without modifying the core architecture.
+Project Progress
 
-# Team Responsibilities
+Phase 01 – Database Foundation
 
-## Member 01 ( Chamodyha Peshan)
+Completed:
 
-Responsible for the overall backend architecture, security, integration, and project management.
+Project Structure
 
-### Completed
+Entity Models
 
-* Project Architecture
-* Database Design
-* Entity Framework Core
-* ApplicationDbContext
-* ASP.NET Identity
-* JWT Authentication
-* Repository Pattern
-* Service Layer
-* Dependency Injection
-* GitHub Repository Management
-* Code Review
-* Module Integration
-* Phase 01 – Database Foundation
-* Phase 02 – Authentication & Authorization
-* Phase 03 – Core Backend Foundation
+Enums
 
-### Will Continue
+ApplicationDbContext
 
-* AI Service Integration
-* Final System Integration
-* Performance Optimization
-* Bug Fixing
-* Deployment
-* Final Testing
-* Code Review & Merge Requests
+Entity Relationships
 
----
+SQL Server Integration
 
-## Member 02 - sudeesha ravisara
+Entity Framework Core Migrations
 
-### Candidate Module
+Database Creation
 
-Responsible for all candidate-related features.
+Foreign Key Configuration
 
-Develop:
+Identity Tables
 
-* Candidate Profile Management
-* Skills Management
-* Education Management
-* Experience Management
-* Resume Upload & Management
-* Candidate Dashboard
-* Candidate APIs
-* Candidate Module Testing
+Phase 02 – Authentication and Authorization
 
----
+Completed:
 
-## Member 03
+ASP.NET Core Identity
 
-### Recruiter Module
+JWT Authentication
 
-Responsible for recruiter operations and job management.
+User Registration
 
-Develop:
+User Login
 
-* Company Management
-* Department Management
-* Job CRUD Operations
-* Job Skills Management
-* Job Search & Filtering
-* Recruiter Dashboard
-* Recruiter APIs
-* Recruiter Module Testing
+Role Management
 
----
+Role-Based Authorization
 
-## Member 04 - Hansi
+Protected Backend APIs
 
-### Recruitment Workflow Module
+Protected Frontend Routes
 
-Responsible for the complete hiring workflow.
+Admin Account Seeding
 
-Develop:
+Email Verification
 
-* Job Applications
-* Application Tracking
-* Application Status Management
-* Interview Scheduling
-* Interview Feedback
-* Candidate Evaluation
-* Hiring Workflow
-* Recruitment Workflow APIs
-* Workflow Testing
+OTP Verification
 
----
+Forgot Password
 
-## Member 05 - Sachintha
+Password Reset
 
-### AI & Analytics Module
+Invitation Account Activation
 
-Responsible for AI-powered features and reporting.
+JWT Storage and Axios Interceptor
 
-Develop:
+Phase 03 – Service Layer and API Architecture
 
-* Resume Parsing
-* Skill Extraction
-* AI Job Recommendation
-* Candidate Ranking
-* Candidate–Job Matching
-* Recruitment Analytics
-* Hiring Reports
-* AI APIs
-* AI Module Testing
+Completed:
 
----
+Service Layer Implementation
 
-## Member 06 -sashin
+Repository-Service Architecture
 
-### External Integrations & Communication Module
+Business Logic Separation
 
-Responsible for integrations with external services and notifications.
+Dependency Injection
 
-Develop:
+DTO-Based API Communication
 
-* Resume File Storage
-* Email Notifications
-* Interview Reminder Emails
-* Google Calendar Integration
-* Microsoft Outlook Calendar Integration
-* Cloud Storage Integration (Azure Blob / Cloudinary)
-* Notification Services
-* Integration Testing
-* User Acceptance Testing (UAT)
+Controller-Service Communication
 
----
+API Error Handling
 
-# Branch Strategy
+Code Organization Improvements
 
-| Member    | Branch                     |
-| --------- | -------------------------- |
-| Member 01 | feature/project-foundation |
-| Member 02 | feature/candidate-module   |
-| Member 03 | feature/recruiter-module   |
-| Member 04 | feature/application-module |
-| Member 05 | feature/ai-analytics       |
-| Member 06 | feature/integrations       |
+Reusable Services
 
----
+Centralized Frontend API Configuration
 
-# Development Workflow
+Phase 04 – Recruitment Modules
 
-1. Clone the repository.
-2. Create or switch to your assigned branch.
-3. Implement only your assigned module.
-4. Commit changes with meaningful commit messages.
-5. Push your branch to GitHub.
-6. Create a Pull Request to the `main` branch.
-7. The Project Lead will review and merge approved changes.
-8. Resolve merge conflicts before submitting new Pull Requests.
+Completed or integrated:
 
-**Important:** Team members should not modify another member's module without prior discussion to minimize merge conflicts and maintain clear individual contributions.
+Platform Admin Management
 
+Company Registration and Approval
 
-# Clone Project
+Company Admin Dashboard
 
-Clone the repository
+Recruiter Invitation Management
 
-```bash
-(https://github.com/chamodyha123/HirePath.git)
-```
+Hiring Manager Invitation Management
 
-Open Visual Studio
+Candidate Profile Management
 
-Open
+Education Management
 
-```
-HirePathAI.sln
-```
+Experience Management
 
----
+Skills Management
 
-# Configure Database
+Resume Upload and Management
 
-Open
+Job CRUD Operations
 
-```
+Active Job Search
+
+Candidate Job Applications
+
+Application Tracking
+
+Recruiter Candidate Pipeline
+
+Application Status Management
+
+Interview Scheduling
+
+Interview Feedback
+
+Candidate Evaluation
+
+Hiring Decision Workflow
+
+Recruitment Analytics
+
+User Roles
+
+SuperAdmin
+
+Admin
+
+PlatformAdmin
+
+CompanyAdmin
+
+Recruiter
+
+HiringManager
+
+Candidate
+
+Each role has separate permissions, routes, dashboards, and workflows.
+
+User Registration and Login Flows
+
+Candidate Registration Flow
+
+Candidate Registration
+        │
+        ▼
+Candidate enters personal information
+        │
+        ▼
+System sends email verification OTP
+        │
+        ▼
+Candidate enters OTP
+        │
+        ▼
+Email is verified
+        │
+        ▼
+Candidate account is activated
+        │
+        ▼
+Candidate logs in
+        │
+        ▼
+Redirect to Candidate Dashboard
+
+Candidate dashboard route:
+
+/candidate-dashboard
+
+Candidate functions:
+
+Manage profile
+
+Add education
+
+Add experience
+
+Add skills
+
+Upload CV
+
+Set primary CV
+
+Search active jobs
+
+Apply for jobs
+
+Track application status
+
+View interview details
+
+Company Registration Flow
+
+Company Registration
+        │
+        ▼
+Company representative submits registration
+        │
+        ▼
+Registration stored as Pending
+        │
+        ▼
+Platform Admin reviews request
+        │
+        ├── Reject
+        │
+        └── Approve
+                │
+                ▼
+        Company account is approved
+                │
+                ▼
+        Company Admin account is activated
+                │
+                ▼
+        Company Admin logs in
+                │
+                ▼
+        Redirect to Company Admin Dashboard
+
+Company Admin dashboard route:
+
+/company-admin/dashboard
+
+Company Admin functions:
+
+View company dashboard
+
+Manage company information
+
+Invite recruiters
+
+Invite hiring managers
+
+Activate or deactivate company members
+
+Manage company jobs
+
+View company-related recruitment data
+
+Recruiter Invitation Flow
+
+Company Admin
+        │
+        ▼
+Enters recruiter name and email
+        │
+        ▼
+System creates invitation token
+        │
+        ▼
+Invitation email is sent
+        │
+        ▼
+Recruiter opens invitation link
+        │
+        ▼
+Recruiter creates username and password
+        │
+        ▼
+Recruiter account is activated
+        │
+        ▼
+Recruiter logs in
+        │
+        ▼
+Redirect to Recruiter Dashboard
+
+Recruiter dashboard route:
+
+/recruiter-dashboard
+
+Recruiter functions:
+
+Create jobs
+
+Edit jobs
+
+Delete jobs
+
+View active jobs
+
+View candidate applications
+
+Review candidate profiles
+
+View and download candidate CVs
+
+Move applications to Under Review
+
+Shortlist candidates
+
+Reject candidates
+
+Schedule interviews
+
+Add recruiter notes
+
+Monitor recruitment statistics
+
+Hiring Manager Invitation Flow
+
+Company Admin
+        │
+        ▼
+Enters hiring manager name and email
+        │
+        ▼
+System creates invitation token
+        │
+        ▼
+Invitation email is sent
+        │
+        ▼
+Hiring Manager opens invitation link
+        │
+        ▼
+Hiring Manager creates username and password
+        │
+        ▼
+Hiring Manager account is activated
+        │
+        ▼
+Hiring Manager logs in
+        │
+        ▼
+Redirect to Hiring Manager Dashboard
+
+Hiring Manager dashboard route:
+
+/hiring-dashboard
+
+Hiring Manager functions:
+
+View shortlisted candidates
+
+View scheduled interviews
+
+Review candidate information
+
+Review candidate CV
+
+Submit interview feedback
+
+Evaluate candidates
+
+Mark candidates as interviewed
+
+Recommend candidates
+
+Reject candidates
+
+Make an offer
+
+Mark candidates as hired
+
+Platform Admin Login Flow
+
+Platform Admin Login
+        │
+        ▼
+System validates email and password
+        │
+        ▼
+JWT token is generated
+        │
+        ▼
+Role is verified
+        │
+        ▼
+Redirect to Platform Admin Dashboard
+
+Platform Admin dashboard route:
+
+/platform-admin/dashboard
+
+Platform Admin functions:
+
+View dashboard statistics
+
+Review pending company requests
+
+Approve companies
+
+Reject companies
+
+Suspend companies
+
+Activate companies
+
+Delete companies
+
+View all users
+
+Search and filter users
+
+Edit user information
+
+Change user roles
+
+Suspend or activate users
+
+Delete users where allowed
+
+View platform analytics
+
+Monitor jobs, applications, candidates, recruiters, and hiring managers
+
+Complete Recruitment Workflow
+
+Company registers
+        │
+        ▼
+Platform Admin approves company
+        │
+        ▼
+Company Admin activates account
+        │
+        ▼
+Company Admin invites Recruiter
+        │
+        ▼
+Company Admin invites Hiring Manager
+        │
+        ▼
+Recruiter creates a job
+        │
+        ▼
+Job is saved in SQL Server
+        │
+        ▼
+Candidate views active job
+        │
+        ▼
+Candidate uploads CV
+        │
+        ▼
+Candidate applies for job
+        │
+        ▼
+JobApplication record is created
+        │
+        ▼
+Recruiter sees application
+        │
+        ├── Reject Candidate
+        │
+        ├── Move to Under Review
+        │
+        └── Shortlist Candidate
+                │
+                ▼
+        Recruiter schedules interview
+                │
+                ▼
+        Candidate sees interview details
+                │
+                ▼
+        Hiring Manager sees interview
+                │
+                ▼
+        Hiring Manager submits feedback
+                │
+                ▼
+        Candidate is evaluated
+                │
+                ├── Rejected
+                │
+                ├── Offered
+                │
+                └── Hired
+                        │
+                        ▼
+        Candidate application tracker is updated
+
+Application Status Flow
+
+Applied
+   │
+   ▼
+UnderReview
+   │
+   ├── Rejected
+   │
+   ▼
+Shortlisted
+   │
+   ▼
+InterviewScheduled
+   │
+   ▼
+Interviewed
+   │
+   ├── Rejected
+   │
+   ▼
+Offered
+   │
+   ├── Rejected
+   │
+   ▼
+Hired
+
+Additional status:
+
+Withdrawn
+
+The recruiter and hiring manager control application statuses according to their permissions. Candidates can view the current status through the Candidate Application Tracker.
+
+Team Responsibilities
+
+Member 01 – Chamodyha Peshan
+
+Project Lead, Architecture, Security and System Integration
+
+Responsible for overall project architecture, authentication, authorization, module integration, backend foundation, frontend-backend communication, and project management.
+
+Completed Contributions
+
+Initial Project Setup
+
+Backend Architecture
+
+Database Design
+
+Entity Framework Core Integration
+
+ApplicationDbContext Configuration
+
+Entity Relationships
+
+ASP.NET Core Identity
+
+JWT Authentication
+
+User Registration
+
+Login API
+
+Email Verification
+
+OTP Verification
+
+Forgot Password
+
+Reset Password
+
+Role-Based Authorization
+
+Protected Routes
+
+Repository Pattern
+
+Service Layer
+
+Dependency Injection
+
+Swagger JWT Configuration
+
+Admin Account Seeding
+
+Central Axios Configuration
+
+Frontend and Backend API Integration
+
+Company Registration Integration
+
+Company Approval Workflow Integration
+
+Recruiter Invitation Integration
+
+Hiring Manager Invitation Integration
+
+Invitation Account Activation
+
+GitHub Repository Management
+
+Branch Management
+
+Pull Request Review
+
+Merge Conflict Resolution
+
+Code Review
+
+Security Configuration
+
+Sensitive Configuration Cleanup
+
+Continuing Responsibilities
+
+Final System Integration
+
+Performance Optimization
+
+Security Review
+
+Bug Fixing
+
+Deployment
+
+Final Testing
+
+User Acceptance Testing Support
+
+Code Review and Merge Requests
+
+Production Configuration
+
+AI Service Integration Support
+
+Member 02 – Sudeesha Ravisara
+
+Candidate Module
+
+Responsible for candidate-related functionality.
+
+Developed or contributed to:
+
+Candidate Profile Management
+
+Candidate Dashboard
+
+Education Management
+
+Experience Management
+
+Skills Management
+
+Resume Upload
+
+Resume Management
+
+Primary Resume Selection
+
+Candidate APIs
+
+Assisted with identifying bugs across the system
+
+Helped troubleshoot frontend and backend issues
+
+Supported API error detection and correction
+
+Helped resolve frontend–backend integration problems
+
+Assisted with debugging candidate module issues
+
+Helped test system workflows and identify broken features
+
+Job Search
+
+Candidate Module Testing
+
+Member 03 – Kavishka Dewuduni
+
+Recruiter and Job Management Module
+
+Responsible for recruiter operations and job-related functionality.
+
+Developed or contributed to:
+
+Company Management
+
+Department Management
+
+Job CRUD Operations
+
+Job Skills Management
+
+Job Search and Filtering
+
+Recruiter Dashboard
+
+Recruiter APIs
+
+Candidate Search
+
+Recruiter Module Testing
+
+Member 04 – Hansi
+
+Recruitment Workflow Module
+
+Responsible for the recruitment and hiring workflow.
+
+Developed or contributed to:
+
+Job Applications
+
+Application Tracking
+
+Application Status Management
+
+Candidate Shortlisting
+
+Candidate Rejection
+
+Interview Scheduling
+
+Interview Rescheduling
+
+Interview Cancellation
+
+Interview Feedback
+
+Candidate Evaluation
+
+Offer Workflow
+
+Hiring Workflow
+
+Recruitment Workflow APIs
+
+Workflow Testing
+
+Member 05 – Sachintha
+
+AI, Analytics and System Integration Support Module
+
+Responsible for AI-powered recruitment features, analytics, integration support, and project-wide technical improvements.
+
+Developed or contributed to:
+
+Resume Parsing
+
+Skill Extraction
+
+AI Job Recommendation
+
+Candidate Ranking
+
+Candidate–Job Matching
+
+Recruitment Analytics
+
+Hiring Reports
+
+AI APIs
+
+AI Module Testing
+
+Module Error Fixing
+
+API Route Corrections
+
+Database Migration Support
+
+Frontend and Backend Build Fixes
+
+Platform Admin Integration
+
+Code Review
+
+Final Module Integration
+
+Security Configuration
+
+Sensitive Configuration Cleanup
+
+Member 06 – Sashin
+
+Platform Admin Module
+
+Responsible for managing the HirePath platform, companies, users, and system-level analytics.
+
+Developed or contributed to:
+
+Platform Admin Dashboard
+
+Platform Admin Sidebar and Layout
+
+Company Management
+
+Pending Company Requests
+
+Company Approval
+
+Company Rejection
+
+Company Activation
+
+Company Suspension
+
+Company Deletion
+
+Global User Management
+
+User Search
+
+Role Filtering
+
+Status Filtering
+
+User Editing
+
+User Role Management
+
+User Activation and Suspension
+
+User Deletion Handling
+
+Platform Analytics
+
+Dashboard Statistics
+
+User Distribution Analytics
+
+Recruitment Analytics Display
+
+Platform Admin APIs
+
+Platform Admin Frontend Integration
+
+Platform Admin Module Testing
+
+Development Workflow
+
+Clone the repository.
+
+Pull the latest changes from main.
+
+Switch to the assigned development branch.
+
+Implement the assigned module.
+
+Build and test the project.
+
+Commit changes using a meaningful commit message.
+
+Push the development branch.
+
+Create a Pull Request.
+
+Test merged modules in the test branch.
+
+Merge the tested system into main.
+
+Team members should not modify another member's module without prior discussion.
+
+Clone Project
+
+git clone https://github.com/chamodyha123/HirePath.git
+
+Open the solution in Visual Studio:
+
+HirePath.sln
+
+Backend Configuration
+
+Open:
+
 appsettings.json
-```
 
-Change SQL Server connection string
+Configure the database using placeholders or user secrets:
 
-```json
-"ConnectionStrings": {
-  "DefaultConnection": "Server=YOUR_SERVER;Database=HirePathDB;Trusted_Connection=True;TrustServerCertificate=True;"
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=<SERVER_NAME>;Database=<DATABASE_NAME>;Trusted_Connection=True;TrustServerCertificate=True;"
+  }
 }
-```
 
----
+Do not commit real passwords, API keys, SMTP passwords, Cloudinary secrets, or JWT secrets to GitHub.
 
-# Create Database
+Create and Update Database
 
-Open Package Manager Console
+dotnet ef database update
 
-Run
+Alternatively, use Visual Studio Package Manager Console:
 
-```powershell
 Update-Database
-```
 
----
+Run Backend
 
-# Run Project
+dotnet restore
+dotnet build
+dotnet run
 
-Press
+Run Frontend
 
-```
-F5
-```
+npm install
+npm run dev
 
-or
+Default frontend URL:
 
-```
-Ctrl + F5
-```
+http://localhost:5173
 
-Swagger will open automatically.
+Default Development Administrator
 
----
+Production credentials must not be placed inside the README.
 
-# Default Admin
+Email: <ADMIN_EMAIL>
+Password: <ADMIN_PASSWORD>
 
-Email
+Git Workflow
 
-```
-admin@hirepath.com
-```
+Update Local Repository
 
-Password
-
-```
-Admin@123
-```
-
----
-
-# Git Workflow
-
-## First Time
-
-```bash
-git clone https://github.com/chamodyha123/HirePathAI.git
-```
-
----
-
-## Before Starting Work
-
-```bash
+git checkout main
 git pull origin main
-```
 
----
+Create Development Branch
 
-## Create Your Branch
-
-Member 2
-
-```bash
 git checkout -b dev-yourname
-```
 
-Member 3
+Save Changes
 
-```bash
-git checkout -b dev-yourname
-```
-
-Member 4
-
-```bash
-git checkout -b dev-yourname
-```
-
-Member 5
-
-```bash
-git checkout -b dev-yourname
-```
-
----
-
-## Save Your Work
-
-```bash
 git add .
-git commit -m "Completed Candidate Module"
-```
+git commit -m "Complete assigned module"
 
----
+Push Development Branch
 
-## Push
+git push -u origin dev-yourname
 
-```bash
-git push origin candidate-module
-```
+Merge Process
 
-Do NOT push directly to **main**.
+Development Branch
+        │
+        ▼
+Pull Request
+        │
+        ▼
+Code Review
+        │
+        ▼
+Test Branch
+        │
+        ▼
+Integration Testing
+        │
+        ▼
+Main Branch
 
----
+Do not push directly to main unless the project lead explicitly approves it.
 
-# Coding Standards
+Coding Standards
 
-- Follow existing folder structure.
-- Use PascalCase for classes.
-- Use async/await.
-- Keep controllers thin.
-- Business logic belongs in Services.
-- Database access belongs in Repositories.
-- Do not modify ApplicationDbContext without informing the team.
-- Do not delete existing migrations.
-- Do not rename existing entities without discussion.
+Follow the existing folder structure.
 
----
+Use PascalCase for C# classes and methods.
 
-# Important Rules
+Use camelCase for JavaScript variables and functions.
 
-Before coding
+Use async and await for database operations.
 
-Always
+Keep controllers thin.
 
-```bash
+Store business logic inside services.
+
+Store database access inside repositories.
+
+Use DTOs for API requests and responses.
+
+Apply input validation.
+
+Use role-based authorization.
+
+Use the shared Axios API instance.
+
+Do not hardcode JWT tokens.
+
+Do not hardcode backend URLs inside pages.
+
+Do not use mock data in production modules.
+
+Do not expose database entities unnecessarily.
+
+Do not commit secrets.
+
+Do not delete existing migrations without team approval.
+
+Do not rename shared entities without discussion.
+
+Important Development Rules
+
+Before coding:
+
 git pull origin main
-```
 
-Before pushing
+Before pushing:
 
-- Build Solution
-- Fix all compile errors
-- Test your APIs using Swagger
+Build the backend.
 
----
+Build the frontend.
 
-# Folder Structure
+Fix compile errors.
 
-```
+Fix runtime errors.
+
+Test APIs with Swagger.
+
+Test frontend pages.
+
+Verify role permissions.
+
+Check browser console errors.
+
+Check database updates.
+
+Confirm no secrets are committed.
+
+Backend Folder Structure
+
 Controllers/
 Data/
 DTOs/
@@ -458,22 +1183,84 @@ Repositories/
 Services/
 Middleware/
 Migrations/
+
+Frontend Folder Structure
+
+src/
+├── api/
+├── components/
+├── layouts/
+├── pages/
+├── services/
+├── styles/
+└── routes/
+
+Security
+
+The system uses:
+
+ASP.NET Identity
+
+Password Hashing
+
+JWT Authentication
+
+Role-Based Authorization
+
+Protected API Endpoints
+
+Protected React Routes
+
+OTP Verification
+
+Email Verification
+
+Input Validation
+
+Secure File Upload Validation
+
+Centralized Error Handling
+
+CORS Configuration
+
+Sensitive data must be stored using:
+
+.NET User Secrets
+
+Environment Variables
+
+Azure Key Vault or another production secret manager
+
+# Default Development Accounts
+
+## Platform Administrator
+
+Role
+
+```text
+PlatformAdmin
+```
+
+Email
+
+```text
+admin@hirepath.com
+```
+
+Password
+
+```text
+Admin@123
 ```
 
 ---
 
-# Contact
+## Notes
 
-Project Lead
+These credentials are intended for **development and testing only**.
 
-Responsible for
+For production deployments:
 
-- Architecture
-- Database
-- Authentication
-- Repository Pattern
-- GitHub Management
-
----
-
-Let's build an excellent recruitment platform together!
+- Change the default administrator password.
+- Store credentials securely.
+- Do not expose real passwords in public repositories.
