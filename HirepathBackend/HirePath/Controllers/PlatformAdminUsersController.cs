@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace HirePathAI.API.Controllers.PlatformAdmin
@@ -182,16 +183,131 @@ namespace HirePathAI.API.Controllers.PlatformAdmin
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            var user = await _userManager.FindByIdAsync(id.ToString());
-            if (user == null) return NotFound("User not found.");
-
-            var result = await _userManager.DeleteAsync(user);
-            if (!result.Succeeded)
+            var currentUserIdValue = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            if (int.TryParse(currentUserIdValue, out var currentUserId) && currentUserId == id)
             {
-                return BadRequest(string.Join(" | ", result.Errors.Select(e => e.Description)));
+                return Conflict(new
+                {
+                    message = "You cannot delete the account that is currently signed in."
+                });
             }
 
-            return Ok(new { message = "User deleted successfully." });
+            var user = await _userManager.FindByIdAsync(id.ToString());
+            if (user == null)
+            {
+                return NotFound(new { message = "User not found." });
+            }
+
+            // Several workflow tables intentionally use RESTRICT/NO ACTION to preserve
+            // recruitment and administration audit history. Deleting a referenced user
+            // directly would cause a SQL foreign-key exception and previously surfaced as
+            // an unhelpful HTTP 500. Detect those references first and return a clear 409.
+            var blockers = new List<string>();
+
+            var candidateProfileId = await _context.CandidateProfiles
+                .Where(profile => profile.UserId == id)
+                .Select(profile => (int?)profile.Id)
+                .FirstOrDefaultAsync();
+
+            if (candidateProfileId.HasValue)
+            {
+                var applicationCount = await _context.JobApplications
+                    .CountAsync(application => application.CandidateProfileId == candidateProfileId.Value);
+                if (applicationCount > 0)
+                {
+                    blockers.Add($"{applicationCount} job application(s)");
+                }
+            }
+
+            var scheduledInterviewCount = await _context.Interviews
+                .CountAsync(interview => interview.ScheduledByUserId == id);
+            if (scheduledInterviewCount > 0)
+            {
+                blockers.Add($"{scheduledInterviewCount} scheduled interview record(s)");
+            }
+
+            var feedbackCount = await _context.InterviewFeedbacks
+                .CountAsync(feedback => feedback.SubmittedByUserId == id);
+            if (feedbackCount > 0)
+            {
+                blockers.Add($"{feedbackCount} interview feedback record(s)");
+            }
+
+            var evaluationCount = await _context.Evaluations
+                .CountAsync(evaluation => evaluation.EvaluatedByUserId == id);
+            if (evaluationCount > 0)
+            {
+                blockers.Add($"{evaluationCount} candidate evaluation record(s)");
+            }
+
+            var statusHistoryCount = await _context.ApplicationStatusHistories
+                .CountAsync(history => history.ChangedByUserId == id);
+            if (statusHistoryCount > 0)
+            {
+                blockers.Add($"{statusHistoryCount} application status history record(s)");
+            }
+
+            var invitationCount = await _context.CompanyInvitations
+                .CountAsync(invitation => invitation.InvitedByUserId == id);
+            if (invitationCount > 0)
+            {
+                blockers.Add($"{invitationCount} company invitation record(s)");
+            }
+
+            var reviewedRegistrationCount = await _context.CompanyRegistrationRequests
+                .CountAsync(request => request.ReviewedByUserId == id);
+            if (reviewedRegistrationCount > 0)
+            {
+                blockers.Add($"{reviewedRegistrationCount} reviewed company registration record(s)");
+            }
+
+            if (blockers.Count > 0)
+            {
+                return Conflict(new
+                {
+                    message = "This user cannot be permanently deleted because the account is referenced by recruitment or audit records. Suspend the account instead to preserve system history.",
+                    dependencies = blockers
+                });
+            }
+
+            await using var transaction = await _context.Database.BeginTransactionAsync();
+            try
+            {
+                // Company membership and candidate profile are configured for cascade
+                // deletion. Clearing CompanyId avoids the RESTRICT relationship from User
+                // to Company before Identity removes the user row.
+                user.CompanyId = null;
+                var updateResult = await _userManager.UpdateAsync(user);
+                if (!updateResult.Succeeded)
+                {
+                    await transaction.RollbackAsync();
+                    return BadRequest(new
+                    {
+                        message = string.Join(" | ", updateResult.Errors.Select(error => error.Description))
+                    });
+                }
+
+                var result = await _userManager.DeleteAsync(user);
+                if (!result.Succeeded)
+                {
+                    await transaction.RollbackAsync();
+                    return BadRequest(new
+                    {
+                        message = string.Join(" | ", result.Errors.Select(error => error.Description))
+                    });
+                }
+
+                await transaction.CommitAsync();
+                return Ok(new { message = "User deleted successfully." });
+            }
+            catch (DbUpdateException)
+            {
+                await transaction.RollbackAsync();
+                return Conflict(new
+                {
+                    message = "The user is still referenced by related database records and cannot be deleted safely. Suspend the account instead."
+                });
+            }
         }
     }
 }
