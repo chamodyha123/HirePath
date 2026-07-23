@@ -97,27 +97,28 @@ The frontend is developed using React and Vite.
 ---
 
 ## Current Architecture
-React Frontend
-│
-▼
-Axios API Services
-│
-▼
-ASP.NET Core Controllers
-│
-▼
-Services / Business Logic
-│
-▼
-Repositories / Data Access
-│
-▼
-Entity Framework Core
-│
-▼
-SQL Server Database
 
-text
+```text
+React Frontend
+      │
+      ▼
+Axios API Services
+      │
+      ▼
+ASP.NET Core Controllers
+      │
+      ▼
+Services / Business Logic
+      │
+      ▼
+Repositories / Data Access
+      │
+      ▼
+Entity Framework Core
+      │
+      ▼
+SQL Server Database
+```
 
 ---
 
@@ -175,7 +176,7 @@ text
 
 ### Phase 04 – Recruitment Modules
 
-**Completed or integrated:**
+**Completed:**
 
 - Platform Admin Management
 - Company Registration and Approval
@@ -218,34 +219,37 @@ Each role has separate permissions, routes, dashboards, and workflows.
 ## User Registration and Login Flows
 
 ### Candidate Registration Flow
-Candidate Registration
-│
-▼
-Candidate enters personal information
-│
-▼
-System sends email verification OTP
-│
-▼
-Candidate enters OTP
-│
-▼
-Email is verified
-│
-▼
-Candidate account is activated
-│
-▼
-Candidate logs in
-│
-▼
-Redirect to Candidate Dashboard
 
-text
+```text
+Candidate Registration
+        │
+        ▼
+Candidate enters personal information
+        │
+        ▼
+System sends email verification OTP
+        │
+        ▼
+Candidate enters OTP
+        │
+        ▼
+Email is verified
+        │
+        ▼
+Candidate account is activated
+        │
+        ▼
+Candidate logs in
+        │
+        ▼
+Redirect to Candidate Dashboard
+```
 
 **Candidate dashboard route:**
 
-`/candidate-dashboard`
+```text
+/candidate-dashboard
+```
 
 **Candidate functions:**
 
@@ -263,38 +267,41 @@ text
 ---
 
 ### Company Registration Flow
-Company Registration
-│
-▼
-Company representative submits registration
-│
-▼
-Registration stored as Pending
-│
-▼
-Platform Admin reviews request
-│
-├── Reject
-│
-└── Approve
-│
-▼
-Company account is approved
-│
-▼
-Company Admin account is activated
-│
-▼
-Company Admin logs in
-│
-▼
-Redirect to Company Admin Dashboard
 
-text
+```text
+Company Registration
+        │
+        ▼
+Company representative submits registration
+        │
+        ▼
+Registration stored as Pending
+        │
+        ▼
+Platform Admin reviews request
+        │
+        ├── Reject
+        │
+        └── Approve
+                │
+                ▼
+Company account is approved
+        │
+        ▼
+Company Admin account is activated
+        │
+        ▼
+Company Admin logs in
+        │
+        ▼
+Redirect to Company Admin Dashboard
+```
 
 **Company Admin dashboard route:**
 
-`/company-admin/dashboard`
+```text
+/company-admin/dashboard
+```
 
 **Company Admin functions:**
 
@@ -309,37 +316,40 @@ text
 ---
 
 ### Recruiter Invitation Flow
-Company Admin
-│
-▼
-Enters recruiter name and email
-│
-▼
-System creates invitation token
-│
-▼
-Invitation email is sent
-│
-▼
-Recruiter opens invitation link
-│
-▼
-Recruiter creates username and password
-│
-▼
-Recruiter account is activated
-│
-▼
-Recruiter logs in
-│
-▼
-Redirect to Recruiter Dashboard
 
-text
+```text
+Company Admin
+        │
+        ▼
+Enters recruiter name and email
+        │
+        ▼
+System creates invitation token
+        │
+        ▼
+Invitation email is sent
+        │
+        ▼
+Recruiter opens invitation link
+        │
+        ▼
+Recruiter creates username and password
+        │
+        ▼
+Recruiter account is activated
+        │
+        ▼
+Recruiter logs in
+        │
+        ▼
+Redirect to Recruiter Dashboard
+```
 
 **Recruiter dashboard route:**
 
-`/recruiter-dashboard`
+```text
+/recruiter-dashboard
+```
 
 **Recruiter functions:**
 
@@ -360,37 +370,40 @@ text
 ---
 
 ### Hiring Manager Invitation Flow
-Company Admin
-│
-▼
-Enters hiring manager name and email
-│
-▼
-System creates invitation token
-│
-▼
-Invitation email is sent
-│
-▼
-Hiring Manager opens invitation link
-│
-▼
-Hiring Manager creates username and password
-│
-▼
-Hiring Manager account is activated
-│
-▼
-Hiring Manager logs in
-│
-▼
-Redirect to Hiring Manager Dashboard
 
-text
+```text
+Company Admin
+        │
+        ▼
+Enters hiring manager name and email
+        │
+        ▼
+System creates invitation token
+        │
+        ▼
+Invitation email is sent
+        │
+        ▼
+Hiring Manager opens invitation link
+        │
+        ▼
+Hiring Manager creates username and password
+        │
+        ▼
+Hiring Manager account is activated
+        │
+        ▼
+Hiring Manager logs in
+        │
+        ▼
+Redirect to Hiring Manager Dashboard
+```
 
 **Hiring Manager dashboard route:**
 
-`/hiring-dashboard`
+```text
+/hiring-dashboard
+```
 
 **Hiring Manager functions:**
 
@@ -409,25 +422,28 @@ text
 ---
 
 ### Platform Admin Login Flow
-Platform Admin Login
-│
-▼
-System validates email and password
-│
-▼
-JWT token is generated
-│
-▼
-Role is verified
-│
-▼
-Redirect to Platform Admin Dashboard
 
-text
+```text
+Platform Admin Login
+        │
+        ▼
+System validates email and password
+        │
+        ▼
+JWT token is generated
+        │
+        ▼
+Role is verified
+        │
+        ▼
+Redirect to Platform Admin Dashboard
+```
 
 **Platform Admin dashboard route:**
 
-`/platform-admin/dashboard`
+```text
+/platform-admin/dashboard
+```
 
 **Platform Admin functions:**
 
@@ -450,103 +466,105 @@ text
 ---
 
 ## Complete Recruitment Workflow
-Company registers
-│
-▼
-Platform Admin approves company
-│
-▼
-Company Admin activates account
-│
-▼
-Company Admin invites Recruiter
-│
-▼
-Company Admin invites Hiring Manager
-│
-▼
-Recruiter creates a job
-│
-▼
-Job is saved in SQL Server
-│
-▼
-Candidate views active job
-│
-▼
-Candidate uploads CV
-│
-▼
-Candidate applies for job
-│
-▼
-JobApplication record is created
-│
-▼
-Recruiter sees application
-│
-├── Reject Candidate
-│
-├── Move to Under Review
-│
-└── Shortlist Candidate
-│
-▼
-Recruiter schedules interview
-│
-▼
-Candidate sees interview details
-│
-▼
-Hiring Manager sees interview
-│
-▼
-Hiring Manager submits feedback
-│
-▼
-Candidate is evaluated
-│
-├── Rejected
-│
-├── Offered
-│
-└── Hired
-│
-▼
-Candidate application tracker is updated
 
-text
+```text
+Company registers
+        │
+        ▼
+Platform Admin approves company
+        │
+        ▼
+Company Admin activates account
+        │
+        ▼
+Company Admin invites Recruiter
+        │
+        ▼
+Company Admin invites Hiring Manager
+        │
+        ▼
+Recruiter creates a job
+        │
+        ▼
+Job is saved in SQL Server
+        │
+        ▼
+Candidate views active job
+        │
+        ▼
+Candidate uploads CV
+        │
+        ▼
+Candidate applies for job
+        │
+        ▼
+JobApplication record is created
+        │
+        ▼
+Recruiter sees application
+        │
+        ├── Reject Candidate
+        │
+        ├── Move to Under Review
+        │
+        └── Shortlist Candidate
+                │
+                ▼
+Recruiter schedules interview
+        │
+        ▼
+Candidate sees interview details
+        │
+        ▼
+Hiring Manager sees interview
+        │
+        ▼
+Hiring Manager submits feedback
+        │
+        ▼
+Candidate is evaluated
+        │
+        ├── Rejected
+        │
+        ├── Offered
+        │
+        └── Hired
+                │
+                ▼
+Candidate application tracker is updated
+```
 
 ---
 
 ## Application Status Flow
-Applied
-│
-▼
-UnderReview
-│
-├── Rejected
-│
-▼
-Shortlisted
-│
-▼
-InterviewScheduled
-│
-▼
-Interviewed
-│
-├── Rejected
-│
-▼
-Offered
-│
-├── Rejected
-│
-▼
-Hired
 
-text
+```text
+Applied
+   │
+   ▼
+UnderReview
+   │
+   ├── Rejected
+   │
+   ▼
+Shortlisted
+   │
+   ▼
+InterviewScheduled
+   │
+   ▼
+Interviewed
+   │
+   ├── Rejected
+   │
+   ▼
+Offered
+   │
+   ├── Rejected
+   │
+   ▼
+Hired
+```
 
 Additional status: `Withdrawn`
 
@@ -649,7 +667,7 @@ Responsible for candidate-related functionality.
 
 Responsible for recruiter operations and job-related functionality.
 
-**Developed or contributed to:**
+**Developed:**
 
 - Company Management
 - Department Management
@@ -669,7 +687,7 @@ Responsible for recruiter operations and job-related functionality.
 
 Responsible for the recruitment and hiring workflow.
 
-**Developed or contributed to:**
+**Developed:**
 
 - Job Applications
 - Application Tracking
@@ -694,7 +712,7 @@ Responsible for the recruitment and hiring workflow.
 
 Responsible for AI-powered recruitment features, analytics, integration support, and project-wide technical improvements.
 
-**Developed or contributed to:**
+**Developed:**
 
 - Resume Parsing
 - Skill Extraction
@@ -723,7 +741,7 @@ Responsible for AI-powered recruitment features, analytics, integration support,
 
 Responsible for managing the HirePath platform, companies, users, and system-level analytics.
 
-**Developed or contributed to:**
+**Developed:**
 
 - Platform Admin Dashboard
 - Platform Admin Sidebar and Layout
@@ -773,68 +791,128 @@ Responsible for managing the HirePath platform, companies, users, and system-lev
 
 ```bash
 git clone https://github.com/chamodyha123/HirePath.git
+```
+
 Open the solution in Visual Studio:
 
-text
+```text
 HirePath.sln
-Backend Configuration
+```
+
+---
+
+## Backend Configuration
+
 Open:
 
-text
+```text
 appsettings.json
+```
+
 Configure the database using placeholders or user secrets:
 
-json
+```json
 {
   "ConnectionStrings": {
     "DefaultConnection": "Server=<SERVER_NAME>;Database=<DATABASE_NAME>;Trusted_Connection=True;TrustServerCertificate=True;"
   }
 }
+```
+
 Do not commit real passwords, API keys, SMTP passwords, Cloudinary secrets, or JWT secrets to GitHub.
 
-Create and Update Database
-bash
+---
+
+## Create and Update Database
+
+```bash
 dotnet ef database update
+```
+
 Alternatively, use Visual Studio Package Manager Console:
 
-text
+```text
 Update-Database
-Run Backend
-bash
+```
+
+---
+
+## Run Backend
+
+```bash
 dotnet restore
 dotnet build
 dotnet run
-Run Frontend
-bash
+```
+
+---
+
+## Run Frontend
+
+```bash
 npm install
 npm run dev
+```
+
 Default frontend URL:
 
-text
+```text
 http://localhost:5173
-Default Development Administrator
-Production credentials must not be placed inside the README.
+```
 
-Email: <ADMIN_EMAIL>
-Password: <ADMIN_PASSWORD>
+---
 
-Git Workflow
-Update Local Repository
-bash
+## Default Development Accounts
+
+### Platform Administrator
+
+| Field | Value |
+|---|---|
+| Role | `PlatformAdmin` |
+| Email | `admin@hirepath.com` |
+| Password | `Admin@123` |
+
+Dashboard route:
+
+```text
+/platform-admin/dashboard
+```
+
+> These credentials are intended for development and testing only. Change the default password and store production credentials securely before deployment.
+
+---
+
+## Git Workflow
+
+### Update Local Repository
+
+```bash
 git checkout main
 git pull origin main
-Create Development Branch
-bash
+```
+
+### Create Development Branch
+
+```bash
 git checkout -b dev-yourname
-Save Changes
-bash
+```
+
+### Save Changes
+
+```bash
 git add .
 git commit -m "Complete assigned module"
-Push Development Branch
-bash
+```
+
+### Push Development Branch
+
+```bash
 git push -u origin dev-yourname
-Merge Process
-text
+```
+
+### Merge Process
+
+```text
 Development Branch
         │
         ▼
@@ -851,74 +929,61 @@ Integration Testing
         │
         ▼
 Main Branch
+```
+
 Do not push directly to main unless the project lead explicitly approves it.
 
-Coding Standards
-Follow the existing folder structure.
+---
 
-Use PascalCase for C# classes and methods.
+## Coding Standards
 
-Use camelCase for JavaScript variables and functions.
+- Follow the existing folder structure.
+- Use PascalCase for C# classes and methods.
+- Use camelCase for JavaScript variables and functions.
+- Use async and await for database operations.
+- Keep controllers thin.
+- Store business logic inside services.
+- Store database access inside repositories.
+- Use DTOs for API requests and responses.
+- Apply input validation.
+- Use role-based authorization.
+- Use the shared Axios API instance.
+- Do not hardcode JWT tokens.
+- Do not hardcode backend URLs inside pages.
+- Do not use mock data in production modules.
+- Do not expose database entities unnecessarily.
+- Do not commit secrets.
+- Do not delete existing migrations without team approval.
+- Do not rename shared entities without discussion.
 
-Use async and await for database operations.
+---
 
-Keep controllers thin.
+## Important Development Rules
 
-Store business logic inside services.
-
-Store database access inside repositories.
-
-Use DTOs for API requests and responses.
-
-Apply input validation.
-
-Use role-based authorization.
-
-Use the shared Axios API instance.
-
-Do not hardcode JWT tokens.
-
-Do not hardcode backend URLs inside pages.
-
-Do not use mock data in production modules.
-
-Do not expose database entities unnecessarily.
-
-Do not commit secrets.
-
-Do not delete existing migrations without team approval.
-
-Do not rename shared entities without discussion.
-
-Important Development Rules
 Before coding:
 
-bash
+```bash
 git pull origin main
+```
+
 Before pushing:
 
-Build the backend.
+- Build the backend.
+- Build the frontend.
+- Fix compile errors.
+- Fix runtime errors.
+- Test APIs with Swagger.
+- Test frontend pages.
+- Verify role permissions.
+- Check browser console errors.
+- Check database updates.
+- Confirm no secrets are committed.
 
-Build the frontend.
+---
 
-Fix compile errors.
+## Backend Folder Structure
 
-Fix runtime errors.
-
-Test APIs with Swagger.
-
-Test frontend pages.
-
-Verify role permissions.
-
-Check browser console errors.
-
-Check database updates.
-
-Confirm no secrets are committed.
-
-Backend Folder Structure
-text
+```text
 Controllers/
 Data/
 DTOs/
@@ -928,8 +993,13 @@ Repositories/
 Services/
 Middleware/
 Migrations/
-Frontend Folder Structure
-text
+```
+
+---
+
+## Frontend Folder Structure
+
+```text
 src/
 ├── api/
 ├── components/
@@ -938,62 +1008,41 @@ src/
 ├── services/
 ├── styles/
 └── routes/
-Security
+```
+
+---
+
+## Security
+
 The system uses:
 
-ASP.NET Identity
-
-Password Hashing
-
-JWT Authentication
-
-Role-Based Authorization
-
-Protected API Endpoints
-
-Protected React Routes
-
-OTP Verification
-
-Email Verification
-
-Input Validation
-
-Secure File Upload Validation
-
-Centralized Error Handling
-
-CORS Configuration
+- ASP.NET Identity
+- Password Hashing
+- JWT Authentication
+- Role-Based Authorization
+- Protected API Endpoints
+- Protected React Routes
+- OTP Verification
+- Email Verification
+- Input Validation
+- Secure File Upload Validation
+- Centralized Error Handling
+- CORS Configuration
 
 Sensitive data must be stored using:
 
-.NET User Secrets
+- .NET User Secrets
+- Environment Variables
+- Azure Key Vault or another production secret manager
 
-Environment Variables
+---
 
-Azure Key Vault or another production secret manager
+## Notes
 
-Default Development Accounts
-Platform Administrator
-Role
-
-text
-PlatformAdmin
-Email
-
-text
-admin@hirepath.com
-Password
-
-text
-Admin@123
-Notes
-These credentials are intended for development and testing only.
+The Platform Administrator credentials included in this README are intended for local development and testing only.
 
 For production deployments:
 
-Change the default administrator password.
-
-Store credentials securely.
-
-Do not expose real passwords in public repositories.
+- Change the default administrator password.
+- Store credentials securely.
+- Do not expose real passwords in public repositories.
