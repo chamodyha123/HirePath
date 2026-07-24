@@ -494,5 +494,4 @@ Database is available
 # HirePath AI
 
 AI-Powered Recruitment & Talent Management Platform  
-Software Architecture – SE205.3  
-NSBM Green University
+
