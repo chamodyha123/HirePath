@@ -2,8 +2,6 @@
 
 ## AI-Powered Recruitment & Talent Management Platform
 
-### Software Architecture – SE205.3
-### NSBM Green University
 
 ---
 
